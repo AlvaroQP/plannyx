@@ -12,6 +12,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "firebase": "^10.7.2",
+    "flag-icons": "^7.1.0",
     "i18next": "^23.7.18",
     "i18next-browser-languagedetector": "^7.2.0",
     "i18next-http-backend": "^2.4.2",
@@ -20,6 +21,7 @@
     "react-i18next": "^14.0.1",
     "react-router-dom": "^6.21.3",
     "react-scripts": "5.0.1",
+    "react-spinners": "^0.13.8",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

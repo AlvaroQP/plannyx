@@ -1,0 +1,11 @@
+.flag-container {
+  margin-right: 0.25rem;
+}
+
+.flag {
+  margin-right: 0.5rem;
+}
+
+.flag-container .Mui-selected {
+  color: white;
+}

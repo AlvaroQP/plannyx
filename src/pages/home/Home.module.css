@@ -1,0 +1,12 @@
+.banner {
+  width: 100%;
+  display: block;
+}
+
+.welcome-message-container {
+  background-color: #0f418d;
+  color: white;
+  padding: 2rem;
+  font-size: 1rem;
+  text-align: center;
+}

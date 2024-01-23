@@ -13,40 +13,39 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import logo from "../../../assets/images/logo.png";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import Flags from "../flags/Flags";
+import { useTranslation } from "react-i18next";
 import styles from "./ResponsiveAppBar.module.css";
 
-const pages = [
-  {
-    name: "aaa",
-    path: "/",
-  },
-  {
-    name: "bbb",
-    path: "/",
-  },
-];
-
-const settings = ["Account", "Settings", "Help", "Feedback", "Logout"];
-
 export default function ResponsiveAppBar() {
+  const { t } = useTranslation();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-  const handleOpenNavMenu = (event) => {
+  const pages = [
+    {
+      name: t("appbar-menus.projects"),
+      path: "projects",
+    },
+  ];
+
+  const settings = [t("appbar-menus.dashboard"), t("appbar-menus.logout")];
+
+  function handleOpenNavMenu(event) {
     setAnchorElNav(event.currentTarget);
-  };
+  }
 
-  const handleOpenUserMenu = (event) => {
+  function handleOpenUserMenu(event) {
     setAnchorElUser(event.currentTarget);
-  };
+  }
 
-  const handleCloseNavMenu = () => {
+  function handleCloseNavMenu() {
     setAnchorElNav(null);
-  };
+  }
 
-  const handleCloseUserMenu = () => {
+  function handleCloseUserMenu() {
     setAnchorElUser(null);
-  };
+  }
 
   return (
     <AppBar position="sticky">
@@ -129,9 +128,8 @@ export default function ResponsiveAppBar() {
                 key={page.name}
                 onClick={handleCloseNavMenu}
                 sx={{
-                  my: 2,
+                  my: 1,
                   color: "white",
-                  display: "block",
                 }}
                 className={styles.navbutton}
               >
@@ -144,8 +142,10 @@ export default function ResponsiveAppBar() {
             ))}
           </Box>
 
+          <Flags />
+
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Settings">
+            <Tooltip title={t("appbar-menus.settings")}>
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <AccountCircleIcon sx={{ color: "#fff", fontSize: "2.5rem" }} />
               </IconButton>

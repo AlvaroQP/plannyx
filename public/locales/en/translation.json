@@ -1,3 +1,11 @@
 {
-    "welcome-message": "Welcome to Plannyx, the perfect place to organize your projects and tasks with ease."
+    "appbar-menus": {
+        "projects": "Projects",
+        "tasks": "Tasks",
+        "dashboard": "Dashboard",
+        "settings": "Settings",
+        "logout": "Logout"
+    },
+    
+    "welcome-message": "Welcome to Plannyx, the ideal tool for smooth project organization and task management. Plan and manage your tasks with ease, and get ready to boost your productivity!"
 }

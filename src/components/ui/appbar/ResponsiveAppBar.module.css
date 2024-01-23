@@ -1,5 +1,5 @@
 .appbar {
-  background-color: #0d2e51;
+  background-color: #0f418d;
   color: #fff;
 }
 
@@ -28,10 +28,6 @@
 .logo {
   height: 50px;
   margin-top: 0.25rem;
-}
-
-.avatar {
-  border: 1px solid #c1c1c1;
 }
 
 .navbutton:hover {
