@@ -1,0 +1,23 @@
+.footer-container {
+  background-color: #0f418dec;
+  color: white;
+}
+
+.footer-logo-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.footer-logo {
+  width: 10rem;
+}
+
+.copyright-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

@@ -27,5 +27,9 @@
         "login": "Iniciar sesión",
         "sign-up": "Registrarse",
         "back": "Volver"
+    },
+    "footer": {
+        "all-rights-reserved": "Todos los derechos reservados.",
+        "developed-by": "Desarrollado por Álvaro Quiles Pomares."
     }
 }

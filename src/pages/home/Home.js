@@ -9,6 +9,7 @@ import { useAuth } from "../../auth/auth-context/AuthProvider";
 import CustomButton from "../../components/ui/button/CustomButton";
 import { useNavigate } from "react-router-dom";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import Footer from "../../components/ui/footer/Footer";
 import styles from "./Home.module.css";
 
 export default function Home() {
@@ -83,6 +84,8 @@ export default function Home() {
       <div>
         <img src={homeBanner2} alt="banner" className={styles.banner} />
       </div>
+
+      <Footer />
     </>
   );
 }
