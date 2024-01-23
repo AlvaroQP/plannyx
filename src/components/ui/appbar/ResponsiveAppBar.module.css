@@ -1,0 +1,39 @@
+.appbar {
+  background-color: #0d2e51;
+  color: #fff;
+}
+
+.links {
+  color: #fff;
+}
+
+.linksmobile {
+  color: #000;
+}
+
+.links,
+.linksmobile {
+  text-decoration: none;
+  text-transform: none;
+}
+
+.links:hover {
+  text-decoration: underline;
+}
+
+.linksmobile:hover .mobilemenuitem {
+  font-weight: bold;
+}
+
+.logo {
+  height: 50px;
+  margin-top: 0.25rem;
+}
+
+.avatar {
+  border: 1px solid #c1c1c1;
+}
+
+.navbutton:hover {
+  cursor: pointer;
+}
