@@ -2,11 +2,11 @@
   position: fixed;
   bottom: 15px;
   right: 15px;
-  color: #3d6592;
+  color: #5aa5f4;
   cursor: pointer;
   z-index: 1000;
 }
 
 .scroll-top:hover {
-  color: #7594b6;
+  color: rgb(145, 174, 205);
 }

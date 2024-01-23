@@ -1,10 +1,31 @@
 {
     "appbar-menus": {
+        "login": "Iniciar sesión",
+        "sign-up": "Registrarse",
         "projects": "Proyectos",
         "tasks": "Tareas",
         "dashboard": "Dashboard",
         "settings": "Ajustes",
         "logout": "Cerrar sesión"
     },
-    "welcome-message": "Bienvenid@ a Plannyx, la herramienta ideal para una gestión fluida de proyectos y tareas. Planifica y organiza tus tareas con facilidad, y ¡prepárate para aumentar tu productividad!"
+    "home": {
+        "welcome-message": {
+            "p1": "Bienvenid@ a Plannyx, la herramienta ideal para una gestión fluida de proyectos y tareas.",
+            "p2": "Planifica y organiza tus tareas con facilidad, y ¡prepárate para aumentar tu productividad!"
+        },
+        "why-use-plannyx": "¿Por qué usar Plannyx?",
+        "benefits": {
+            "1": "Planifica tus proyectos personales y profesionales.",
+            "2": "Gestiona tus tareas eficazmente.",
+            "3": "Mantente organizado con fechas límite y recordatorios útiles.",
+            "4": "Controla tus listas de tareas pendientes.",
+            "5": "Visualiza tus tareas a través de tu calendario personal.",
+            "6": "Analiza tus progresos con un panel de control detallado."
+        }
+    },
+    "button": {
+        "login": "Iniciar sesión",
+        "sign-up": "Registrarse",
+        "back": "Volver"
+    }
 }

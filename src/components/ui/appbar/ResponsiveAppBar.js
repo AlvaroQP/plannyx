@@ -8,26 +8,38 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import logo from "../../../assets/images/logo.png";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Flags from "../flags/Flags";
 import { useTranslation } from "react-i18next";
+import { useAuth } from "../../../auth/auth-context/AuthProvider";
 import styles from "./ResponsiveAppBar.module.css";
 
 export default function ResponsiveAppBar() {
+  const { user } = useAuth();
   const { t } = useTranslation();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-  const pages = [
-    {
-      name: t("appbar-menus.projects"),
-      path: "projects",
-    },
-  ];
+  const pages = user
+    ? [
+        {
+          name: t("appbar-menus.projects"),
+          path: "projects",
+        },
+      ]
+    : [
+        {
+          name: t("appbar-menus.login"),
+          path: "/login",
+        },
+        {
+          name: t("appbar-menus.sign-up"),
+          path: "/signup",
+        },
+      ];
 
   const settings = [t("appbar-menus.dashboard"), t("appbar-menus.logout")];
 
@@ -119,26 +131,16 @@ export default function ResponsiveAppBar() {
             }}
           >
             <NavLink to="/" end>
-              <img src={logo} alt="logo" className={styles.logo} />
+              <img src={logo} alt="logo" className={styles["logo-mobile"]} />
             </NavLink>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
-              <Button
-                key={page.name}
-                onClick={handleCloseNavMenu}
-                sx={{
-                  my: 1,
-                  color: "white",
-                }}
-                className={styles.navbutton}
-              >
-                <NavLink to={page.path} end className={styles.links}>
-                  <MenuItem onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{page.name}</Typography>
-                  </MenuItem>
-                </NavLink>
-              </Button>
+              <NavLink to={page.path} end className={styles.links}>
+                <MenuItem key={page.name} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">{page.name}</Typography>
+                </MenuItem>
+              </NavLink>
             ))}
           </Box>
 

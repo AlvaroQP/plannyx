@@ -1,11 +1,31 @@
 {
     "appbar-menus": {
+        "login": "Login",
+        "sign-up": "Sign Up",
         "projects": "Projects",
         "tasks": "Tasks",
         "dashboard": "Dashboard",
         "settings": "Settings",
         "logout": "Logout"
     },
-    
-    "welcome-message": "Welcome to Plannyx, the ideal tool for smooth project organization and task management. Plan and manage your tasks with ease, and get ready to boost your productivity!"
+    "home": { 
+        "welcome-message": {
+            "p1": "Welcome to Plannyx, the ideal tool for smooth project organization and task management.",
+            "p2": "Plan and manage your tasks with ease, and get ready to boost your productivity!"
+        },
+        "why-use-plannyx": "Why use Plannyx?",
+        "benefits": {
+            "1": "Plan your personal and professional projects.",
+            "2": "Manage your tasks efficiently.",
+            "3": "Stay organized with deadlines and helpful reminders.",
+            "4": "Keep track of your to-do lists.",
+            "5": "Visualize your tasks seamlessly through your personal calendar.",
+            "6": "Monitor your progress with a detailed dashboard."
+        }
+    },
+    "button": {
+        "login": "Login",
+        "sign-up": "Sign up",
+        "back": "Back"
+    }
 }

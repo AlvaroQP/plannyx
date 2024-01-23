@@ -3,10 +3,54 @@
   display: block;
 }
 
-.welcome-message-container {
-  background-color: #0f418d;
+.message-container {
+  background-color: #0f418dec;
   color: white;
-  padding: 2rem;
+  padding: 1rem;
   font-size: 1rem;
   text-align: center;
+}
+
+.login-signup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.login-signup-container > button {
+  margin: 0 0.5rem;
+}
+
+.message-container-benefits {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #0f418dec;
+  color: white;
+  padding: 1rem;
+}
+
+.benefits-ul-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.benefits-ul-container ul {
+  list-style-type: none;
+  flex: 1 1 300px;
+}
+
+.benefits-ul-container li {
+  margin: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.benefits-ul-container li > * {
+  margin: 0 0.5rem;
 }

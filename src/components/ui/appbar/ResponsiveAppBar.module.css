@@ -30,6 +30,12 @@
   margin-top: 0.25rem;
 }
 
-.navbutton:hover {
-  cursor: pointer;
+.logo-mobile {
+  height: 50px;
+  margin-top: 0.25rem;
+  margin-left: 5rem;
+}
+
+.navbutton {
+  text-transform: none;
 }
