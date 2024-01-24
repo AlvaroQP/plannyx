@@ -4,13 +4,16 @@ import { useTranslation } from "react-i18next";
 import Login from "../../../auth/login/Login";
 import Signup from "../../../auth/signup/Signup";
 
-export default function LoginSignUpButtons() {
+export default function LoginSignUpButtons({ handleCloseNavMenu }) {
   const { t } = useTranslation();
   const [showLogin, setShowLogin] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
 
   function handleShowLogin() {
     setShowLogin(true);
+    if (handleCloseNavMenu) {
+      handleCloseNavMenu();
+    }
   }
 
   function handleCloseLogin() {
@@ -19,6 +22,9 @@ export default function LoginSignUpButtons() {
 
   function handleShowSignUp() {
     setShowSignUp(true);
+    if (handleCloseNavMenu) {
+      handleCloseNavMenu();
+    }
   }
 
   function handleCloseSignUp() {

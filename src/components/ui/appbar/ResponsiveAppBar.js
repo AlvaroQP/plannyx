@@ -99,7 +99,7 @@ export default function ResponsiveAppBar() {
             >
               {!user ? (
                 <div className={styles["login-signup-container-mobile"]}>
-                  <LoginSignUpButtons />
+                  <LoginSignUpButtons handleCloseNavMenu={handleCloseNavMenu} />
                 </div>
               ) : (
                 pages.map((page) => (
