@@ -61,7 +61,7 @@ export function AuthProvider({ children }) {
       password
     );
     await updateProfile(userCredential.user, { displayName });
-    // Add a new document in collection "users" with email, name and role
+
     await setDoc(doc(db, "users", userCredential.user.uid), {
       email: userCredential.user.email,
       name: userCredential.user.displayName,

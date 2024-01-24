@@ -9,7 +9,7 @@ export default function LoadingBackdropSpinner() {
   return (
     <Backdrop
       open={isLoading}
-      sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      sx={{ zIndex: (theme) => theme.zIndex.drawer + 999 }}
     >
       <BeatLoader color="#a5d8ff" size="1.5rem" loading />
     </Backdrop>

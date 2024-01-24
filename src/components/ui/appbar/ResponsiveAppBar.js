@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -15,13 +15,15 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Flags from "../flags/Flags";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../../../auth/auth-context/AuthProvider";
+import LogoutButton from "../../../auth/logout/LogoutButton";
+import LoginSignUpButtons from "../button/LoginSignUpButtons";
 import styles from "./ResponsiveAppBar.module.css";
 
 export default function ResponsiveAppBar() {
   const { user } = useAuth();
   const { t } = useTranslation();
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
 
   const pages = user
     ? [
@@ -30,18 +32,9 @@ export default function ResponsiveAppBar() {
           path: "projects",
         },
       ]
-    : [
-        {
-          name: t("appbar-menus.login"),
-          path: "/login",
-        },
-        {
-          name: t("appbar-menus.sign-up"),
-          path: "/signup",
-        },
-      ];
+    : null;
 
-  const settings = [t("appbar-menus.dashboard"), t("appbar-menus.logout")];
+  const settings = [<LogoutButton />];
 
   function handleOpenNavMenu(event) {
     setAnchorElNav(event.currentTarget);
@@ -104,21 +97,27 @@ export default function ResponsiveAppBar() {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
-                <NavLink
-                  key={page.name}
-                  to={page.path}
-                  end
-                  className={styles.linksmobile}
-                >
-                  <MenuItem
-                    onClick={handleCloseNavMenu}
-                    className={styles.mobilemenuitem}
+              {!user ? (
+                <div className={styles["login-signup-container-mobile"]}>
+                  <LoginSignUpButtons />
+                </div>
+              ) : (
+                pages.map((page) => (
+                  <NavLink
+                    key={page.name}
+                    to={page.path}
+                    end
+                    className={styles.linksmobile}
                   >
-                    {page.name}
-                  </MenuItem>
-                </NavLink>
-              ))}
+                    <MenuItem
+                      onClick={handleCloseNavMenu}
+                      className={styles.mobilemenuitem}
+                    >
+                      {page.name}
+                    </MenuItem>
+                  </NavLink>
+                ))
+              )}
             </Menu>
           </Box>
 
@@ -135,13 +134,24 @@ export default function ResponsiveAppBar() {
             </NavLink>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <NavLink to={page.path} end className={styles.links}>
-                <MenuItem key={page.name} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page.name}</Typography>
-                </MenuItem>
-              </NavLink>
-            ))}
+            {!user ? (
+              <div className={styles["login-signup-container"]}>
+                <LoginSignUpButtons />
+              </div>
+            ) : (
+              pages.map((page) => (
+                <NavLink
+                  to={page.path}
+                  key={page.name}
+                  end
+                  className={styles.links}
+                >
+                  <MenuItem key={page.name} onClick={handleCloseNavMenu}>
+                    <Typography textAlign="center">{page.name}</Typography>
+                  </MenuItem>
+                </NavLink>
+              ))
+            )}
           </Box>
 
           <Flags />

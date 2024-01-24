@@ -6,15 +6,13 @@ import homeBanner2 from "../../assets/images/home-banner-2.png";
 import { useTranslation } from "react-i18next";
 import i18n from "../../i18n";
 import { useAuth } from "../../auth/auth-context/AuthProvider";
-import CustomButton from "../../components/ui/button/CustomButton";
-import { useNavigate } from "react-router-dom";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import LoginSignUpButtons from "../../components/ui/button/LoginSignUpButtons";
 import Footer from "../../components/ui/footer/Footer";
 import styles from "./Home.module.css";
 
 export default function Home() {
   const { user } = useAuth();
-  const navigate = useNavigate();
   const { t } = useTranslation();
 
   return (
@@ -33,18 +31,7 @@ export default function Home() {
 
         {!user && (
           <div className={styles["login-signup-container"]}>
-            <CustomButton
-              text={t("button.login")}
-              variant="contained"
-              color="primary"
-              onClick={() => navigate("/login")}
-            />
-            <CustomButton
-              text={t("button.sign-up")}
-              variant="contained"
-              color="success"
-              onClick={() => navigate("/signup")}
-            />
+            <LoginSignUpButtons />
           </div>
         )}
       </div>

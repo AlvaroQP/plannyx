@@ -33,9 +33,22 @@
 .logo-mobile {
   height: 50px;
   margin-top: 0.25rem;
-  margin-left: 5rem;
+  margin-left: 4rem;
 }
 
 .navbutton {
   text-transform: none;
+}
+
+.login-signup-container button {
+  margin-left: 1rem;
+}
+
+.login-signup-container-mobile {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-signup-container-mobile button {
+  margin: 0.5rem;
 }

@@ -1,7 +1,7 @@
 {
     "appbar-menus": {
-        "login": "Login",
-        "sign-up": "Sign Up",
+        "login": "Log in",
+        "sign-up": "Sign up",
         "projects": "Projects",
         "tasks": "Tasks",
         "dashboard": "Dashboard",
@@ -24,12 +24,44 @@
         }
     },
     "button": {
-        "login": "Login",
+        "login": "Log In",
+        "logout": "Log out",
         "sign-up": "Sign up",
-        "back": "Back"
+        "back": "Back",
+        "cancel": "Cancel"
     },
     "footer": {
         "all-rights-reserved": "All rights reserved.",
         "developed-by": "Developed by Álvaro Quiles Pomares."
+    },
+    "login": {
+        "title": "Log In",
+        "welcome": "Welcome back",
+        "invalid-email-password": "Invalid email or password.",
+        "login-with-google": "Log in with Google",
+        "field": {
+            "email": "Email",
+            "password": "Password"
+        }
+    },
+    "signup": {
+        "title": "Create your account",
+        "welcome": "Welcome",
+        "email-already-in-use": "The email address is already in use by another account.",
+        "password-requirements": "Password must be at least 6 characters, include at least one uppercase character and one special symbol.",
+        "passwords-do-not-match": "Passwords do not match.",
+        "could-not-create-account": "Could not create account. Please try again later.",
+        "field": {
+            "name": "Name",
+            "email": "Email",
+            "password": "Password",
+            "confirm-password": "Confirm password"
+        }
+    },
+    "logout": {     
+        "message": "Are you sure you want to log out?",
+        "logout": "Log out",
+        "goodbye": "Goodbye",
+        "failed-to-logout": "Failed to log out. Please try again later."
     }
 }

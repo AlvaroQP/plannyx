@@ -25,11 +25,43 @@
     },
     "button": {
         "login": "Iniciar sesión",
+        "logout": "Cerrar sesión",
         "sign-up": "Registrarse",
-        "back": "Volver"
+        "back": "Volver",
+        "cancel": "Cancelar"
     },
     "footer": {
         "all-rights-reserved": "Todos los derechos reservados.",
         "developed-by": "Desarrollado por Álvaro Quiles Pomares."
+    },
+    "login": {
+        "title": "Iniciar sesión",
+        "welcome": "Bienvenid@ de nuevo",
+        "invalid-email-password": "Email o contraseña inválidos.",
+        "login-with-google": "Iniciar sesión con Google",
+        "field": {
+            "email": "Correo electrónico",
+            "password": "Contraseña"
+        }
+    },
+    "signup": {
+        "title": "Crea tu cuenta",
+        "welcome": "Bienvenid@",
+        "email-already-in-use": "El correo electrónico ya está en uso.",
+        "password-requirements": "La contraseña debe tener al menos 6 caracteres y al menos una letra mayúscula y un caracter especial.",
+        "passwords-do-not-match": "Las contraseñas no coinciden.",
+        "could-not-create-account": "No se ha podido crear la cuenta. Por favor, inténtalo de nuevo más tarde.",
+        "field": {
+            "name": "Nombre",
+            "email": "Correo electrónico",
+            "password": "Contraseña",
+            "confirm-password": "Confirmar contraseña"
+        }
+    },
+    "logout": {
+        "message": "¿Estás segur@ de que quieres cerrar sesión?",
+        "logout": "Cerrar sesión",
+        "goodbye": "¡Hasta pronto",
+        "failed-to-logout": "No se ha podido cerrar sesión. Por favor, inténtalo de nuevo más tarde."
     }
 }

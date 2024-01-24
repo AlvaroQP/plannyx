@@ -1,0 +1,25 @@
+.dialog-content {
+  margin: 0;
+  overflow: hidden;
+}
+
+.form {
+  width: 20rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px 40px 40px;
+  background-color: #0f3978;
+}
+
+.form-title {
+  text-align: center;
+  color: #fff;
+  font-size: 30px;
+}
+
+.google-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
