@@ -106,6 +106,7 @@ export function AuthProvider({ children }) {
       email,
       password
     );
+
     await updateProfile(userCredential.user, { displayName });
 
     await setDoc(doc(db, "users", userCredential.user.uid), {
@@ -113,6 +114,7 @@ export function AuthProvider({ children }) {
       name: userCredential.user.displayName,
       role: "user",
     });
+
     await sendEmailVerification(userCredential.user);
 
     return userCredential;

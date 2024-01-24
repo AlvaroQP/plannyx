@@ -26,7 +26,6 @@ export default function Login({ handleCloseLogin }) {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const { t } = useTranslation();
-
   const [showPassword, setShowPassword] = useState(false);
 
   async function handleLogin(e) {
