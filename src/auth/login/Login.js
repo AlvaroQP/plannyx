@@ -19,7 +19,7 @@ import DialogContent from "@mui/material/DialogContent";
 import styles from "./Login.module.css";
 
 export default function Login({ handleCloseLogin }) {
-  const { login, loginWithGoogle } = useAuth();
+  const { login, loginWithGoogle, setIsUserEmailVerified } = useAuth();
   const { setIsLoading } = useLoading();
   const { createAlert } = useAlert();
   const [email, setEmail] = useState("");
@@ -34,11 +34,16 @@ export default function Login({ handleCloseLogin }) {
     setIsLoading(true);
     try {
       const userCredential = await login(email, password);
-      createAlert(
-        "success",
-        `${t("login.welcome")}, ${userCredential.user.displayName}!`
-      );
-      handleCloseLogin();
+      if (!userCredential.user.emailVerified) {
+        setError(t("signup.verify-email"));
+      } else {
+        createAlert(
+          "success",
+          `${t("login.welcome")}, ${userCredential.user.displayName}!`
+        );
+        setIsUserEmailVerified(true);
+        handleCloseLogin();
+      }
     } catch (error) {
       setError(t("login.invalid-email-password"));
       setEmail("");

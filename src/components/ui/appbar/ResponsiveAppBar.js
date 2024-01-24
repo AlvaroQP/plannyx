@@ -97,7 +97,7 @@ export default function ResponsiveAppBar() {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {!user ? (
+              {!user?.emailVerified ? (
                 <div className={styles["login-signup-container-mobile"]}>
                   <LoginSignUpButtons handleCloseNavMenu={handleCloseNavMenu} />
                 </div>
@@ -134,7 +134,7 @@ export default function ResponsiveAppBar() {
             </NavLink>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {!user ? (
+            {!user?.emailVerified ? (
               <div className={styles["login-signup-container"]}>
                 <LoginSignUpButtons />
               </div>
@@ -156,7 +156,7 @@ export default function ResponsiveAppBar() {
 
           <Flags />
 
-          {user && (
+          {user?.emailVerified && (
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title={t("appbar-menus.settings")}>
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

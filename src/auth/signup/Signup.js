@@ -43,11 +43,8 @@ export default function Signup({ handleCloseSignUp }) {
     }
 
     try {
-      const userCredential = await signup(email, password, displayName);
-      createAlert(
-        "success",
-        `${t("signup.welcome")}, ${userCredential.user.displayName}!`
-      );
+      await signup(email, password, displayName);
+      createAlert("success", `${t("signup.verify-email")}`);
       handleCloseSignUp();
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {

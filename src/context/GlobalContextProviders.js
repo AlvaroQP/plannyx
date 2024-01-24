@@ -5,10 +5,10 @@ import { AlertProvider } from "./alerts/AlertProvider";
 
 export default function GlobalContextProviders({ children }) {
   return (
-    <AuthProvider>
+    <AlertProvider>
       <LoadingProvider>
-        <AlertProvider>{children}</AlertProvider>
+        <AuthProvider>{children}</AuthProvider>
       </LoadingProvider>
-    </AuthProvider>
+    </AlertProvider>
   );
 }

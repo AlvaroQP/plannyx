@@ -5,7 +5,14 @@ import RootLayout from "./pages/root-layout/RootLayout";
 import Error from "./pages/error/Error";
 import Home from "./pages/home/Home";
 import Projects from "./pages/projects/Projects";
+import { useAuth } from "./auth/auth-context/AuthProvider";
 import "./i18n";
+import UserPanel from "./pages/user-panel/UserPanel";
+
+function UserPanelOrHome() {
+  const { user, isUserEmailVerified } = useAuth();
+  return user && isUserEmailVerified ? <UserPanel /> : <Home />;
+}
 
 export default function App() {
   const router = createBrowserRouter([
@@ -16,7 +23,7 @@ export default function App() {
       children: [
         {
           index: true,
-          element: <Home />,
+          element: <UserPanelOrHome />,
         },
         {
           path: "projects",

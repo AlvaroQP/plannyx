@@ -47,6 +47,7 @@
     "signup": {
         "title": "Crea tu cuenta",
         "welcome": "Bienvenid@",
+        "verify-email": "Por favor, verifica tu correo electrónico para poder acceder a la aplicación.",
         "email-already-in-use": "El correo electrónico ya está en uso.",
         "password-requirements": "La contraseña debe tener al menos 6 caracteres y al menos una letra mayúscula y un caracter especial.",
         "passwords-do-not-match": "Las contraseñas no coinciden.",

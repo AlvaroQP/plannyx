@@ -47,6 +47,7 @@
     "signup": {
         "title": "Create your account",
         "welcome": "Welcome",
+        "verify-email": "Please verify your email address in order to log in.",
         "email-already-in-use": "The email address is already in use by another account.",
         "password-requirements": "Password must be at least 6 characters, include at least one uppercase character and one special symbol.",
         "passwords-do-not-match": "Passwords do not match.",

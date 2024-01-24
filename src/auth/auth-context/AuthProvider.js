@@ -6,6 +6,7 @@ import {
   signInWithPopup,
   signOut,
   updateProfile,
+  sendEmailVerification,
 } from "firebase/auth";
 import { auth, googleProvider, db } from "../../firebase/firebase";
 import { getDoc, setDoc, doc } from "firebase/firestore";
@@ -16,6 +17,15 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isUserEmailVerified, setIsUserEmailVerified] = useState(false);
+
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
+
+  useEffect(() => {
+    console.log(`Is email verified? ${user?.emailVerified}`);
+  }, [user?.emailVerified]);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
@@ -42,8 +52,14 @@ export function AuthProvider({ children }) {
   }, []);
 
   async function login(email, password) {
-    const user = await signInWithEmailAndPassword(auth, email, password);
-    const userDoc = await getDoc(doc(db, "users", user.user.uid));
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    await userCredential.user.reload();
+
+    const userDoc = await getDoc(doc(db, "users", userCredential.user.uid));
 
     if (userDoc.exists()) {
       if (userDoc.data().role === "admin") {
@@ -51,7 +67,7 @@ export function AuthProvider({ children }) {
       }
     }
 
-    return user;
+    return userCredential;
   }
 
   async function signup(email, password, displayName) {
@@ -67,6 +83,8 @@ export function AuthProvider({ children }) {
       name: userCredential.user.displayName,
       role: "user",
     });
+    await sendEmailVerification(userCredential.user);
+
     return userCredential;
   }
 
@@ -93,6 +111,8 @@ export function AuthProvider({ children }) {
         loginWithGoogle,
         signup,
         logout,
+        isUserEmailVerified,
+        setIsUserEmailVerified,
       }}
     >
       {children}

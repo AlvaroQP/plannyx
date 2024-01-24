@@ -8,7 +8,7 @@ import CustomDialog from "../../components/ui/dialog/CustomDialog";
 import { useTranslation } from "react-i18next";
 
 export default function LogoutButton() {
-  const { logout } = useAuth();
+  const { logout, setIsUserEmailVerified } = useAuth();
   const { user } = useAuth();
   const { createAlert } = useAlert();
   const navigate = useNavigate();
@@ -26,6 +26,7 @@ export default function LogoutButton() {
   async function handleLogout() {
     try {
       await logout();
+      setIsUserEmailVerified(false);
       createAlert("success", `${t("logout.goodbye")}, ${user.displayName}!`);
       navigate("/");
     } catch (error) {
