@@ -10,10 +10,14 @@ import "./i18n";
 import UserPanel from "./pages/user-panel/UserPanel";
 
 function UserPanelOrHome() {
-  const { user, isUserEmailVerified } = useAuth();
-  return user && isUserEmailVerified ? <UserPanel /> : <Home />;
-}
+  const { isUserEmailVerified, isLoadingEmailVerification } = useAuth();
 
+  if (isLoadingEmailVerification) {
+    return null;
+  }
+
+  return isUserEmailVerified ? <UserPanel /> : <Home />;
+}
 export default function App() {
   const router = createBrowserRouter([
     {

@@ -1,4 +1,10 @@
-import React, { createContext, useEffect, useState, useContext } from "react";
+import React, {
+  createContext,
+  useEffect,
+  useState,
+  useContext,
+  useCallback,
+} from "react";
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
@@ -9,7 +15,7 @@ import {
   sendEmailVerification,
 } from "firebase/auth";
 import { auth, googleProvider, db } from "../../firebase/firebase";
-import { getDoc, setDoc, doc } from "firebase/firestore";
+import { getDoc, setDoc, doc, updateDoc } from "firebase/firestore";
 
 const AuthContext = createContext();
 
@@ -18,14 +24,21 @@ export function AuthProvider({ children }) {
   const [isAdmin, setIsAdmin] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isUserEmailVerified, setIsUserEmailVerified] = useState(false);
+  const [isLoadingEmailVerification, setIsLoadingEmailVerification] =
+    useState(true);
 
   useEffect(() => {
-    console.log(user);
-  }, [user]);
+    async function updateUserDoc() {
+      if (isUserEmailVerified && user) {
+        const userDoc = doc(db, "users", user.uid);
+        await updateDoc(userDoc, {
+          emailVerified: true,
+        });
+      }
+    }
 
-  useEffect(() => {
-    console.log(`Is email verified? ${user?.emailVerified}`);
-  }, [user?.emailVerified]);
+    updateUserDoc();
+  }, [isUserEmailVerified, user]);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
@@ -50,6 +63,23 @@ export function AuthProvider({ children }) {
     // Cleanup subscription on unmount
     return () => unsubscribe();
   }, []);
+
+  const getEmailVerifiedStatus = useCallback(async () => {
+    if (user) {
+      const userDoc = await getDoc(doc(db, "users", user.uid));
+      if (userDoc.exists()) {
+        return userDoc.data().emailVerified;
+      }
+    }
+    return false;
+  }, [user]);
+
+  useEffect(() => {
+    getEmailVerifiedStatus().then((verified) => {
+      setIsUserEmailVerified(verified);
+      setIsLoadingEmailVerification(false);
+    });
+  }, [getEmailVerifiedStatus]);
 
   async function login(email, password) {
     const userCredential = await signInWithEmailAndPassword(
@@ -113,6 +143,8 @@ export function AuthProvider({ children }) {
         logout,
         isUserEmailVerified,
         setIsUserEmailVerified,
+        getEmailVerifiedStatus,
+        isLoadingEmailVerification,
       }}
     >
       {children}

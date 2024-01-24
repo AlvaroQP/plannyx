@@ -20,19 +20,20 @@ import LoginSignUpButtons from "../button/LoginSignUpButtons";
 import styles from "./ResponsiveAppBar.module.css";
 
 export default function ResponsiveAppBar() {
-  const { user } = useAuth();
+  const { user, isUserEmailVerified } = useAuth();
   const { t } = useTranslation();
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
-  const pages = user
-    ? [
-        {
-          name: t("appbar-menus.projects"),
-          path: "projects",
-        },
-      ]
-    : null;
+  const pages =
+    user && isUserEmailVerified
+      ? [
+          {
+            name: t("appbar-menus.projects"),
+            path: "projects",
+          },
+        ]
+      : null;
 
   const settings = [<LogoutButton />];
 
@@ -97,7 +98,7 @@ export default function ResponsiveAppBar() {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {!user?.emailVerified ? (
+              {!isUserEmailVerified ? (
                 <div className={styles["login-signup-container-mobile"]}>
                   <LoginSignUpButtons handleCloseNavMenu={handleCloseNavMenu} />
                 </div>
@@ -134,7 +135,7 @@ export default function ResponsiveAppBar() {
             </NavLink>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {!user?.emailVerified ? (
+            {!isUserEmailVerified ? (
               <div className={styles["login-signup-container"]}>
                 <LoginSignUpButtons />
               </div>
@@ -156,7 +157,7 @@ export default function ResponsiveAppBar() {
 
           <Flags />
 
-          {user?.emailVerified && (
+          {user && isUserEmailVerified && (
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title={t("appbar-menus.settings")}>
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
