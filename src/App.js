@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 import GlobalContextProviders from "./context/GlobalContextProviders";
 import RootLayout from "./pages/root-layout/RootLayout";
 import Error from "./pages/error/Error";
@@ -14,22 +13,17 @@ import { useAuth } from "./auth/auth-context/AuthProvider";
 import "./i18n";
 
 export default function App() {
-  function UserPanelOrHome() {
-    const { isUserEmailVerified, isLoadingEmailVerification } = useAuth();
-    if (isLoadingEmailVerification) {
-      return null;
-    }
-
-    return isUserEmailVerified ? <UserPanelContainer /> : <Home />;
-  }
-
   function ComponentOrRestrictedAccess({ component: Component }) {
     const { isUserEmailVerified, isLoadingEmailVerification } = useAuth();
     if (isLoadingEmailVerification) {
       return null;
     }
 
-    return isUserEmailVerified ? <Component /> : <RestrictedAccess />;
+    if (Component === UserPanelContainer) {
+      return isUserEmailVerified ? <UserPanelContainer /> : <Home />;
+    } else {
+      return isUserEmailVerified ? <Component /> : <RestrictedAccess />;
+    }
   }
 
   const router = createBrowserRouter([
@@ -40,7 +34,9 @@ export default function App() {
       children: [
         {
           index: true,
-          element: <UserPanelOrHome />,
+          element: (
+            <ComponentOrRestrictedAccess component={UserPanelContainer} />
+          ),
         },
         {
           path: "projects",
