@@ -1,25 +1,37 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import GlobalContextProviders from "./context/GlobalContextProviders";
 import RootLayout from "./pages/root-layout/RootLayout";
 import Error from "./pages/error/Error";
 import Home from "./pages/home/Home";
-import Projects from "./pages/projects/Projects";
+import Projects from "./pages/user-panel/projects/Projects";
+import UserPanelContainer from "./pages/user-panel/user-panel-container/UserPanelContainer";
+import Calendar from "./pages/user-panel/calendar/Calendar";
+import Dashboard from "./pages/user-panel/dashboard/Dashboard";
+import RestrictedAccess from "./pages/restricted-access/RestrictedAccess";
 import { useAuth } from "./auth/auth-context/AuthProvider";
-import UserPanel from "./pages/user-panel/UserPanel";
 import "./i18n";
 
-function UserPanelOrHome() {
-  const { isUserEmailVerified, isLoadingEmailVerification } = useAuth();
+export default function App() {
+  function UserPanelOrHome() {
+    const { isUserEmailVerified, isLoadingEmailVerification } = useAuth();
+    if (isLoadingEmailVerification) {
+      return null;
+    }
 
-  if (isLoadingEmailVerification) {
-    return null;
+    return isUserEmailVerified ? <UserPanelContainer /> : <Home />;
   }
 
-  return isUserEmailVerified ? <UserPanel /> : <Home />;
-}
+  function ComponentOrRestrictedAccess({ component: Component }) {
+    const { isUserEmailVerified, isLoadingEmailVerification } = useAuth();
+    if (isLoadingEmailVerification) {
+      return null;
+    }
 
-export default function App() {
+    return isUserEmailVerified ? <Component /> : <RestrictedAccess />;
+  }
+
   const router = createBrowserRouter([
     {
       path: "/",
@@ -32,7 +44,15 @@ export default function App() {
         },
         {
           path: "projects",
-          element: <Projects />,
+          element: <ComponentOrRestrictedAccess component={Projects} />,
+        },
+        {
+          path: "calendar",
+          element: <ComponentOrRestrictedAccess component={Calendar} />,
+        },
+        {
+          path: "dashboard",
+          element: <ComponentOrRestrictedAccess component={Dashboard} />,
         },
       ],
     },

@@ -3,8 +3,10 @@
         "login": "Iniciar sesión",
         "sign-up": "Registrarse",
         "projects": "Proyectos",
+        "to-do-lists": "Listas de tareas",
+        "calendar": "Calendario",
         "tasks": "Tareas",
-        "dashboard": "Dashboard",
+        "dashboard": "Panel de control",
         "settings": "Ajustes",
         "logout": "Cerrar sesión"
     },
@@ -74,6 +76,9 @@
     },
     "500": {
         "title": "Ha ocurrido un error."
+    },
+    "access-denied": {
+        "title": "Acceso denegado.",
+        "message": "No tienes permiso para acceder a esta página o recurso."
     }
-    
 }

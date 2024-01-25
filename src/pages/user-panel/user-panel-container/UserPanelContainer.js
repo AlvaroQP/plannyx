@@ -1,5 +1,5 @@
 import React from "react";
 
-export default function UserPanel() {
+export default function UserPanelContainer() {
   return <div>UserPanel</div>;
 }

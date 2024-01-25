@@ -3,6 +3,8 @@
         "login": "Log in",
         "sign-up": "Sign up",
         "projects": "Projects",
+        "to-do-lists": "To-do lists",
+        "calendar": "Calendar",
         "tasks": "Tasks",
         "dashboard": "Dashboard",
         "settings": "Settings",
@@ -74,5 +76,9 @@
     },
     "500": {
         "title": "An error occurred."
+    },
+    "access-denied": {
+        "title": "Access denied.",
+        "message": "You do not have permission to access this page or resource."
     }
 }
