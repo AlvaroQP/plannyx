@@ -24,10 +24,12 @@
         }
     },
     "button": {
+        "home": "Home",
         "login": "Log In",
         "logout": "Log out",
         "sign-up": "Sign up",
         "back": "Back",
+        "done": "Done",
         "cancel": "Cancel"
     },
     "footer": {
@@ -36,7 +38,7 @@
     },
     "login": {
         "title": "Log In",
-        "welcome": "Welcome back",
+        "welcome": "Welcome",
         "invalid-email-password": "Invalid email or password.",
         "login-with-google": "Log in with Google",
         "field": {
@@ -48,6 +50,7 @@
         "title": "Create your account",
         "welcome": "Welcome",
         "verify-email": "Please verify your email address in order to log in.",
+        "verify-email-description": "A verification email has been sent to your email address. Please click on the link provided in the email to verify your account and be able to log in.",
         "email-already-in-use": "The email address is already in use by another account.",
         "password-requirements": "Password must be at least 6 characters, include at least one uppercase character and one special symbol.",
         "passwords-do-not-match": "Passwords do not match.",
@@ -64,5 +67,12 @@
         "logout": "Log out",
         "goodbye": "Goodbye",
         "failed-to-logout": "Failed to log out. Please try again later."
+    },
+    "404": {
+        "title": "Page not found.",
+        "message": "Could not find the resource or page you were looking for."
+    },
+    "500": {
+        "title": "An error occurred."
     }
 }

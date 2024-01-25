@@ -87,6 +87,7 @@ export function AuthProvider({ children }) {
       email,
       password
     );
+    // Reloads the current user to check if the email is verified
     await userCredential.user.reload();
 
     const userDoc = await getDoc(doc(db, "users", userCredential.user.uid));

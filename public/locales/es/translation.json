@@ -24,10 +24,12 @@
         }
     },
     "button": {
+        "home": "Inicio",
         "login": "Iniciar sesión",
         "logout": "Cerrar sesión",
         "sign-up": "Registrarse",
         "back": "Volver",
+        "done": "Hecho",
         "cancel": "Cancelar"
     },
     "footer": {
@@ -36,7 +38,7 @@
     },
     "login": {
         "title": "Iniciar sesión",
-        "welcome": "Bienvenid@ de nuevo",
+        "welcome": "Bienvenid@",
         "invalid-email-password": "Email o contraseña inválidos.",
         "login-with-google": "Iniciar sesión con Google",
         "field": {
@@ -47,7 +49,8 @@
     "signup": {
         "title": "Crea tu cuenta",
         "welcome": "Bienvenid@",
-        "verify-email": "Por favor, verifica tu correo electrónico para poder acceder a la aplicación.",
+        "verify-email": "Por favor, verifica tu correo electrónico para poder acceder.",
+        "verify-email-description": "Te hemos enviado un correo electrónico a la dirección que nos has proporcionado. Por favor, haz clic en el enlace que aparece en el correo para verificar tu cuenta y poder acceder a la aplicación.",
         "email-already-in-use": "El correo electrónico ya está en uso.",
         "password-requirements": "La contraseña debe tener al menos 6 caracteres y al menos una letra mayúscula y un caracter especial.",
         "passwords-do-not-match": "Las contraseñas no coinciden.",
@@ -64,5 +67,13 @@
         "logout": "Cerrar sesión",
         "goodbye": "¡Hasta pronto",
         "failed-to-logout": "No se ha podido cerrar sesión. Por favor, inténtalo de nuevo más tarde."
+    },
+    "404": {
+        "title": "Página no encontrada.",
+        "message": "No se pudo encontrar la página o recurso que estabas buscando."
+    },
+    "500": {
+        "title": "Ha ocurrido un error."
     }
+    
 }

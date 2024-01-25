@@ -16,6 +16,7 @@ import { useTranslation } from "react-i18next";
 import Dialog from "@mui/material/Dialog";
 import CloseIcon from "@mui/icons-material/Close";
 import DialogContent from "@mui/material/DialogContent";
+import CustomDivider from "../../components/ui/divider/CustomDivider";
 import styles from "./Login.module.css";
 
 export default function Login({ handleCloseLogin }) {
@@ -70,7 +71,7 @@ export default function Login({ handleCloseLogin }) {
             </IconButton>
           </Box>
           <h2 className={styles["form-title"]}>{t("login.title")}</h2>
-          <Box sx={{ width: "100%", border: ".5px solid #9f9f9f" }} />
+          <CustomDivider />
 
           {error && <AuthFormAlert severity="error" message={error} />}
 

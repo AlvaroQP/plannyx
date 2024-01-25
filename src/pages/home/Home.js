@@ -5,14 +5,11 @@ import homeBanner1 from "../../assets/images/home-banner-1.png";
 import homeBanner2 from "../../assets/images/home-banner-2.png";
 import { useTranslation } from "react-i18next";
 import i18n from "../../i18n";
-import { useAuth } from "../../auth/auth-context/AuthProvider";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
-import LoginSignUpButtons from "../../components/ui/button/LoginSignUpButtons";
 import Footer from "../../components/ui/footer/Footer";
 import styles from "./Home.module.css";
 
 export default function Home() {
-  const { user } = useAuth();
   const { t } = useTranslation();
 
   return (
@@ -28,12 +25,6 @@ export default function Home() {
       <div className={styles["message-container"]}>
         <p>{t("home.welcome-message.p1")}</p>
         <p>{t("home.welcome-message.p2")}</p>
-
-        {!user && (
-          <div className={styles["login-signup-container"]}>
-            <LoginSignUpButtons />
-          </div>
-        )}
       </div>
 
       <div>
