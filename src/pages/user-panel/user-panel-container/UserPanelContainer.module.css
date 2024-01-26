@@ -1,3 +1,7 @@
+.user-panel-container {
+  display: flex;
+}
+
 .sidebar-container {
   height: 100vh;
   display: flex;

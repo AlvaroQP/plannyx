@@ -40,7 +40,7 @@ export default function LogoutButtonSideBar() {
         icon={<LogoutIcon sx={{ color: "#3071d4" }} />}
         onClick={handleOpenConfirmLogout}
       >
-        Logout
+        {t("logout.logout")}
       </MenuItem>
 
       <CustomDialog

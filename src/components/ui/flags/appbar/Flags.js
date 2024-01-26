@@ -1,9 +1,9 @@
 import React from "react";
-import changeLanguage from "../../../utils/changeLanguage";
+import changeLanguage from "../../../../utils/changeLanguage";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import "/node_modules/flag-icons/css/flag-icons.min.css";
-import { useLanguage } from "../../../context/language/LanguageProvider";
+import { useLanguage } from "../../../../context/language/LanguageProvider";
 import styles from "./Flags.module.css";
 
 export default function Flags() {

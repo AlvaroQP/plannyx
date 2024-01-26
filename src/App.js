@@ -4,7 +4,8 @@ import GlobalContextProviders from "./context/GlobalContextProviders";
 import RootLayout from "./pages/root-layout/RootLayout";
 import Error from "./pages/error/Error";
 import Home from "./pages/home/Home";
-import Projects from "./pages/user-panel/projects/Projects";
+import NewProject from "./pages/user-panel/projects/new-project/NewProject";
+import AllProjects from "./pages/user-panel/projects/all-projects/AllProjects";
 import UserPanelContainer from "./pages/user-panel/user-panel-container/UserPanelContainer";
 import Calendar from "./pages/user-panel/calendar/Calendar";
 import Dashboard from "./pages/user-panel/dashboard/Dashboard";
@@ -19,7 +20,7 @@ export default function App() {
       return null;
     }
 
-    if (Component === UserPanelContainer) {
+    if (Component === Home) {
       return isUserEmailVerified ? <UserPanelContainer /> : <Home />;
     } else {
       return isUserEmailVerified ? <Component /> : <AccessDenied />;
@@ -34,19 +35,29 @@ export default function App() {
       children: [
         {
           index: true,
+          element: <ComponentOrAccessDenied component={Home} />,
+        },
+        {
+          path: "user-panel",
           element: <ComponentOrAccessDenied component={UserPanelContainer} />,
-        },
-        {
-          path: "projects",
-          element: <ComponentOrAccessDenied component={Projects} />,
-        },
-        {
-          path: "calendar",
-          element: <ComponentOrAccessDenied component={Calendar} />,
-        },
-        {
-          path: "dashboard",
-          element: <ComponentOrAccessDenied component={Dashboard} />,
+          children: [
+            {
+              path: "projects/new",
+              element: <ComponentOrAccessDenied component={NewProject} />,
+            },
+            {
+              path: "projects/all",
+              element: <ComponentOrAccessDenied component={AllProjects} />,
+            },
+            {
+              path: "calendar",
+              element: <ComponentOrAccessDenied component={Calendar} />,
+            },
+            {
+              path: "dashboard",
+              element: <ComponentOrAccessDenied component={Dashboard} />,
+            },
+          ],
         },
       ],
     },

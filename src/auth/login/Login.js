@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import CustomButton from "../../components/ui/button/CustomButton";
 import { TextField } from "@mui/material";
-import { useAlert } from "../../context/alerts/AlertProvider";
 import { useAuth } from "../auth-context/AuthProvider";
 import Box from "@mui/material/Box";
 import AuthFormAlert from "../../components/ui/alert/AuthFormAlert";
@@ -23,7 +22,6 @@ import styles from "./Login.module.css";
 export default function Login({ handleCloseLogin }) {
   const { login, loginWithGoogle, setIsUserEmailVerified } = useAuth();
   const { setIsLoading } = useLoading();
-  const { createAlert } = useAlert();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
@@ -39,13 +37,9 @@ export default function Login({ handleCloseLogin }) {
       if (!userCredential.user.emailVerified) {
         setError(t("signup.verify-email"));
       } else {
-        createAlert(
-          "success",
-          `${t("login.welcome")}, ${userCredential.user.displayName}!`
-        );
         setIsUserEmailVerified(true);
         handleCloseLogin();
-        navigate("/");
+        navigate("/user-panel");
       }
     } catch (error) {
       setError(t("login.invalid-email-password"));
@@ -115,9 +109,8 @@ export default function Login({ handleCloseLogin }) {
             type="submit"
           />
 
-          <Box
-            sx={{ width: "100%", border: ".5px solid #9f9f9f", mt: 3, mb: 1.5 }}
-          />
+          <br />
+          <CustomDivider />
 
           <CustomButton
             variant="contained"

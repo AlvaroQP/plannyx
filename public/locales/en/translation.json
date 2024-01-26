@@ -80,5 +80,16 @@
     "access-denied": {
         "title": "Access denied.",
         "message": "You do not have permission to access this page or resource."
+    },
+    "user-panel-sidebar": {
+        "general": "General",
+        "projects": "Projects",
+        "new-project": "New project",
+        "my-projects": "My projects",
+        "calendar": "Calendar",
+        "dashboard": "Dashboard",
+        "settings": "Settings",
+        "profile": "Profile",
+        "language": "Language"
     }
 }

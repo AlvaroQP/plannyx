@@ -8,14 +8,11 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import logo from "../../../assets/images/logo.png";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import Flags from "../flags/Flags";
+import Flags from "../flags/appbar/Flags";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../../../auth/auth-context/AuthProvider";
-import LogoutButton from "../../../auth/logout/LogoutButton";
 import LoginSignUpButtons from "../button/LoginSignUpButtons";
 import styles from "./ResponsiveAppBar.module.css";
 
@@ -23,7 +20,6 @@ export default function ResponsiveAppBar() {
   const { user, isUserEmailVerified } = useAuth();
   const { t } = useTranslation();
   const [anchorElNav, setAnchorElNav] = useState(null);
-  const [anchorElUser, setAnchorElUser] = useState(null);
 
   const pages =
     user && isUserEmailVerified
@@ -43,22 +39,12 @@ export default function ResponsiveAppBar() {
         ]
       : null;
 
-  const settings = [<LogoutButton />];
-
   function handleOpenNavMenu(event) {
     setAnchorElNav(event.currentTarget);
   }
 
-  function handleOpenUserMenu(event) {
-    setAnchorElUser(event.currentTarget);
-  }
-
   function handleCloseNavMenu() {
     setAnchorElNav(null);
-  }
-
-  function handleCloseUserMenu() {
-    setAnchorElUser(null);
   }
 
   return (
@@ -164,40 +150,6 @@ export default function ResponsiveAppBar() {
           </Box>
 
           <Flags />
-
-          {user && isUserEmailVerified && (
-            <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title={t("appbar-menus.settings")}>
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <AccountCircleIcon
-                    sx={{ color: "#fff", fontSize: "2.5rem" }}
-                  />
-                </IconButton>
-              </Tooltip>
-              <Menu
-                sx={{ mt: "45px" }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                {settings.map((setting, index) => (
-                  <MenuItem key={index} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
-            </Box>
-          )}
         </Toolbar>
       </Container>
     </AppBar>
