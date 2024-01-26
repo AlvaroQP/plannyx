@@ -8,12 +8,12 @@ import Projects from "./pages/user-panel/projects/Projects";
 import UserPanelContainer from "./pages/user-panel/user-panel-container/UserPanelContainer";
 import Calendar from "./pages/user-panel/calendar/Calendar";
 import Dashboard from "./pages/user-panel/dashboard/Dashboard";
-import RestrictedAccess from "./pages/restricted-access/RestrictedAccess";
+import AccessDenied from "./pages/access-denied/AccessDenied";
 import { useAuth } from "./auth/auth-context/AuthProvider";
 import "./i18n";
 
 export default function App() {
-  function ComponentOrRestrictedAccess({ component: Component }) {
+  function ComponentOrAccessDenied({ component: Component }) {
     const { isUserEmailVerified, isLoadingEmailVerification } = useAuth();
     if (isLoadingEmailVerification) {
       return null;
@@ -22,7 +22,7 @@ export default function App() {
     if (Component === UserPanelContainer) {
       return isUserEmailVerified ? <UserPanelContainer /> : <Home />;
     } else {
-      return isUserEmailVerified ? <Component /> : <RestrictedAccess />;
+      return isUserEmailVerified ? <Component /> : <AccessDenied />;
     }
   }
 
@@ -34,21 +34,19 @@ export default function App() {
       children: [
         {
           index: true,
-          element: (
-            <ComponentOrRestrictedAccess component={UserPanelContainer} />
-          ),
+          element: <ComponentOrAccessDenied component={UserPanelContainer} />,
         },
         {
           path: "projects",
-          element: <ComponentOrRestrictedAccess component={Projects} />,
+          element: <ComponentOrAccessDenied component={Projects} />,
         },
         {
           path: "calendar",
-          element: <ComponentOrRestrictedAccess component={Calendar} />,
+          element: <ComponentOrAccessDenied component={Calendar} />,
         },
         {
           path: "dashboard",
-          element: <ComponentOrRestrictedAccess component={Dashboard} />,
+          element: <ComponentOrAccessDenied component={Dashboard} />,
         },
       ],
     },

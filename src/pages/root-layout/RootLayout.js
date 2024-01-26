@@ -4,13 +4,17 @@ import ScrollTop from "../../components/ui/scroll-top/ScrollTop";
 import LoadingBackdropSpinner from "../../components/ui/loading/LoadingBackdropSpinner";
 import { useAlert } from "../../context/alerts/AlertProvider";
 import CustomAlert from "../../components/ui/alert/CustomAlert";
+import { useLocation } from "react-router-dom";
+import { useAuth } from "../../auth/auth-context/AuthProvider";
 
 export default function RootLayout() {
   const { alert } = useAlert();
+  const { pathname } = useLocation();
+  const { isUserEmailVerified } = useAuth();
 
   return (
     <>
-      <ResponsiveAppBar />
+      {!isUserEmailVerified && <ResponsiveAppBar />}
       {alert && <CustomAlert />}
       <Outlet />
       <ScrollTop />

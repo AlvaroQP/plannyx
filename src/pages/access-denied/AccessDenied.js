@@ -3,7 +3,7 @@ import CustomButton from "../../components/ui/button/CustomButton";
 import Box from "@mui/material/Box";
 import { useTranslation } from "react-i18next";
 
-export default function RestrictedAccess() {
+export default function AccessDenied() {
   const navigate = useNavigate();
   const { t } = useTranslation();
 

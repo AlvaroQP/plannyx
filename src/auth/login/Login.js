@@ -17,6 +17,7 @@ import Dialog from "@mui/material/Dialog";
 import CloseIcon from "@mui/icons-material/Close";
 import DialogContent from "@mui/material/DialogContent";
 import CustomDivider from "../../components/ui/divider/CustomDivider";
+import { useNavigate } from "react-router-dom";
 import styles from "./Login.module.css";
 
 export default function Login({ handleCloseLogin }) {
@@ -28,6 +29,7 @@ export default function Login({ handleCloseLogin }) {
   const [error, setError] = useState(null);
   const { t } = useTranslation();
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
   async function handleLogin(e) {
     e.preventDefault();
@@ -43,6 +45,7 @@ export default function Login({ handleCloseLogin }) {
         );
         setIsUserEmailVerified(true);
         handleCloseLogin();
+        navigate("/");
       }
     } catch (error) {
       setError(t("login.invalid-email-password"));
