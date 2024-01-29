@@ -90,6 +90,8 @@
         "dashboard": "Panel de control",
         "settings": "Ajustes",
         "profile": "Perfil",
-        "language": "Idioma"
+        "language": "Idioma",
+        "english": "Inglés",
+        "spanish": "Español"
     }
 }
