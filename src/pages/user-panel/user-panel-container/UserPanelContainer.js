@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "../../../assets/images/logo-blue.png";
 import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
 import ListAltIcon from "@mui/icons-material/ListAlt";
@@ -12,65 +12,145 @@ import { useTranslation } from "react-i18next";
 import { Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Flags from "../../../components/ui/flags/sidebar/Flags";
+import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
+import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
+import Tooltip from "@mui/material/Tooltip";
 import styles from "./UserPanelContainer.module.css";
 
 export default function UserPanelContainer() {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const [collapsed, setCollapsed] = useState(false);
+
+  function handleCollapseClick() {
+    setCollapsed(!collapsed);
+  }
+
+  const projectsMenu = (
+    <SubMenu
+      label={t("user-panel-sidebar.projects")}
+      icon={<ListAltIcon className={styles.icon} />}
+    >
+      <MenuItem onClick={() => navigate("/user-panel/projects/new")}>
+        {t("user-panel-sidebar.new-project")}
+      </MenuItem>
+      <MenuItem onClick={() => navigate("/user-panel/projects/all")}>
+        {t("user-panel-sidebar.my-projects")}
+      </MenuItem>
+    </SubMenu>
+  );
+
+  const calendarMenu = (
+    <MenuItem icon={<CalendarMonthIcon className={styles.icon} />}>
+      {t("user-panel-sidebar.calendar")}
+    </MenuItem>
+  );
+
+  const dashboardMenu = (
+    <SubMenu
+      label={t("user-panel-sidebar.dashboard")}
+      icon={<BarChartIcon className={styles.icon} />}
+    >
+      <MenuItem>1</MenuItem>
+      <MenuItem>2</MenuItem>
+      <MenuItem>3</MenuItem>
+    </SubMenu>
+  );
+
+  const profileMenu = (
+    <MenuItem icon={<AccountCircleIcon className={styles.icon} />}>
+      {t("user-panel-sidebar.profile")}
+    </MenuItem>
+  );
 
   return (
     <div className={styles["user-panel-container"]}>
-      <Sidebar className={styles["sidebar-container"]}>
+      <Sidebar
+        className={styles["sidebar-container"]}
+        collapsed={collapsed}
+        transitionDuration={500}
+      >
         <div className={styles["logo-container"]}>
-          <img src={logo} alt="logo" />
+          {collapsed ? null : <img src={logo} alt="logo" />}
+          <div
+            onClick={handleCollapseClick}
+            className={styles["toggle-icon-container"]}
+          >
+            {collapsed ? (
+              <ArrowCircleRightIcon
+                className={`${styles["toggle-icon"]} ${styles["toggle-icon-right"]}`}
+                sx={{ fontSize: "2rem" }}
+              />
+            ) : (
+              <Tooltip title={t("user-panel-sidebar.collapse")}>
+                <ArrowCircleLeftIcon
+                  className={styles["toggle-icon"]}
+                  sx={{ fontSize: "2rem" }}
+                />
+              </Tooltip>
+            )}
+          </div>
         </div>
 
         <CustomDivider />
 
         <Menu>
-          <MenuItem>
+          {!collapsed && (
             <p className={styles["title-p"]}>
               {t("user-panel-sidebar.general")}
             </p>
-          </MenuItem>
-          <SubMenu
-            label={t("user-panel-sidebar.projects")}
-            icon={<ListAltIcon className={styles.icon} />}
-          >
-            <MenuItem onClick={() => navigate("/user-panel/projects/new")}>
-              {t("user-panel-sidebar.new-project")}
-            </MenuItem>
-            <MenuItem onClick={() => navigate("/user-panel/projects/all")}>
-              {t("user-panel-sidebar.my-projects")}
-            </MenuItem>
-          </SubMenu>
-          <MenuItem icon={<CalendarMonthIcon className={styles.icon} />}>
-            {t("user-panel-sidebar.calendar")}
-          </MenuItem>
-          <SubMenu
-            label={t("user-panel-sidebar.dashboard")}
-            icon={<BarChartIcon className={styles.icon} />}
-          >
-            <MenuItem>Pie charts</MenuItem>
-            <MenuItem>Line charts</MenuItem>
-            <MenuItem>Bar charts</MenuItem>
-          </SubMenu>
+          )}
+
+          {collapsed ? (
+            <Tooltip title={t("user-panel-sidebar.projects")} placement="right">
+              {projectsMenu}
+            </Tooltip>
+          ) : (
+            projectsMenu
+          )}
+
+          {collapsed ? (
+            <Tooltip title={t("user-panel-sidebar.calendar")} placement="right">
+              {calendarMenu}
+            </Tooltip>
+          ) : (
+            calendarMenu
+          )}
+
+          {collapsed ? (
+            <Tooltip
+              title={t("user-panel-sidebar.dashboard")}
+              placement="right"
+            >
+              {dashboardMenu}
+            </Tooltip>
+          ) : (
+            dashboardMenu
+          )}
 
           <CustomDivider />
 
-          <MenuItem>
+          {!collapsed && (
             <p className={styles["title-p"]}>
               {t("user-panel-sidebar.settings")}
             </p>
-          </MenuItem>
+          )}
 
-          <MenuItem icon={<AccountCircleIcon className={styles.icon} />}>
-            {t("user-panel-sidebar.profile")}
-          </MenuItem>
+          {collapsed ? (
+            <Tooltip title={t("user-panel-sidebar.profile")} placement="right">
+              {profileMenu}
+            </Tooltip>
+          ) : (
+            profileMenu
+          )}
 
-          <Flags />
+          {collapsed ? <Flags collapsed={true} /> : <Flags />}
 
-          <LogoutButtonSideBar />
+          {collapsed ? (
+            <LogoutButtonSideBar collapsed={true} />
+          ) : (
+            <LogoutButtonSideBar />
+          )}
         </Menu>
       </Sidebar>
 

@@ -92,6 +92,8 @@
         "profile": "Perfil",
         "language": "Idioma",
         "english": "Inglés",
-        "spanish": "Español"
+        "spanish": "Español",
+        "collapse": "Contraer",
+        "expand": "Expandir"
     }
 }

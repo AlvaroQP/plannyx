@@ -6,8 +6,9 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import CustomDialog from "../../components/ui/dialog/CustomDialog";
 import { useTranslation } from "react-i18next";
 import { MenuItem } from "react-pro-sidebar";
+import { Tooltip } from "@mui/material";
 
-export default function LogoutButtonSideBar() {
+export default function LogoutButtonSideBar({ collapsed }) {
   const { logout, setIsUserEmailVerified } = useAuth();
   const { user } = useAuth();
   const { createAlert } = useAlert();
@@ -34,14 +35,24 @@ export default function LogoutButtonSideBar() {
     }
   }
 
+  const logoutButtonMenuItem = (
+    <MenuItem
+      icon={<LogoutIcon sx={{ color: "#3071d4" }} />}
+      onClick={handleOpenConfirmLogout}
+    >
+      {t("logout.logout")}
+    </MenuItem>
+  );
+
   return (
     <>
-      <MenuItem
-        icon={<LogoutIcon sx={{ color: "#3071d4" }} />}
-        onClick={handleOpenConfirmLogout}
-      >
-        {t("logout.logout")}
-      </MenuItem>
+      {collapsed ? (
+        <Tooltip title={t("logout.logout")} placement="right">
+          {logoutButtonMenuItem}
+        </Tooltip>
+      ) : (
+        logoutButtonMenuItem
+      )}
 
       <CustomDialog
         open={openConfirmLogout}

@@ -5,9 +5,10 @@ import LanguageIcon from "@mui/icons-material/Language";
 import "/node_modules/flag-icons/css/flag-icons.min.css";
 import changeLanguage from "../../../../utils/changeLanguage";
 import { useLanguage } from "../../../../context/language/LanguageProvider";
+import Tooltip from "@mui/material/Tooltip";
 import styles from "./Flags.module.css";
 
-export default function Flags() {
+export default function Flags({ collapsed }) {
   const { t } = useTranslation();
   const { setLanguage } = useLanguage();
 
@@ -16,7 +17,7 @@ export default function Flags() {
     changeLanguage(language);
   }
 
-  return (
+  const languageMenu = (
     <SubMenu
       label={t("user-panel-sidebar.language")}
       icon={<LanguageIcon className={styles.icon} />}
@@ -30,5 +31,13 @@ export default function Flags() {
         {t("user-panel-sidebar.spanish")}
       </MenuItem>
     </SubMenu>
+  );
+
+  return collapsed ? (
+    <Tooltip title={t("user-panel-sidebar.language")} placement="right">
+      {languageMenu}
+    </Tooltip>
+  ) : (
+    languageMenu
   );
 }

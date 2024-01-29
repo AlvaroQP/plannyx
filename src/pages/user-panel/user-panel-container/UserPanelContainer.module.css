@@ -3,12 +3,14 @@
 }
 
 .sidebar-container {
+  position: relative;
   height: 100vh;
-  display: flex;
-  background-color: #d4d3d3;
+  background-color: #c7c7c7;
 }
 
 .logo-container {
+  display: flex;
+  align-items: center;
   margin-top: 0.5rem;
   margin-left: 1.5rem;
 }
@@ -17,17 +19,49 @@
   width: 70%;
 }
 
+.logo-container img.logo-no-text {
+  width: 50%;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
 .icon {
   color: #3071d4;
 }
 
 .title-p {
   font-size: 0.9rem;
-  margin-left: 0.5rem;
+  margin-left: 1.75rem;
   font-weight: 600;
   color: rgb(115, 117, 119);
 }
 
 .flag {
   margin-right: 0.35rem;
+}
+
+.toggle-icon-container {
+  margin-bottom: 4rem;
+}
+
+.toggle-icon {
+  position: absolute;
+  top: 1.5rem;
+  right: 0.5rem;
+  font-size: 2rem;
+  color: #3071d4;
+  cursor: pointer;
+}
+
+.toggle-icon-right {
+  left: 1.5rem;
+}
+
+.toggle-icon-left:hover,
+.toggle-icon-right:hover {
+  color: #3b83ef;
+}
+
+.expand-text {
+  font-size: 0.6rem;
 }
