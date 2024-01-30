@@ -23,17 +23,17 @@ export default function CustomAlert() {
       open={open}
       onClose={handleClose}
       variant="filled"
-      autoHideDuration={5000}
+      /* autoHideDuration={10000} */
       anchorOrigin={{ vertical: "top", horizontal: "center" }}
       sx={{
         width: "100%",
-        marginTop: "2.6rem",
+        marginTop: 0,
       }}
     >
       <Alert
         severity={alert?.severity}
         onClose={handleClose}
-        sx={{ width: "100%" }}
+        sx={{ width: "100%", marginTop: 0 }}
       >
         {alert?.message}
       </Alert>

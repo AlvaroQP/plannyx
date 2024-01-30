@@ -32,7 +32,8 @@
         "sign-up": "Registrarse",
         "back": "Volver",
         "done": "Hecho",
-        "cancel": "Cancelar"
+        "cancel": "Cancelar",
+        "close": "Cerrar"
     },
     "footer": {
         "all-rights-reserved": "Todos los derechos reservados.",
@@ -108,6 +109,10 @@
         "high-priority": "Prioridad Alta",
         "critical-priority": "Prioridad Crítica",
         "please-fill-all-fields": "Por favor, rellena todos los campos.",
-        "end-date-after-start-date": "La fecha de finalización no puede ser anterior a la fecha de inicio."
+        "end-date-after-start-date": "La fecha de finalización no puede ser anterior a la fecha de inicio.",
+        "project-added": "El proyecto ha sido creado con éxito.",
+        "success": "Éxito",
+        "error": "Error",
+        "could-not-add-project": "No se pudo añadir el proyecto. Por favor, inténtalo de nuevo más tarde."
     }
 }

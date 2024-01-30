@@ -21,10 +21,15 @@ import CheckCircleOutlineOutlinedIcon from "@mui/icons-material/CheckCircleOutli
 import Alert from "@mui/material/Alert";
 import dayjs from "dayjs";
 import { useLoading } from "../../../../context/loading/LoadingProvider";
+import { useProjects } from "../../../../context/projects/ProjectsProvider";
+import { useDialog } from "../../../../context/dialog/DialogProvider";
+import { Timestamp } from "firebase/firestore";
 import styles from "./NewProject.module.css";
 
 export default function NewProject() {
   const { t } = useTranslation();
+  const { postProject } = useProjects();
+  const { openDialog } = useDialog();
   const { setIsLoading } = useLoading();
   const [projectName, setProjectName] = useState("");
   const [projectDescription, setProjectDescription] = useState("");
@@ -67,17 +72,36 @@ export default function NewProject() {
       setIsDateAlertOpen(true);
       setIsLoading(false);
     } else {
-      console.log("Project name: ", projectName);
-      console.log("Project description: ", projectDescription);
-      console.log("Project start date: ", projectStartDate);
-      console.log("Project end date: ", projectEndDate);
-      console.log("Project priority: ", projectPriority);
+      const project = {
+        name: projectName,
+        description: projectDescription,
+        startDate: Timestamp.fromDate(projectStartDate.toDate()),
+        endDate: isEndDateKnown
+          ? Timestamp.fromDate(projectEndDate.toDate())
+          : null,
+        priority: projectPriority,
+      };
 
-      setValidForm(true);
-      setIsDateAlertOpen(false);
-      handleReset();
-      alert("OK");
-      setIsLoading(false);
+      try {
+        postProject(project);
+        openDialog({
+          title: t("new-project.success"),
+          description: t("new-project.project-added"),
+          severity: "success",
+        });
+      } catch (error) {
+        console.error(error);
+        openDialog({
+          title: t("new-project.error"),
+          description: t("new-project.could-not-add-project"),
+          severity: "error",
+        });
+      } finally {
+        setValidForm(true);
+        setIsDateAlertOpen(false);
+        handleReset();
+        setIsLoading(false);
+      }
     }
   }
 

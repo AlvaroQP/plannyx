@@ -32,7 +32,8 @@
         "sign-up": "Sign up",
         "back": "Back",
         "done": "Done",
-        "cancel": "Cancel"
+        "cancel": "Cancel",
+        "close": "Close"
     },
     "footer": {
         "all-rights-reserved": "All rights reserved.",
@@ -108,6 +109,10 @@
         "high-priority": "High Priority",
         "critical-priority": "Critical Priority",
         "please-fill-all-fields": "Please fill in all fields.",
-        "end-date-after-start-date": "The end date can't be earlier than the start date."
+        "end-date-after-start-date": "The end date can't be earlier than the start date.",
+        "success": "Success",
+        "error": "Error",
+        "project-added": "The project has been created successfully.",
+        "could-not-add-project": "Could not add project. Please try again later."
     }
 }

@@ -21,6 +21,7 @@ const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
+  const [userId, setUserId] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isUserEmailVerified, setIsUserEmailVerified] = useState(false);
@@ -39,6 +40,14 @@ export function AuthProvider({ children }) {
 
     updateUserDoc();
   }, [isUserEmailVerified, user]);
+
+  useEffect(() => {
+    if (user) {
+      setUserId(user.uid);
+    } else {
+      setUserId(null);
+    }
+  }, [user]);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
@@ -138,6 +147,7 @@ export function AuthProvider({ children }) {
     <AuthContext.Provider
       value={{
         user,
+        userId,
         isAdmin,
         isLoading,
         login,
