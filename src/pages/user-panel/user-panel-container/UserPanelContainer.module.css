@@ -6,6 +6,7 @@
   position: relative;
   height: 100vh;
   background-color: #c7c7c7;
+  font-weight: 400;
 }
 
 .logo-container {
@@ -17,12 +18,6 @@
 
 .logo-container img {
   width: 70%;
-}
-
-.logo-container img.logo-no-text {
-  width: 50%;
-  margin-right: 0.5rem;
-  margin-bottom: 0.5rem;
 }
 
 .icon {

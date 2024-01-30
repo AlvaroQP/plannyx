@@ -84,8 +84,8 @@
     "user-panel-sidebar": {
         "general": "General",
         "projects": "Proyectos",
-        "new-project": "Nuevo proyecto",
-        "my-projects": "Mis proyectos",
+        "new-project": "Nuevo Proyecto",
+        "my-projects": "Mis Proyectos",
         "calendar": "Calendario",
         "dashboard": "Panel de control",
         "settings": "Ajustes",
@@ -95,5 +95,17 @@
         "spanish": "Español",
         "collapse": "Contraer",
         "expand": "Expandir"
+    },
+    "new-project": {
+        "project-name": "Nombre del Proyecto",
+        "project-description": "Descripción del Proyecto",
+        "start-date": "Fecha de Inicio",
+        "end-date": "Fecha de Finalización",
+        "specify-end-date": "¿Especificar fecha de finalización?",
+        "priority": "Prioridad",
+        "low-priority": "Prioridad Baja",
+        "medium-priority": "Prioridad Media",
+        "high-priority": "Prioridad Alta",
+        "critical-priority": "Prioridad Crítica"
     }
 }

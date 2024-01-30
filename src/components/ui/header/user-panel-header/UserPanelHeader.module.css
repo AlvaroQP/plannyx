@@ -1,0 +1,9 @@
+.user-panel-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #0f418d;
+  height: 73px;
+  font-weight: 500;
+  color: white;
+}

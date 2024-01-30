@@ -84,8 +84,8 @@
     "user-panel-sidebar": {
         "general": "General",
         "projects": "Projects",
-        "new-project": "New project",
-        "my-projects": "My projects",
+        "new-project": "New Project",
+        "my-projects": "My Projects",
         "calendar": "Calendar",
         "dashboard": "Dashboard",
         "settings": "Settings",
@@ -95,5 +95,17 @@
         "spanish": "Spanish",
         "collapse": "Collapse",
         "expand": "Expand"
+    },
+    "new-project": {
+        "project-name": "Project Name",
+        "project-description": "Project Description",
+        "start-date": "Start Date",
+        "end-date": "End Date",
+        "specify-end-date": "Specify end date?",
+        "priority": "Priority",
+        "low-priority": "Low Priority",
+        "medium-priority": "Medium Priority",
+        "high-priority": "High Priority",
+        "critical-priority": "Critical Priority"
     }
 }
