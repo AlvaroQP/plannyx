@@ -1,6 +1,6 @@
 .new-project-container {
   width: 100%;
-  background-color: rgb(248, 248, 248);
+  background-color: rgb(251, 251, 251);
 }
 
 .new-project-form {
@@ -54,20 +54,36 @@
 
 .low-priority-text,
 .medium-priority-text,
-.high-priority-text {
+.high-priority-text,
+.critical-priority-text {
   display: flex;
   gap: 0.5rem;
   margin-top: 0.5rem;
 }
 
-.low-priority-text {
+.priority-icon-low {
   color: #029a02;
 }
 
-.medium-priority-text {
+.priority-icon-medium {
   color: #ff6b02;
 }
 
-.high-priority-text {
-  color: #d91414;
+.priority-icon-high {
+  color: #cd0303;
+}
+
+.priority-icon-critical {
+  color: #ff0000;
+}
+
+.buttonsContainer {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttonsContainer > button {
+  margin: 0 1rem;
 }

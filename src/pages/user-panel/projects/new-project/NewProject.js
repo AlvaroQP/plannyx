@@ -14,27 +14,95 @@ import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dateFormat from "../../../../utils/dateFormat";
 import CircleIcon from "@mui/icons-material/Circle";
+import ErrorIcon from "@mui/icons-material/Error";
+import CustomButton from "../../../../components/ui/button/CustomButton";
+import RestartAltOutlinedIcon from "@mui/icons-material/RestartAltOutlined";
+import CheckCircleOutlineOutlinedIcon from "@mui/icons-material/CheckCircleOutlineOutlined";
+import Alert from "@mui/material/Alert";
+import dayjs from "dayjs";
+import { useLoading } from "../../../../context/loading/LoadingProvider";
 import styles from "./NewProject.module.css";
 
 export default function NewProject() {
   const { t } = useTranslation();
+  const { setIsLoading } = useLoading();
   const [projectName, setProjectName] = useState("");
   const [projectDescription, setProjectDescription] = useState("");
   const [projectStartDate, setProjectStartDate] = useState(null);
   const [projectEndDate, setProjectEndDate] = useState(null);
   const [projectPriority, setProjectPriority] = useState("");
   const [isEndDateKnown, setIsEndDateKnown] = useState(true);
+  const [validForm, setValidForm] = useState(true);
+  const [isDateAlertOpen, setIsDateAlertOpen] = useState(false);
+
+  function handleReset() {
+    setProjectName("");
+    setProjectDescription("");
+    setProjectStartDate(null);
+    setProjectEndDate(null);
+    setProjectPriority("");
+    setIsEndDateKnown(true);
+    setValidForm(true);
+    setIsDateAlertOpen(false);
+  }
+
+  function handleSubmit(e) {
+    setValidForm(true);
+    setIsLoading(true);
+    e.preventDefault();
+
+    if (
+      projectName === "" ||
+      projectDescription === "" ||
+      projectStartDate === null ||
+      (isEndDateKnown && projectEndDate === null) ||
+      projectPriority === ""
+    ) {
+      setValidForm(false);
+      setIsLoading(false);
+    } else if (
+      isEndDateKnown &&
+      dayjs(projectStartDate).isAfter(projectEndDate)
+    ) {
+      setIsDateAlertOpen(true);
+      setIsLoading(false);
+    } else {
+      console.log("Project name: ", projectName);
+      console.log("Project description: ", projectDescription);
+      console.log("Project start date: ", projectStartDate);
+      console.log("Project end date: ", projectEndDate);
+      console.log("Project priority: ", projectPriority);
+
+      setValidForm(true);
+      setIsDateAlertOpen(false);
+      handleReset();
+      alert("OK");
+      setIsLoading(false);
+    }
+  }
 
   return (
     <div className={styles["new-project-container"]}>
       <UserPanelHeader title={t("user-panel-sidebar.new-project")} />
 
-      <form className={styles["new-project-form"]}>
+      <form onSubmit={handleSubmit} className={styles["new-project-form"]}>
         <img
           className={styles["project-banner"]}
           src={projectsBanner}
           alt="projects banner"
         />
+
+        {!validForm && (
+          <Alert severity="error" sx={{ mb: 4 }}>
+            {t("new-project.please-fill-all-fields")}
+          </Alert>
+        )}
+
+        {isDateAlertOpen && (
+          <Alert severity="error" sx={{ mb: 4 }}>
+            {t("new-project.end-date-after-start-date")}
+          </Alert>
+        )}
 
         <TextField
           required
@@ -114,23 +182,47 @@ export default function NewProject() {
           >
             <MenuItem value="low">
               <span className={styles["low-priority-text"]}>
-                <CircleIcon /> {t("new-project.low-priority")}
+                <CircleIcon className={styles["priority-icon-low"]} />{" "}
+                {t("new-project.low-priority")}
               </span>
             </MenuItem>
             <MenuItem value="medium">
               <span className={styles["medium-priority-text"]}>
-                <CircleIcon />
+                <CircleIcon className={styles["priority-icon-medium"]} />
                 {t("new-project.medium-priority")}
               </span>
             </MenuItem>
             <MenuItem value="high">
               <span className={styles["high-priority-text"]}>
-                <CircleIcon />
+                <CircleIcon className={styles["priority-icon-high"]} />
                 {t("new-project.high-priority")}
+              </span>
+            </MenuItem>
+            <MenuItem value="critical">
+              <span className={styles["critical-priority-text"]}>
+                <ErrorIcon className={styles["priority-icon-critical"]} />
+                {t("new-project.critical-priority")}
               </span>
             </MenuItem>
           </Select>
         </FormControl>
+
+        <div className={styles.buttonsContainer}>
+          <CustomButton
+            text="Reset"
+            variant="outlined"
+            color="error"
+            icon={<RestartAltOutlinedIcon />}
+            onClick={handleReset}
+          />
+          <CustomButton
+            type="submit"
+            text="Submit"
+            variant="contained"
+            color="primary"
+            icon={<CheckCircleOutlineOutlinedIcon />}
+          />
+        </div>
       </form>
     </div>
   );

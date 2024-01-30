@@ -106,6 +106,8 @@
         "low-priority": "Low Priority",
         "medium-priority": "Medium Priority",
         "high-priority": "High Priority",
-        "critical-priority": "Critical Priority"
+        "critical-priority": "Critical Priority",
+        "please-fill-all-fields": "Please fill in all fields.",
+        "end-date-after-start-date": "The end date can't be earlier than the start date."
     }
 }
