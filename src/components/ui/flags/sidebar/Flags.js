@@ -35,7 +35,7 @@ export default function Flags({ collapsed }) {
 
   return collapsed ? (
     <Tooltip title={t("user-panel-sidebar.language")} placement="right">
-      {languageMenu}
+      <div>{languageMenu}</div>
     </Tooltip>
   ) : (
     languageMenu

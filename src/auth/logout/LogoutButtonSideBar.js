@@ -48,7 +48,7 @@ export default function LogoutButtonSideBar({ collapsed }) {
     <>
       {collapsed ? (
         <Tooltip title={t("logout.logout")} placement="right">
-          {logoutButtonMenuItem}
+          <div>{logoutButtonMenuItem}</div>
         </Tooltip>
       ) : (
         logoutButtonMenuItem

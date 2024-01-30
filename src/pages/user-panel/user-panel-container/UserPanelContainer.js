@@ -103,7 +103,7 @@ export default function UserPanelContainer() {
 
           {collapsed ? (
             <Tooltip title={t("user-panel-sidebar.projects")} placement="right">
-              {projectsMenu}
+              <div>{projectsMenu}</div>
             </Tooltip>
           ) : (
             projectsMenu
@@ -111,7 +111,7 @@ export default function UserPanelContainer() {
 
           {collapsed ? (
             <Tooltip title={t("user-panel-sidebar.calendar")} placement="right">
-              {calendarMenu}
+              <div>{calendarMenu}</div>
             </Tooltip>
           ) : (
             calendarMenu
@@ -122,7 +122,7 @@ export default function UserPanelContainer() {
               title={t("user-panel-sidebar.dashboard")}
               placement="right"
             >
-              {dashboardMenu}
+              <div>{dashboardMenu}</div>
             </Tooltip>
           ) : (
             dashboardMenu
@@ -138,7 +138,7 @@ export default function UserPanelContainer() {
 
           {collapsed ? (
             <Tooltip title={t("user-panel-sidebar.profile")} placement="right">
-              {profileMenu}
+              <div>{profileMenu}</div>
             </Tooltip>
           ) : (
             profileMenu
