@@ -233,7 +233,7 @@ export default function NewProject() {
 
         <div className={styles.buttonsContainer}>
           <CustomButton
-            text="Reset"
+            text={t("button.reset")}
             variant="outlined"
             color="error"
             icon={<RestartAltOutlinedIcon />}
@@ -241,7 +241,7 @@ export default function NewProject() {
           />
           <CustomButton
             type="submit"
-            text="Submit"
+            text={t("button.submit")}
             variant="contained"
             color="primary"
             icon={<CheckCircleOutlineOutlinedIcon />}

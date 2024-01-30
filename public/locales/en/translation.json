@@ -33,7 +33,9 @@
         "back": "Back",
         "done": "Done",
         "cancel": "Cancel",
-        "close": "Close"
+        "close": "Close",
+        "reset": "Reset",
+        "submit": "Submit"
     },
     "footer": {
         "all-rights-reserved": "All rights reserved.",
