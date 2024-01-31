@@ -80,6 +80,7 @@ export default function NewProject() {
           ? Timestamp.fromDate(projectEndDate.toDate())
           : null,
         priority: projectPriority,
+        status: "not started",
       };
 
       try {
