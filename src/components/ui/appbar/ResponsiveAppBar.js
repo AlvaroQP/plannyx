@@ -25,16 +25,8 @@ export default function ResponsiveAppBar() {
     user && isUserEmailVerified
       ? [
           {
-            name: t("appbar-menus.projects"),
-            path: "projects",
-          },
-          {
-            name: t("appbar-menus.calendar"),
-            path: "calendar",
-          },
-          {
-            name: t("appbar-menus.dashboard"),
-            path: "dashboard",
+            name: t("appbar-menus.user-panel"),
+            path: "user-panel",
           },
         ]
       : null;

@@ -27,6 +27,8 @@ export function AuthProvider({ children }) {
   const [isUserEmailVerified, setIsUserEmailVerified] = useState(false);
   const [isLoadingEmailVerification, setIsLoadingEmailVerification] =
     useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isAuthChecking, setIsAuthChecking] = useState(true);
 
   useEffect(() => {
     async function updateUserDoc() {
@@ -51,7 +53,11 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      setIsAuthChecking(true);
+      setIsLoggedIn(true);
+      setIsLoadingEmailVerification(true);
       setUser(currentUser);
+      setIsAuthChecking(false);
 
       if (currentUser) {
         const userDoc = await getDoc(doc(db, "users", currentUser.uid));
@@ -63,9 +69,16 @@ export function AuthProvider({ children }) {
             setIsAdmin(false);
           }
         }
+
+        setIsUserEmailVerified(userDoc.data()?.emailVerified);
+        setIsLoadingEmailVerification(false);
       } else {
         setIsAdmin(false);
+        setIsUserEmailVerified(false);
+        setIsLoadingEmailVerification(false);
+        setIsLoggedIn(false);
       }
+
       setIsLoading(false);
     });
 
@@ -105,6 +118,7 @@ export function AuthProvider({ children }) {
       if (userDoc.data().role === "admin") {
         setIsAdmin(true);
       }
+      setIsLoggedIn(true);
     }
 
     return userCredential;
@@ -140,6 +154,7 @@ export function AuthProvider({ children }) {
 
   async function logout() {
     setIsAdmin(false);
+    setIsLoggedIn(false);
     return await signOut(auth);
   }
 
@@ -158,6 +173,8 @@ export function AuthProvider({ children }) {
         setIsUserEmailVerified,
         getEmailVerifiedStatus,
         isLoadingEmailVerification,
+        isLoggedIn,
+        isAuthChecking,
       }}
     >
       {children}

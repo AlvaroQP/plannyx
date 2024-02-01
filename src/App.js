@@ -15,16 +15,22 @@ import "./i18n";
 
 export default function App() {
   function ComponentOrAccessDenied({ component: Component }) {
-    const { isUserEmailVerified, isLoadingEmailVerification } = useAuth();
-    if (isLoadingEmailVerification) {
+    const { isLoadingEmailVerification, isLoggedIn, isAuthChecking } =
+      useAuth();
+
+    if (isAuthChecking || isLoadingEmailVerification) {
       return null;
     }
 
     if (Component === Home) {
-      return isUserEmailVerified ? <UserPanelContainer /> : <Home />;
-    } else {
-      return isUserEmailVerified ? <Component /> : <AccessDenied />;
+      return !isLoggedIn ? <Home /> : <UserPanelContainer />;
     }
+
+    if (isLoggedIn) {
+      return <Component />;
+    }
+
+    return <AccessDenied />;
   }
 
   const router = createBrowserRouter([

@@ -1,13 +1,14 @@
-import ResponsiveAppBar from "../../components/ui/appbar/ResponsiveAppBar";
 import { useRouteError } from "react-router-dom";
 import CustomButton from "../../components/ui/button/CustomButton";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useAuth } from "../../auth/auth-context/AuthProvider";
 import styles from "./Error.module.css";
 
 export default function Error() {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { isLoggedIn } = useAuth();
 
   const error = useRouteError();
   let title;
@@ -24,19 +25,16 @@ export default function Error() {
   }
 
   return (
-    <>
-      <ResponsiveAppBar />
-      <div className={styles["not-found-container"]}>
-        <h1> {title} </h1>
-        <p> {errorMessage} </p>
-        <br />
-        <CustomButton
-          text={t("button.home")}
-          variant="contained"
-          color="primary"
-          onClick={() => navigate("/")}
-        />
-      </div>
-    </>
+    <div className={styles["not-found-container"]}>
+      <h1> {title} </h1>
+      <p> {errorMessage} </p>
+      <br />
+      <CustomButton
+        text={t("button.back")}
+        variant="contained"
+        color="primary"
+        onClick={() => navigate(isLoggedIn ? "user-panel" : "/")}
+      />
+    </div>
   );
 }

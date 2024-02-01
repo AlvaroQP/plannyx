@@ -207,7 +207,7 @@ export default function NewProject() {
           >
             <MenuItem value="low">
               <span className={styles["low-priority-text"]}>
-                <CircleIcon className={styles["priority-icon-low"]} />{" "}
+                <CircleIcon className={styles["priority-icon-low"]} />
                 {t("new-project.low-priority")}
               </span>
             </MenuItem>
