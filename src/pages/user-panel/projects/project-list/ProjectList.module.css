@@ -1,6 +1,5 @@
 .project-list-container {
   width: 100%;
-  margin: auto 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -9,9 +8,9 @@
 
 .project-list {
   width: 100%;
-  display: flex;
+  /* display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: center; */
   background-color: #e4e4e4;
   border-radius: 0.5rem;
   border: 1px solid #e1e1e1;

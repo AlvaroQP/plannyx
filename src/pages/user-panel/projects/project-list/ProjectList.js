@@ -20,7 +20,7 @@ export default function ProjectList({ projects }) {
           className={styles["project-list"]}
           key={index}
           sx={{
-            m: "1rem 3rem",
+            m: "1rem",
           }}
         >
           <ListItem>
@@ -57,7 +57,7 @@ export default function ProjectList({ projects }) {
                   {project.startDate.toDate().toLocaleDateString()}
                 </p>
               )}
-              <p className={styles["project-list-status"]}>
+              <div className={styles["project-list-status"]}>
                 <span className={styles["span-bold"]}>
                   {t("project.status")}
                 </span>
@@ -100,7 +100,7 @@ export default function ProjectList({ projects }) {
                     />
                   </>
                 )}
-              </p>
+              </div>
             </div>
           </ListItem>
         </List>

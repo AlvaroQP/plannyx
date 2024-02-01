@@ -1,12 +1,23 @@
+/* DO NOT CHANGE THESE STYLES */
 .user-panel-container {
   display: flex;
+  height: 100vh;
+  background-color: #fefefe;
+  overflow: hidden;
 }
 
+/* DO NOT CHANGE THESE STYLES */
 .sidebar-container {
   position: relative;
-  height: 100vh;
+  height: 100%;
   font-weight: 400;
   color: rgb(43, 43, 43);
+}
+
+/* DO NOT CHANGE THESE STYLES */
+.outlet-container {
+  flex-grow: 1;
+  overflow: scroll;
 }
 
 .logo-container {
@@ -17,7 +28,7 @@
 }
 
 .logo-container img {
-  width: 70%;
+  width: 60%;
 }
 
 .icon {

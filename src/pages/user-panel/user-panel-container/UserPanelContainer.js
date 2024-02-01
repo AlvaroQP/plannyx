@@ -160,7 +160,9 @@ export default function UserPanelContainer() {
         </Menu>
       </Sidebar>
 
-      <Outlet />
+      <div className={styles["outlet-container"]}>
+        <Outlet />
+      </div>
     </div>
   );
 }
