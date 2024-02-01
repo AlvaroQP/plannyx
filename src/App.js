@@ -5,7 +5,7 @@ import RootLayout from "./pages/root-layout/RootLayout";
 import Error from "./pages/error/Error";
 import Home from "./pages/home/Home";
 import NewProject from "./pages/user-panel/projects/new-project/NewProject";
-import AllProjects from "./pages/user-panel/projects/all-projects/AllProjects";
+import ProjectsContainer from "./pages/user-panel/projects/projects-container/ProjectsContainer";
 import UserPanelContainer from "./pages/user-panel/user-panel-container/UserPanelContainer";
 import Calendar from "./pages/user-panel/calendar/Calendar";
 import Dashboard from "./pages/user-panel/dashboard/Dashboard";
@@ -53,7 +53,9 @@ export default function App() {
             },
             {
               path: "projects/all",
-              element: <ComponentOrAccessDenied component={AllProjects} />,
+              element: (
+                <ComponentOrAccessDenied component={ProjectsContainer} />
+              ),
             },
             {
               path: "calendar",

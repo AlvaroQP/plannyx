@@ -1,11 +1,6 @@
-.all-projects-container {
-  width: 100%;
-  background-color: #fefefe;
-}
-
 .project-list-container {
-  width: 90%;
-  margin: 3rem auto 0;
+  width: 100%;
+  margin: auto 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -17,10 +12,14 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  background-color: #f1f1f1;
+  background-color: #e4e4e4;
   border-radius: 0.5rem;
-  border: 1px solid #bdbdbd;
+  border: 1px solid #e1e1e1;
   cursor: pointer;
+}
+
+.project-list:hover {
+  background-color: #e1e1e1;
 }
 
 .project-list-info-container p {
@@ -38,16 +37,16 @@
 }
 
 .project-list-status {
+  display: flex;
+  align-items: center;
   font-size: 0.8rem;
   color: #6c757d;
 }
 
-.no-projects-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 50vh;
-  gap: 1.5rem;
-  text-align: center;
+.project-list-status-in-progress {
+  margin-right: 0.5rem;
+}
+
+.span-bold {
+  font-weight: 600;
 }

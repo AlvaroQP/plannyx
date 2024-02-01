@@ -1,0 +1,9 @@
+.tabs-container {
+  width: 90%;
+  margin: 2rem auto 0;
+  background-color: #f4f4f4;
+}
+
+.tab-list {
+  background-color: #eaeaea;
+}
