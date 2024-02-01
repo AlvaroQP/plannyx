@@ -3,7 +3,6 @@ import CustomButton from "../button/CustomButton";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
 import { Alert, AlertTitle, Box } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
@@ -20,12 +19,12 @@ export default function CustomDialog(props) {
     >
       <Box>
         <DialogContent sx={{ padding: "2rem 1rem" }}>
-          <DialogContentText id="alert-dialog-description">
+          <div id="alert-dialog-description">
             <Alert severity={severity}>
               <AlertTitle>{title}</AlertTitle>
               {description}
             </Alert>
-          </DialogContentText>
+          </div>
         </DialogContent>
         <DialogActions sx={{ display: "flex", justifyContent: "center" }}>
           <CustomButton

@@ -36,7 +36,8 @@
         "cancel": "Cancel",
         "close": "Close",
         "reset": "Reset",
-        "submit": "Submit"
+        "submit": "Submit",
+        "new-project": "New Project"
     },
     "footer": {
         "all-rights-reserved": "All rights reserved.",
@@ -117,5 +118,21 @@
         "error": "Error",
         "project-added": "The project has been created successfully.",
         "could-not-add-project": "Could not add project. Please try again later."
+    },
+    "projects-list": {
+        "no-projects": "You have no projects yet. Create one by clicking on the button below."
+    },
+    "project": {
+        "name": "Name",
+        "description": "Description",
+        "start-date": "Start Date",
+        "end-date": "End Date",
+        "status": "Status",
+        "status-not-started": "Not Started",
+        "status-in-progress": "In Progress",
+        "status-finished": "Finished",
+        "status-stuck": "Stuck",
+        "priority": "Priority",
+        "created-at": "Created at"
     }
 }

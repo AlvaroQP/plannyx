@@ -5,8 +5,8 @@
 .sidebar-container {
   position: relative;
   height: 100vh;
-  background-color: #c7c7c7;
   font-weight: 400;
+  color: rgb(43, 43, 43);
 }
 
 .logo-container {

@@ -24,11 +24,13 @@ import { useLoading } from "../../../../context/loading/LoadingProvider";
 import { useProjects } from "../../../../context/projects/ProjectsProvider";
 import { useDialog } from "../../../../context/dialog/DialogProvider";
 import { Timestamp } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 import styles from "./NewProject.module.css";
 
 export default function NewProject() {
   const { t } = useTranslation();
-  const { postProject } = useProjects();
+  const navigate = useNavigate();
+  const { postProject, getAllProjects } = useProjects();
   const { openDialog } = useDialog();
   const { setIsLoading } = useLoading();
   const [projectName, setProjectName] = useState("");
@@ -51,7 +53,7 @@ export default function NewProject() {
     setIsDateAlertOpen(false);
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     setValidForm(true);
     setIsLoading(true);
     e.preventDefault();
@@ -81,15 +83,18 @@ export default function NewProject() {
           : null,
         priority: projectPriority,
         status: "not started",
+        createdAt: Timestamp.now(),
       };
 
       try {
-        postProject(project);
+        await postProject(project);
+        await getAllProjects();
         openDialog({
           title: t("new-project.success"),
           description: t("new-project.project-added"),
           severity: "success",
         });
+        navigate("/user-panel/projects/all");
       } catch (error) {
         console.error(error);
         openDialog({
@@ -193,7 +198,7 @@ export default function NewProject() {
           </LocalizationProvider>
         </div>
 
-        <FormControl variant="filled" required>
+        <FormControl variant="filled" sx={{ background: "#fff" }} required>
           <InputLabel id="priority-select-label">
             {t("new-project.priority")}
           </InputLabel>

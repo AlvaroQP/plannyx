@@ -15,6 +15,7 @@ import Flags from "../../../components/ui/flags/sidebar/Flags";
 import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
 import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
 import Tooltip from "@mui/material/Tooltip";
+import { NavLink } from "react-router-dom";
 import styles from "./UserPanelContainer.module.css";
 
 export default function UserPanelContainer() {
@@ -69,9 +70,14 @@ export default function UserPanelContainer() {
         className={styles["sidebar-container"]}
         collapsed={collapsed}
         transitionDuration={500}
+        backgroundColor="#e3e3e3"
       >
         <div className={styles["logo-container"]}>
-          {collapsed ? null : <img src={logo} alt="logo" />}
+          {collapsed ? null : (
+            <NavLink to="/user-panel" end>
+              <img src={logo} alt="logo" />
+            </NavLink>
+          )}
           <div
             onClick={handleCollapseClick}
             className={styles["toggle-icon-container"]}
