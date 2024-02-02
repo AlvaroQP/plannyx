@@ -127,6 +127,7 @@
         "description": "Description",
         "start-date": "Start Date",
         "end-date": "End Date",
+        "end-date-not-specified": "Not specified",
         "status": "Status",
         "all-projects": "All Projects",
         "status-not-started": "Not started",
@@ -134,6 +135,10 @@
         "status-finished": "Finished",
         "status-stuck": "Stuck",
         "priority": "Priority",
-        "created-at": "Created at"
+        "created-at": "Created at",
+        "priority-low": "Low Priority",
+        "priority-medium": "Medium Priority",
+        "priority-high": "High Priority",
+        "priority-critical": "Critical Priority"
     }
 }

@@ -1,9 +1,16 @@
 .user-panel-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
   display: flex;
-  justify-content: center;
   align-items: center;
   background-color: #0f418d;
   height: 73px;
   font-weight: 500;
   color: white;
+  z-index: 1;
+}
+
+.user-panel-header-title {
+  margin-left: 2rem;
 }

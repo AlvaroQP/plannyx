@@ -1,24 +1,46 @@
-.project-list-container {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-}
-
 .project-list {
-  width: 100%;
-  /* display: flex;
-  flex-wrap: wrap;
-  justify-content: center; */
-  background-color: #e4e4e4;
   border-radius: 0.5rem;
-  border: 1px solid #e1e1e1;
   cursor: pointer;
 }
 
-.project-list:hover {
-  background-color: #e1e1e1;
+.project-list-status-not-started {
+  background-color: #e4e4e4;
+  border: 1px solid #e0e0e0;
+}
+
+.project-list-status-not-started:hover {
+  background-color: #d9d9d9;
+}
+
+.project-list-status-in-progress {
+  background-color: #dde4db;
+  border: 1px solid #d1e2d3;
+}
+
+.project-list-status-in-progress:hover {
+  background-color: #d1e2d3;
+}
+
+.project-list-status-finished {
+  background-color: #e2e7ef;
+  border: 1px solid #d7e3ef;
+}
+
+.project-list-status-finished:hover {
+  background-color: #d7e3ef;
+}
+
+.project-list-status-stuck {
+  background-color: #eee0db;
+  border: 1px solid #f0d3d3;
+}
+
+.project-list-status-stuck:hover {
+  background-color: #f0d3d3;
+}
+
+.project-list-info-container {
+  width: 100%;
 }
 
 .project-list-info-container p {
@@ -30,7 +52,9 @@
   font-weight: 600;
 }
 
-.project-list-date {
+.project-list-date,
+.project-list-priority,
+.project-list-created-at {
   font-size: 0.8rem;
   color: #6c757d;
 }
@@ -42,10 +66,17 @@
   color: #6c757d;
 }
 
-.project-list-status-in-progress {
-  margin-right: 0.5rem;
+.status-in-progress-span {
+  padding-right: 0.5rem;
 }
 
 .span-bold {
   font-weight: 600;
+}
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem;
 }

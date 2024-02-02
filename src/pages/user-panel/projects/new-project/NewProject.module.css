@@ -1,11 +1,10 @@
 .new-project-container {
-  width: 100%;
   background-color: #fefefe;
 }
 
 .new-project-form {
-  width: 90%;
-  margin: 2rem auto;
+  /* width: 90%; */
+  margin: 2rem;
   display: flex;
   flex-direction: column;
 }

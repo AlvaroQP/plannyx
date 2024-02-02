@@ -29,66 +29,67 @@ export default function AllProjectsContainer() {
   );
 
   return (
-    <div className={styles["all-projects-container"]}>
+    <>
       <UserPanelHeader title={t("user-panel-sidebar.my-projects")} />
-
-      {projects.length > 0 ? (
-        <CustomScrollableTabs
-          tabs={[
-            {
-              id: 1,
-              name: t("project.all-projects"),
-              content: <ProjectList projects={projects} />,
-            },
-            {
-              id: 2,
-              name: t("project.status-not-started"),
-              content: (
-                <ProjectList
-                  projects={projects.filter(
-                    (project) => project.status === "not started"
-                  )}
-                />
-              ),
-            },
-            {
-              id: 3,
-              name: t("project.status-in-progress"),
-              content: (
-                <ProjectList
-                  projects={projects.filter(
-                    (project) => project.status === "in progress"
-                  )}
-                />
-              ),
-            },
-            {
-              id: 4,
-              name: t("project.status-finished"),
-              content: (
-                <ProjectList
-                  projects={projects.filter(
-                    (project) => project.status === "finished"
-                  )}
-                />
-              ),
-            },
-            {
-              id: 5,
-              name: t("project.status-stuck"),
-              content: (
-                <ProjectList
-                  projects={projects.filter(
-                    (project) => project.status === "stuck"
-                  )}
-                />
-              ),
-            },
-          ]}
-        />
-      ) : (
-        noProjectsContainer
-      )}
-    </div>
+      <div className={styles["all-projects-container"]}>
+        {projects.length > 0 ? (
+          <CustomScrollableTabs
+            tabs={[
+              {
+                id: 1,
+                name: t("project.all-projects"),
+                content: <ProjectList projects={projects} />,
+              },
+              {
+                id: 2,
+                name: t("project.status-not-started"),
+                content: (
+                  <ProjectList
+                    projects={projects.filter(
+                      (project) => project.status === "not started"
+                    )}
+                  />
+                ),
+              },
+              {
+                id: 3,
+                name: t("project.status-in-progress"),
+                content: (
+                  <ProjectList
+                    projects={projects.filter(
+                      (project) => project.status === "in progress"
+                    )}
+                  />
+                ),
+              },
+              {
+                id: 4,
+                name: t("project.status-finished"),
+                content: (
+                  <ProjectList
+                    projects={projects.filter(
+                      (project) => project.status === "finished"
+                    )}
+                  />
+                ),
+              },
+              {
+                id: 5,
+                name: t("project.status-stuck"),
+                content: (
+                  <ProjectList
+                    projects={projects.filter(
+                      (project) => project.status === "stuck"
+                    )}
+                  />
+                ),
+              },
+            ]}
+          />
+        ) : (
+          noProjectsContainer
+        )}
+      </div>
+    </>
   );
 }

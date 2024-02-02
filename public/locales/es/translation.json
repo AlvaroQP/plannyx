@@ -127,6 +127,7 @@
         "description": "Descripción",
         "start-date": "Fecha de Inicio",
         "end-date": "Fecha de Finalización",
+        "end-date-not-specified": "No especificada",
         "status": "Estado",
         "all-projects": "Todos los Proyectos",
         "status-not-started": "No iniciado",
@@ -134,6 +135,10 @@
         "status-finished": "Finalizado",
         "status-stuck": "Atascado",
         "priority": "Prioridad",
-        "created-at": "Creado el"
+        "created-at": "Creado el",
+        "priority-low": "Prioridad Baja",
+        "priority-medium": "Prioridad Media",
+        "priority-high": "Prioridad Alta",
+        "priority-critical": "Prioridad Crítica"
     }
 }
