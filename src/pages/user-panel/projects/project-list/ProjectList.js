@@ -16,10 +16,12 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import { useNavigate } from "react-router-dom";
 import styles from "./ProjectList.module.css";
 
 export default function ProjectList({ projects }) {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const [filter, setFilter] = useState("startDateAsc");
   const [sortedProjects, setSortedProjects] = useState([]);
 
@@ -28,30 +30,46 @@ export default function ProjectList({ projects }) {
   }
 
   const filterSelect = (
-    <Select value={filter} onChange={handleFilterChange}>
+    <Select
+      value={filter}
+      onChange={handleFilterChange}
+      sx={{ fontSize: ".85rem" }}
+    >
       <MenuItem value="startDateAsc">
         {t("project.start-date")}{" "}
-        <ArrowUpwardIcon className={styles["filter-icon"]} />
+        <ArrowUpwardIcon
+          sx={{ fontSize: ".85rem", ml: ".25rem", mt: ".25rem" }}
+        />
       </MenuItem>
       <MenuItem value="startDateDesc">
         {t("project.start-date")}{" "}
-        <ArrowDownwardIcon className={styles["filter-icon"]} />
+        <ArrowDownwardIcon
+          sx={{ fontSize: ".85rem", ml: ".25rem", mt: ".25rem" }}
+        />
       </MenuItem>
       <MenuItem value="endDateAsc">
         {t("project.end-date")}{" "}
-        <ArrowUpwardIcon className={styles["filter-icon"]} />
+        <ArrowUpwardIcon
+          sx={{ fontSize: ".85rem", ml: ".25rem", mt: ".25rem" }}
+        />
       </MenuItem>
       <MenuItem value="endDateDesc">
         {t("project.end-date")}{" "}
-        <ArrowDownwardIcon className={styles["filter-icon"]} />
+        <ArrowDownwardIcon
+          sx={{ fontSize: ".85rem", ml: ".25rem", mt: ".25rem" }}
+        />
       </MenuItem>
       <MenuItem value="priorityAsc">
         {t("project.priority")}{" "}
-        <ArrowUpwardIcon className={styles["filter-icon"]} />
+        <ArrowUpwardIcon
+          sx={{ fontSize: ".85rem", ml: ".25rem", mt: ".25rem" }}
+        />
       </MenuItem>
       <MenuItem value="priorityDesc">
         {t("project.priority")}{" "}
-        <ArrowDownwardIcon className={styles["filter-icon"]} />
+        <ArrowDownwardIcon
+          sx={{ fontSize: ".85rem", ml: ".25rem", mt: ".25rem" }}
+        />
       </MenuItem>
     </Select>
   );
@@ -89,6 +107,7 @@ export default function ProjectList({ projects }) {
     }
 
     setSortedProjects(sorted);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filter, projects]);
 
   return (
@@ -109,6 +128,7 @@ export default function ProjectList({ projects }) {
 
         return (
           <List
+            onClick={() => navigate(`/user-panel/projects/${project.id}`)}
             className={`${styles["project-list"]} ${statusClassName}`}
             key={index}
             sx={{

@@ -145,6 +145,9 @@
         "end-date-asc": "Fecha de Finalización (ascendente)",
         "end-date-desc": "Fecha de Finalización (descendente)",
         "priority-asc": "Prioridad (ascendente)",
-        "priority-desc": "Prioridad (descendente)"
+        "priority-desc": "Prioridad (descendente)",
+        "not-found": "Proyecto no encontrado",
+        "not-found-description": "El proyecto que estás buscando no existe o ha sido eliminado.",
+        "project-details": "Detalles del Proyecto"
     }
 }

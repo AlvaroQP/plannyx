@@ -7,6 +7,7 @@ import React, {
 } from "react";
 import {
   getAllProjectsRequest,
+  getProjectByIdRequest,
   postProjectRequest,
 } from "../../api/projects/ProjectRequests";
 import { useAuth } from "../../auth/auth-context/AuthProvider";
@@ -16,12 +17,6 @@ const ProjectsContext = createContext();
 export function ProjectsProvider({ children }) {
   const { userId } = useAuth();
   const [projects, setProjects] = useState([]);
-
-  useEffect(() => {
-    if (projects.length > 0) {
-      console.log(projects);
-    }
-  }, [projects]);
 
   const getAllProjects = useCallback(async () => {
     let projects = await getAllProjectsRequest(userId);
@@ -35,6 +30,11 @@ export function ProjectsProvider({ children }) {
     }
   }, [userId, getAllProjects]);
 
+  async function getProjectById(projectId) {
+    const project = await getProjectByIdRequest(userId, projectId);
+    return project;
+  }
+
   async function postProject(project) {
     const newProject = await postProjectRequest(userId, project);
     setProjects((prevProjects) => [...prevProjects, newProject]);
@@ -42,7 +42,13 @@ export function ProjectsProvider({ children }) {
 
   return (
     <ProjectsContext.Provider
-      value={{ projects, setProjects, getAllProjects, postProject }}
+      value={{
+        projects,
+        setProjects,
+        getAllProjects,
+        getProjectById,
+        postProject,
+      }}
     >
       {children}
     </ProjectsContext.Provider>

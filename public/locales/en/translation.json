@@ -145,6 +145,9 @@
         "end-date-asc": "End Date (ascending)",
         "end-date-desc": "End Date (descending)",
         "priority-asc": "Priority (ascending)",
-        "priority-desc": "Priority (descending)"
+        "priority-desc": "Priority (descending)",
+        "not-found": "Project not found",
+        "not-found-description": "The project you are looking for does not exist or has been deleted.",
+        "project-details": "Project Details"
     }
 }
