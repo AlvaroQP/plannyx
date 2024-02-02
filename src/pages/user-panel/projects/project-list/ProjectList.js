@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -12,14 +12,90 @@ import SignalCellular1BarIcon from "@mui/icons-material/SignalCellular1Bar";
 import SignalCellular2BarIcon from "@mui/icons-material/SignalCellular2Bar";
 import SignalCellular3BarIcon from "@mui/icons-material/SignalCellular3Bar";
 import SignalCellularConnectedNoInternet4BarIcon from "@mui/icons-material/SignalCellularConnectedNoInternet4Bar";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import styles from "./ProjectList.module.css";
 
 export default function ProjectList({ projects }) {
   const { t } = useTranslation();
+  const [filter, setFilter] = useState("startDateAsc");
+  const [sortedProjects, setSortedProjects] = useState([]);
+
+  function handleFilterChange(event) {
+    setFilter(event.target.value);
+  }
+
+  const filterSelect = (
+    <Select value={filter} onChange={handleFilterChange}>
+      <MenuItem value="startDateAsc">
+        {t("project.start-date")}{" "}
+        <ArrowUpwardIcon className={styles["filter-icon"]} />
+      </MenuItem>
+      <MenuItem value="startDateDesc">
+        {t("project.start-date")}{" "}
+        <ArrowDownwardIcon className={styles["filter-icon"]} />
+      </MenuItem>
+      <MenuItem value="endDateAsc">
+        {t("project.end-date")}{" "}
+        <ArrowUpwardIcon className={styles["filter-icon"]} />
+      </MenuItem>
+      <MenuItem value="endDateDesc">
+        {t("project.end-date")}{" "}
+        <ArrowDownwardIcon className={styles["filter-icon"]} />
+      </MenuItem>
+      <MenuItem value="priorityAsc">
+        {t("project.priority")}{" "}
+        <ArrowUpwardIcon className={styles["filter-icon"]} />
+      </MenuItem>
+      <MenuItem value="priorityDesc">
+        {t("project.priority")}{" "}
+        <ArrowDownwardIcon className={styles["filter-icon"]} />
+      </MenuItem>
+    </Select>
+  );
+
+  const priorityMap = {
+    low: 1,
+    medium: 2,
+    high: 3,
+    critical: 4,
+  };
+
+  useEffect(() => {
+    let sorted = [...projects];
+
+    if (filter === "startDateAsc") {
+      sorted.sort((a, b) => a.startDate.toDate() - b.startDate.toDate());
+    } else if (filter === "startDateDesc") {
+      sorted.sort((a, b) => b.startDate.toDate() - a.startDate.toDate());
+    } else if (filter === "endDateAsc") {
+      sorted.sort((a, b) => {
+        if (a.endDate === null) return 1;
+        if (b.endDate === null) return -1;
+        return a.endDate.toDate() - b.endDate.toDate();
+      });
+    } else if (filter === "endDateDesc") {
+      sorted.sort((a, b) => {
+        if (a.endDate === null) return -1;
+        if (b.endDate === null) return 1;
+        return b.endDate.toDate() - a.endDate.toDate();
+      });
+    } else if (filter === "priorityAsc") {
+      sorted.sort((a, b) => priorityMap[a.priority] - priorityMap[b.priority]);
+    } else if (filter === "priorityDesc") {
+      sorted.sort((a, b) => priorityMap[b.priority] - priorityMap[a.priority]);
+    }
+
+    setSortedProjects(sorted);
+  }, [filter, projects]);
 
   return (
     <div className={styles["project-list-container"]}>
-      {projects.map((project, index) => {
+      {filterSelect}
+
+      {sortedProjects.map((project, index) => {
         let statusClassName;
         if (project.status === "not started") {
           statusClassName = styles["project-list-status-not-started"];

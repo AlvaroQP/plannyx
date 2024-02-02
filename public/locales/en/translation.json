@@ -139,6 +139,12 @@
         "priority-low": "Low Priority",
         "priority-medium": "Medium Priority",
         "priority-high": "High Priority",
-        "priority-critical": "Critical Priority"
+        "priority-critical": "Critical Priority",
+        "start-date-asc": "Start Date (ascending)",
+        "start-date-desc": "Start Date (descending)",
+        "end-date-asc": "End Date (ascending)",
+        "end-date-desc": "End Date (descending)",
+        "priority-asc": "Priority (ascending)",
+        "priority-desc": "Priority (descending)"
     }
 }

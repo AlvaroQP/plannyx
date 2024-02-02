@@ -14,20 +14,6 @@ export default function AllProjectsContainer() {
   const navigate = useNavigate();
   const { projects } = useProjects();
 
-  const noProjectsContainer = (
-    <div className={styles["no-projects-container"]}>
-      {t("projects-list.no-projects")}
-
-      <CustomButton
-        variant="contained"
-        color="primary"
-        text={t("button.new-project")}
-        icon={<AddCircleOutlineIcon />}
-        onClick={() => navigate("/user-panel/projects/new")}
-      />
-    </div>
-  );
-
   return (
     <>
       <UserPanelHeader title={t("user-panel-sidebar.my-projects")} />
@@ -87,7 +73,17 @@ export default function AllProjectsContainer() {
             ]}
           />
         ) : (
-          noProjectsContainer
+          <div className={styles["no-projects-container"]}>
+            {t("projects-list.no-projects")}
+
+            <CustomButton
+              variant="contained"
+              color="primary"
+              text={t("button.new-project")}
+              icon={<AddCircleOutlineIcon />}
+              onClick={() => navigate("/user-panel/projects/new")}
+            />
+          </div>
         )}
       </div>
     </>
