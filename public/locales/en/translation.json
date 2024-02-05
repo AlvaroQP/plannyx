@@ -37,7 +37,10 @@
         "close": "Close",
         "reset": "Reset",
         "submit": "Submit",
-        "new-project": "New Project"
+        "new-project": "New Project", 
+        "edit": "Edit",
+        "delete": "Delete",
+        "save": "Save"
     },
     "footer": {
         "all-rights-reserved": "All rights reserved.",

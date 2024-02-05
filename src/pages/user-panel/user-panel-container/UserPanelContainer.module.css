@@ -55,7 +55,7 @@
   top: 1.5rem;
   right: 0.5rem;
   font-size: 2rem;
-  color: #3071d4;
+  color: #0f418d;
   cursor: pointer;
 }
 
@@ -65,7 +65,7 @@
 
 .toggle-icon-left:hover,
 .toggle-icon-right:hover {
-  color: #3b83ef;
+  color: #3071d4;
 }
 
 .expand-text {

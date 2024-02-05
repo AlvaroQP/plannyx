@@ -13,8 +13,6 @@ import projectsBanner from "../../../../assets/images/projects-banner.png";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dateFormat from "../../../../utils/dateFormat";
-import CircleIcon from "@mui/icons-material/Circle";
-import ErrorIcon from "@mui/icons-material/Error";
 import CustomButton from "../../../../components/ui/button/CustomButton";
 import RestartAltOutlinedIcon from "@mui/icons-material/RestartAltOutlined";
 import CheckCircleOutlineOutlinedIcon from "@mui/icons-material/CheckCircleOutlineOutlined";
@@ -25,6 +23,10 @@ import { useProjects } from "../../../../context/projects/ProjectsProvider";
 import { useDialog } from "../../../../context/dialog/DialogProvider";
 import { Timestamp } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+import SignalCellular1BarIcon from "@mui/icons-material/SignalCellular1Bar";
+import SignalCellular2BarIcon from "@mui/icons-material/SignalCellular2Bar";
+import SignalCellular3BarIcon from "@mui/icons-material/SignalCellular3Bar";
+import SignalCellularConnectedNoInternet4BarIcon from "@mui/icons-material/SignalCellularConnectedNoInternet4Bar";
 import styles from "./NewProject.module.css";
 
 export default function NewProject() {
@@ -212,25 +214,33 @@ export default function NewProject() {
           >
             <MenuItem value="low">
               <span className={styles["low-priority-text"]}>
-                <CircleIcon className={styles["priority-icon-low"]} />
+                <SignalCellular1BarIcon
+                  className={styles["priority-icon-low"]}
+                />
                 {t("new-project.low-priority")}
               </span>
             </MenuItem>
             <MenuItem value="medium">
               <span className={styles["medium-priority-text"]}>
-                <CircleIcon className={styles["priority-icon-medium"]} />
+                <SignalCellular2BarIcon
+                  className={styles["priority-icon-medium"]}
+                />
                 {t("new-project.medium-priority")}
               </span>
             </MenuItem>
             <MenuItem value="high">
               <span className={styles["high-priority-text"]}>
-                <CircleIcon className={styles["priority-icon-high"]} />
+                <SignalCellular3BarIcon
+                  className={styles["priority-icon-high"]}
+                />
                 {t("new-project.high-priority")}
               </span>
             </MenuItem>
             <MenuItem value="critical">
               <span className={styles["critical-priority-text"]}>
-                <ErrorIcon className={styles["priority-icon-critical"]} />
+                <SignalCellularConnectedNoInternet4BarIcon
+                  className={styles["priority-icon-critical"]}
+                />
                 {t("new-project.critical-priority")}
               </span>
             </MenuItem>

@@ -6,6 +6,7 @@ import {
   doc,
   getDoc,
   getDocs,
+  updateDoc,
 } from "firebase/firestore";
 
 export async function getAllProjectsRequest(userId) {
@@ -45,4 +46,15 @@ export async function postProjectRequest(userId, project) {
     id: docRef.id,
     ...project,
   };
+}
+
+export async function putProjectRequest(userId, projectId, project) {
+  try {
+    const docRef = doc(db, "users", userId, "projects", projectId);
+    await updateDoc(docRef, project);
+    return { id: docRef.id, ...project };
+  } catch (error) {
+    console.error("Error updating document:", error);
+    throw error;
+  }
 }

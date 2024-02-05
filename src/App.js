@@ -12,7 +12,7 @@ import Dashboard from "./pages/user-panel/dashboard/Dashboard";
 import AccessDenied from "./pages/access-denied/AccessDenied";
 import { useAuth } from "./auth/auth-context/AuthProvider";
 import "./i18n";
-import ProjectDetail from "./pages/user-panel/projects/project-detail/ProjectDetail";
+import ProjectDetails from "./pages/user-panel/projects/project-details/ProjectDetails";
 
 export default function App() {
   function ComponentOrAccessDenied({ component: Component }) {
@@ -60,7 +60,7 @@ export default function App() {
             },
             {
               path: "projects/:id",
-              element: <ComponentOrAccessDenied component={ProjectDetail} />,
+              element: <ComponentOrAccessDenied component={ProjectDetails} />,
             },
             {
               path: "calendar",

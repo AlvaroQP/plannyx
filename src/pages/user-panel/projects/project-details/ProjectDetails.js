@@ -6,9 +6,10 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import CustomButton from "../../../../components/ui/button/CustomButton";
 import UserPanelHeader from "../../../../components/ui/header/user-panel-header/UserPanelHeader";
-import styles from "./ProjectDetail.module.css";
+import ProjectDetailsContainer from "./project-details-container/ProjectDetailsContainer";
+import styles from "./ProjectDetails.module.css";
 
-export default function ProjectDetail() {
+export default function ProjectDetails() {
   let { id } = useParams();
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -34,10 +35,10 @@ export default function ProjectDetail() {
       {project && (
         <>
           <UserPanelHeader title={t("project.project-details")} />
-          <div className={styles["project-details-container"]}>
-            <h2>{project.name}</h2>
-            <p>{project.description}</p>
-          </div>
+
+          <section className={styles["project-details-section"]}>
+            <ProjectDetailsContainer project={project} />
+          </section>
         </>
       )}
 

@@ -6,6 +6,7 @@
 .project-list-status-not-started {
   background-color: #e4e4e4;
   border: 1px solid #e0e0e0;
+  border-left: 20px solid #c0c0c0;
 }
 
 .project-list-status-not-started:hover {
@@ -15,6 +16,7 @@
 .project-list-status-in-progress {
   background-color: #dde4db;
   border: 1px solid #d1e2d3;
+  border-left: 20px solid #a0d09f;
 }
 
 .project-list-status-in-progress:hover {
@@ -24,6 +26,7 @@
 .project-list-status-finished {
   background-color: #e2e7ef;
   border: 1px solid #d7e3ef;
+  border-left: 20px solid #a1c5ea;
 }
 
 .project-list-status-finished:hover {
@@ -33,6 +36,7 @@
 .project-list-status-stuck {
   background-color: #eee0db;
   border: 1px solid #f0d3d3;
+  border-left: 20px solid #eab1b1;
 }
 
 .project-list-status-stuck:hover {
@@ -41,6 +45,7 @@
 
 .project-list-info-container {
   width: 100%;
+  margin-left: 1rem;
 }
 
 .project-list-info-container p {

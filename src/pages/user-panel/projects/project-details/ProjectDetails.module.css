@@ -1,0 +1,57 @@
+.project-details-section {
+  margin: 2rem;
+  background-color: #f4f4f4;
+  border-radius: 0.5rem;
+  border: 1px solid #e1e1e1;
+  padding: 1rem;
+  font-size: 0.9rem;
+  text-align: justify;
+}
+
+.project-details-container {
+  background-color: #f4f4f4;
+  border-radius: 0.5rem;
+  border: 1px solid #e1e1e1;
+  padding: 1rem;
+  font-size: 0.9rem;
+  text-align: justify;
+}
+
+.not-found-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  gap: 1rem;
+}
+
+.project-list-status {
+  display: flex;
+  align-items: center;
+}
+
+.status-in-progress-span {
+  padding-right: 0.5rem;
+}
+
+.span-bold {
+  font-weight: 600;
+}
+
+.project-details-flex-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.project-details-description {
+  margin-bottom: 1rem;
+}
+
+.project-details-dates > *,
+.project-details-priority-status-container > * {
+  margin-bottom: 1rem;
+}

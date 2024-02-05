@@ -37,7 +37,10 @@
         "close": "Cerrar",
         "reset": "Borrar",
         "submit": "Enviar",
-        "new-project": "Nuevo Proyecto"
+        "new-project": "Nuevo Proyecto",
+        "edit": "Editar",
+        "delete": "Eliminar",
+        "save": "Guardar"
     },
     "footer": {
         "all-rights-reserved": "Todos los derechos reservados.",

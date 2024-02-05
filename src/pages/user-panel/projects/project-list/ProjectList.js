@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
-import Avatar from "@mui/material/Avatar";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import PulseDot from "../../../../components/ui/pulse-dot/PulseDot";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
@@ -136,18 +134,6 @@ export default function ProjectList({ projects }) {
             }}
           >
             <ListItem>
-              <ListItemAvatar>
-                <Avatar
-                  sx={{
-                    background: "#3071d4",
-                    width: "1.5rem",
-                    height: "1.5rem",
-                    fontSize: ".7rem",
-                  }}
-                >
-                  {index + 1}
-                </Avatar>
-              </ListItemAvatar>
               <div className={styles["project-list-info-container"]}>
                 <p className={styles["project-list-name"]}>{project.name}</p>
                 <div className={styles["flex-container"]}>

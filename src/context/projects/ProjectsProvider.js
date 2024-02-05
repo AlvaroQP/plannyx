@@ -9,6 +9,7 @@ import {
   getAllProjectsRequest,
   getProjectByIdRequest,
   postProjectRequest,
+  putProjectRequest,
 } from "../../api/projects/ProjectRequests";
 import { useAuth } from "../../auth/auth-context/AuthProvider";
 
@@ -40,6 +41,13 @@ export function ProjectsProvider({ children }) {
     setProjects((prevProjects) => [...prevProjects, newProject]);
   }
 
+  async function putProject(projectId, project) {
+    const updatedProject = await putProjectRequest(userId, projectId, project);
+    setProjects((prevProjects) =>
+      prevProjects.map((p) => (p.id === projectId ? updatedProject : p))
+    );
+  }
+
   return (
     <ProjectsContext.Provider
       value={{
@@ -48,6 +56,7 @@ export function ProjectsProvider({ children }) {
         getAllProjects,
         getProjectById,
         postProject,
+        putProject,
       }}
     >
       {children}
