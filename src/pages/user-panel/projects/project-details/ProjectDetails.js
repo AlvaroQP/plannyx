@@ -21,10 +21,15 @@ export default function ProjectDetails() {
   useEffect(() => {
     async function fetchProject() {
       setIsLoading(true);
-      const project = await getProjectById(id);
-      setProject(project);
-      setIsLoading(false);
-      setIsProjectFetched(true);
+      try {
+        const project = await getProjectById(id);
+        setProject(project);
+        setIsProjectFetched(true);
+      } catch (error) {
+        console.error("Error fetching project:", error);
+      } finally {
+        setIsLoading(false);
+      }
     }
 
     fetchProject();

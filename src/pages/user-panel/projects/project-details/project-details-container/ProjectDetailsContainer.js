@@ -19,11 +19,13 @@ import { useProjects } from "../../../../../context/projects/ProjectsProvider";
 import { Alert } from "@mui/material";
 import { useLoading } from "../../../../../context/loading/LoadingProvider";
 import { Timestamp } from "firebase/firestore";
+import { useDialog } from "../../../../../context/dialog/DialogProvider";
 import dayjs from "dayjs";
 import styles from "./ProjectDetailsContainer.module.css";
 
 export default function ProjectDetailsContainer({ project }) {
   const { t } = useTranslation();
+  const { openDialog } = useDialog();
   const [editedField, setEditedField] = useState(null);
   const [editedProject, setEditedProject] = useState(project);
   const [validField, setValidField] = useState(true);
@@ -74,8 +76,19 @@ export default function ProjectDetailsContainer({ project }) {
         };
 
         await putProject(editedProject.id, project);
+
+        openDialog({
+          title: t("project.success"),
+          description: t("project.project-edited"),
+          severity: "success",
+        });
       } catch (error) {
         console.error("Error saving project:", error);
+        openDialog({
+          title: t("project.error"),
+          description: t("project.could-not-edit-project"),
+          severity: "error",
+        });
       } finally {
         setIsLoading(false);
         setIsDateAlertOpen(false);
@@ -121,6 +134,8 @@ export default function ProjectDetailsContainer({ project }) {
       {editedField === "name" ? (
         <TextField
           value={editedProject.name}
+          fullWidth
+          label={t("new-project.project-name")}
           onChange={(e) =>
             setEditedProject({ ...editedProject, name: e.target.value })
           }
@@ -138,6 +153,7 @@ export default function ProjectDetailsContainer({ project }) {
         <TextField
           multiline
           fullWidth
+          label={t("new-project.project-description")}
           value={editedProject.description}
           onChange={(e) =>
             setEditedProject({ ...editedProject, description: e.target.value })

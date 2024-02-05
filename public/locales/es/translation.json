@@ -151,6 +151,10 @@
         "priority-desc": "Prioridad (descendente)",
         "not-found": "Proyecto no encontrado",
         "not-found-description": "El proyecto que estás buscando no existe o ha sido eliminado.",
-        "project-details": "Detalles del Proyecto"
+        "project-details": "Detalles del Proyecto",
+        "project-edited": "El proyecto ha sido editado con éxito.",
+        "could-not-edit-project": "No se ha podido editar el proyecto. Por favor, inténtalo de nuevo más tarde.",
+        "success": "Éxito",
+        "error": "Error"
     }
 }
