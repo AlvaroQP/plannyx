@@ -1,19 +1,11 @@
-.new-project-container {
-  background-color: #fefefe;
-}
-
-.new-project-form {
+.new-task-form {
   margin: 2rem;
   display: flex;
   flex-direction: column;
 }
 
-.new-project-form > * {
+.new-task-form > * {
   margin-bottom: 2rem;
-}
-
-.project-banner {
-  width: 100%;
 }
 
 .dates-container {

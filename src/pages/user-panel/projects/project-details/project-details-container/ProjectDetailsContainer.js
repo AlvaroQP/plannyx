@@ -16,6 +16,7 @@ import PulseDot from "../../../../../components/ui/pulse-dot/PulseDot";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import ErrorIcon from "@mui/icons-material/Error";
 import DeleteIcon from "@mui/icons-material/Delete";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import { useProjects } from "../../../../../context/projects/ProjectsProvider";
 import { Alert } from "@mui/material";
 import { useLoading } from "../../../../../context/loading/LoadingProvider";
@@ -262,6 +263,9 @@ export default function ProjectDetailsContainer({ project }) {
                 {t("project.start-date")}:{" "}
               </span>
               {project.startDate.toDate().toLocaleDateString()}
+              <CalendarMonthIcon
+                sx={{ fontSize: "1.1rem", ml: 0.5, mb: 0.25, color: "grey" }}
+              />
             </div>
           )}
 
@@ -297,6 +301,14 @@ export default function ProjectDetailsContainer({ project }) {
               {project.endDate
                 ? project.endDate.toDate().toLocaleDateString()
                 : t("project.end-date-not-specified")}
+              <CalendarMonthIcon
+                sx={{
+                  fontSize: "1.1rem",
+                  ml: 0.5,
+                  mb: 0.25,
+                  color: "grey",
+                }}
+              />
             </div>
           )}
         </div>

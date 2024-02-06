@@ -5,6 +5,7 @@ import { AlertProvider } from "./alerts/AlertProvider";
 import { DialogProvider } from "./dialog/DialogProvider";
 import { LanguageProvider } from "./language/LanguageProvider";
 import { ProjectsProvider } from "./projects/ProjectsProvider";
+import { TasksProvider } from "./tasks/TasksProvider";
 import ThemeWrapper from "./theme/ThemeProvider";
 
 export default function GlobalContextProviders({ children }) {
@@ -15,7 +16,9 @@ export default function GlobalContextProviders({ children }) {
           <AuthProvider>
             <LanguageProvider>
               <ThemeWrapper>
-                <ProjectsProvider>{children}</ProjectsProvider>
+                <ProjectsProvider>
+                  <TasksProvider>{children}</TasksProvider>
+                </ProjectsProvider>
               </ThemeWrapper>
             </LanguageProvider>
           </AuthProvider>

@@ -47,6 +47,13 @@
   margin-bottom: 1rem;
 }
 
+.project-details-start-date,
+.project-details-end-date {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
 .project-details-name:hover,
 .project-details-description:hover,
 .project-details-start-date:hover,

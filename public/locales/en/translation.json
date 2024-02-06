@@ -161,5 +161,26 @@
         "delete-project-message": "Are you sure you want to delete this project?",
         "project-deleted": "The project has been deleted successfully.",
         "could-not-delete-project": "Could not delete project. Please try again later."
+    },
+    "task": {
+        "new-task": "New Task",
+        "view-tasks": "View Tasks",
+        "task-name": "Task Name",
+        "name": "Name",
+        "start-date": "Start Date",
+        "end-date": "End Date",
+        "status": "Status",
+        "priority": "Priority",
+        "please-fill-all-fields": "Please fill in all fields.",
+        "end-date-after-start-date": "The end date can't be before than the start date.",
+        "specify-end-date": "Specify end date?",
+        "low-priority": "Low Priority",
+        "medium-priority": "Medium Priority",
+        "high-priority": "High Priority",
+        "critical-priority": "Critical Priority",
+        "success": "Success",
+        "error": "Error",
+        "task-added": "The task has been created successfully.",
+        "could-not-add-task": "Could not add the task. Please try again later."
     }
 }

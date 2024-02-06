@@ -8,6 +8,16 @@
   text-align: justify;
 }
 
+.tasks-section {
+  margin: 2rem;
+  background-color: #f4f4f4;
+  border-radius: 0.5rem;
+  border: 1px solid #e1e1e1;
+  padding: 2rem 1rem;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
 .back-button-container {
   margin: 1rem 2rem;
 }
@@ -58,4 +68,10 @@
 .project-details-dates > *,
 .project-details-priority-status-container > * {
   margin-bottom: 1rem;
+}
+
+.task-buttons-container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
 }

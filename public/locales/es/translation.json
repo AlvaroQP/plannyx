@@ -161,5 +161,26 @@
         "delete-project-message": "¿Estás segur@ de que quieres eliminar este proyecto?",
         "project-deleted": "El proyecto ha sido eliminado con éxito.",
         "could-not-delete-project": "No se ha podido eliminar el proyecto. Por favor, inténtalo de nuevo más tarde."
+    },
+    "task": {
+        "new-task": "Nueva Tarea",
+        "view-tasks": "Ver Tareas",
+        "task-name": "Nombre de la Tarea",
+        "name": "Nombre",
+        "start-date": "Fecha de Inicio",
+        "end-date": "Fecha de Finalización",
+        "status": "Estado",
+        "priority": "Prioridad",
+        "please-fill-all-fields": "Por favor, rellena todos los campos.",
+        "end-date-after-start-date": "La fecha de finalización no puede ser anterior a la fecha de inicio.",
+        "specify-end-date": "¿Especificar fecha de finalización?",
+        "low-priority": "Prioridad Baja",
+        "medium-priority": "Prioridad Media",
+        "high-priority": "Prioridad Alta",
+        "critical-priority": "Prioridad Crítica",
+        "success": "Éxito",
+        "error": "Error",
+        "task-added": "La tarea ha sido creada con éxito.",
+        "could-not-add-task": "No se ha podido añadir la tarea. Por favor, inténtalo de nuevo más tarde."
     }
 }
