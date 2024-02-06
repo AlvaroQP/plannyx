@@ -22,7 +22,7 @@ export default function Flags({ collapsed }) {
       label={t("user-panel-sidebar.language")}
       icon={<LanguageIcon className={styles.icon} />}
     >
-      <MenuItem onClick={() => handleLanguageChange("en")}>
+      <MenuItem onClick={() => handleLanguageChange("en-gb")}>
         <span className={`fi fi-gb ${styles.flag}`} />{" "}
         {t("user-panel-sidebar.english")}
       </MenuItem>

@@ -16,7 +16,7 @@ export default function Home() {
     <>
       <div className={styles["banner-container"]}>
         <img
-          src={i18n.language === "en" ? bannerEn : bannerEs}
+          src={i18n.language === "en-gb" ? bannerEn : bannerEs}
           alt="banner"
           className={styles.banner}
         />

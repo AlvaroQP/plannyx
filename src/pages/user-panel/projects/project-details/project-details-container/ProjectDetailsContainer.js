@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import styles from "./ProjectDetailsContainer.module.css";
 import SignalCellular1BarIcon from "@mui/icons-material/SignalCellular1Bar";
 import SignalCellular2BarIcon from "@mui/icons-material/SignalCellular2Bar";
 import SignalCellular3BarIcon from "@mui/icons-material/SignalCellular3Bar";
@@ -8,7 +9,6 @@ import { useTranslation } from "react-i18next";
 import { TextField } from "@mui/material";
 import CustomButton from "../../../../../components/ui/button/CustomButton";
 import { LocalizationProvider, MobileDatePicker } from "@mui/x-date-pickers";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dateFormat from "../../../../../utils/dateFormat";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
@@ -20,11 +20,15 @@ import { Alert } from "@mui/material";
 import { useLoading } from "../../../../../context/loading/LoadingProvider";
 import { Timestamp } from "firebase/firestore";
 import { useDialog } from "../../../../../context/dialog/DialogProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
-import styles from "./ProjectDetailsContainer.module.css";
+import { useLanguage } from "../../../../../context/language/LanguageProvider";
+import "dayjs/locale/en-gb";
+import "dayjs/locale/es";
 
 export default function ProjectDetailsContainer({ project }) {
   const { t } = useTranslation();
+  const { language } = useLanguage();
   const { openDialog } = useDialog();
   const [editedField, setEditedField] = useState(null);
   const [editedProject, setEditedProject] = useState(project);
@@ -48,7 +52,6 @@ export default function ProjectDetailsContainer({ project }) {
       setIsLoading(false);
       setIsDateAlertOpen(false);
       setValidField(true);
-      console.log("No changes to save");
       return;
     }
 
@@ -174,7 +177,10 @@ export default function ProjectDetailsContainer({ project }) {
         <div className={styles["project-details-dates"]}>
           {editedField === "startDate" ? (
             <div>
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <LocalizationProvider
+                dateAdapter={AdapterDayjs}
+                adapterLocale={dayjs.locale(language)}
+              >
                 <MobileDatePicker
                   label={t("new-project.start-date")}
                   inputFormat={dateFormat()}
@@ -204,7 +210,10 @@ export default function ProjectDetailsContainer({ project }) {
 
           {editedField === "endDate" ? (
             <div>
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <LocalizationProvider
+                dateAdapter={AdapterDayjs}
+                adapterLocale={dayjs.locale(language)}
+              >
                 <MobileDatePicker
                   label={t("new-project.end-date")}
                   inputFormat={dateFormat()}
@@ -257,7 +266,7 @@ export default function ProjectDetailsContainer({ project }) {
                   <MenuItem value="low">
                     <span className={styles["low-priority-text"]}>
                       <SignalCellular1BarIcon
-                        className={styles["priority-icon-low"]}
+                        sx={{ ml: ".35rem", fontSize: "1rem" }}
                       />
                       {t("new-project.low-priority")}
                     </span>
@@ -265,7 +274,7 @@ export default function ProjectDetailsContainer({ project }) {
                   <MenuItem value="medium">
                     <span className={styles["medium-priority-text"]}>
                       <SignalCellular2BarIcon
-                        className={styles["priority-icon-medium"]}
+                        sx={{ ml: ".35rem", fontSize: "1rem" }}
                       />
                       {t("new-project.medium-priority")}
                     </span>
@@ -273,7 +282,7 @@ export default function ProjectDetailsContainer({ project }) {
                   <MenuItem value="high">
                     <span className={styles["high-priority-text"]}>
                       <SignalCellular3BarIcon
-                        className={styles["priority-icon-high"]}
+                        sx={{ ml: ".35rem", fontSize: "1rem" }}
                       />
                       {t("new-project.high-priority")}
                     </span>
@@ -281,7 +290,7 @@ export default function ProjectDetailsContainer({ project }) {
                   <MenuItem value="critical">
                     <span className={styles["critical-priority-text"]}>
                       <SignalCellularConnectedNoInternet4BarIcon
-                        className={styles["priority-icon-critical"]}
+                        sx={{ ml: ".35rem", fontSize: "1rem" }}
                       />
                       {t("new-project.critical-priority")}
                     </span>

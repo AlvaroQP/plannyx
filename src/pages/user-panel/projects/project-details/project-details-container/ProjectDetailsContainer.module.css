@@ -75,3 +75,12 @@
 .edit-project-buttons-container button {
   margin: 0 0.5rem;
 }
+
+.low-priority-text,
+.medium-priority-text,
+.high-priority-text,
+.critical-priority-text {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}

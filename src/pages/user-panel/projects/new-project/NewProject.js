@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import styles from "./NewProject.module.css";
 import { useTranslation } from "react-i18next";
 import UserPanelHeader from "../../../../components/ui/header/user-panel-header/UserPanelHeader";
 import {
@@ -17,7 +18,6 @@ import CustomButton from "../../../../components/ui/button/CustomButton";
 import RestartAltOutlinedIcon from "@mui/icons-material/RestartAltOutlined";
 import CheckCircleOutlineOutlinedIcon from "@mui/icons-material/CheckCircleOutlineOutlined";
 import Alert from "@mui/material/Alert";
-import dayjs from "dayjs";
 import { useLoading } from "../../../../context/loading/LoadingProvider";
 import { useProjects } from "../../../../context/projects/ProjectsProvider";
 import { useDialog } from "../../../../context/dialog/DialogProvider";
@@ -27,10 +27,14 @@ import SignalCellular1BarIcon from "@mui/icons-material/SignalCellular1Bar";
 import SignalCellular2BarIcon from "@mui/icons-material/SignalCellular2Bar";
 import SignalCellular3BarIcon from "@mui/icons-material/SignalCellular3Bar";
 import SignalCellularConnectedNoInternet4BarIcon from "@mui/icons-material/SignalCellularConnectedNoInternet4Bar";
-import styles from "./NewProject.module.css";
+import dayjs from "dayjs";
+import { useLanguage } from "../../../../context/language/LanguageProvider";
+import "dayjs/locale/en-gb";
+import "dayjs/locale/es";
 
 export default function NewProject() {
   const { t } = useTranslation();
+  const { language } = useLanguage();
   const navigate = useNavigate();
   const { postProject, getAllProjects } = useProjects();
   const { openDialog } = useDialog();
@@ -165,7 +169,10 @@ export default function NewProject() {
         </div>
 
         <div className={styles["dates-container"]}>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <LocalizationProvider
+            dateAdapter={AdapterDayjs}
+            adapterLocale={dayjs.locale(language)}
+          >
             <DatePicker
               required
               className={
