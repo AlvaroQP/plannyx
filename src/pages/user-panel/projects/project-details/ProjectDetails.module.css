@@ -8,6 +8,10 @@
   text-align: justify;
 }
 
+.back-button-container {
+  margin: 1rem 2rem;
+}
+
 .project-details-container {
   background-color: #f4f4f4;
   border-radius: 0.5rem;

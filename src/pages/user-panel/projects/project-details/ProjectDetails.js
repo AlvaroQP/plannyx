@@ -41,6 +41,14 @@ export default function ProjectDetails() {
         <>
           <UserPanelHeader title={t("project.project-details")} />
 
+          <div className={styles["back-button-container"]}>
+            <CustomButton
+              variant="outlined"
+              text={t("user-panel-sidebar.my-projects")}
+              onClick={() => navigate("/user-panel/projects/all")}
+            />
+          </div>
+
           <section className={styles["project-details-section"]}>
             <ProjectDetailsContainer project={project} />
           </section>

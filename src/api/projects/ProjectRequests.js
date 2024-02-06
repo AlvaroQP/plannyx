@@ -7,6 +7,7 @@ import {
   getDoc,
   getDocs,
   updateDoc,
+  deleteDoc,
 } from "firebase/firestore";
 
 export async function getAllProjectsRequest(userId) {
@@ -55,6 +56,16 @@ export async function putProjectRequest(userId, projectId, project) {
     return { id: docRef.id, ...project };
   } catch (error) {
     console.error("Error updating document:", error);
+    throw error;
+  }
+}
+
+export async function deleteProjectRequest(userId, projectId) {
+  try {
+    const docRef = doc(db, "users", userId, "projects", projectId);
+    await deleteDoc(docRef);
+  } catch (error) {
+    console.error("Error deleting document:", error);
     throw error;
   }
 }

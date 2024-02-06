@@ -40,7 +40,8 @@
         "new-project": "Nuevo Proyecto",
         "edit": "Editar",
         "delete": "Eliminar",
-        "save": "Guardar"
+        "save": "Guardar",
+        "delete-project": "Eliminar Proyecto"
     },
     "footer": {
         "all-rights-reserved": "Todos los derechos reservados.",
@@ -155,6 +156,10 @@
         "project-edited": "El proyecto ha sido editado con éxito.",
         "could-not-edit-project": "No se ha podido editar el proyecto. Por favor, inténtalo de nuevo más tarde.",
         "success": "Éxito",
-        "error": "Error"
+        "error": "Error",
+        "delete-project-title": "Eliminar Proyecto",
+        "delete-project-message": "¿Estás segur@ de que quieres eliminar este proyecto?",
+        "project-deleted": "El proyecto ha sido eliminado con éxito.",
+        "could-not-delete-project": "No se ha podido eliminar el proyecto. Por favor, inténtalo de nuevo más tarde."
     }
 }

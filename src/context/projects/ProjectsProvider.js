@@ -10,6 +10,7 @@ import {
   getProjectByIdRequest,
   postProjectRequest,
   putProjectRequest,
+  deleteProjectRequest,
 } from "../../api/projects/ProjectRequests";
 import { useAuth } from "../../auth/auth-context/AuthProvider";
 
@@ -48,6 +49,13 @@ export function ProjectsProvider({ children }) {
     );
   }
 
+  async function deleteProject(projectId) {
+    await deleteProjectRequest(userId, projectId);
+    setProjects((prevProjects) =>
+      prevProjects.filter((project) => project.id !== projectId)
+    );
+  }
+
   return (
     <ProjectsContext.Provider
       value={{
@@ -57,6 +65,7 @@ export function ProjectsProvider({ children }) {
         getProjectById,
         postProject,
         putProject,
+        deleteProject,
       }}
     >
       {children}

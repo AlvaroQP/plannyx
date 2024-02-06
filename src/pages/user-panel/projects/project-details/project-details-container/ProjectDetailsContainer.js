@@ -15,6 +15,7 @@ import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import PulseDot from "../../../../../components/ui/pulse-dot/PulseDot";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import ErrorIcon from "@mui/icons-material/Error";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { useProjects } from "../../../../../context/projects/ProjectsProvider";
 import { Alert } from "@mui/material";
 import { useLoading } from "../../../../../context/loading/LoadingProvider";
@@ -23,19 +24,26 @@ import { useDialog } from "../../../../../context/dialog/DialogProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import { useLanguage } from "../../../../../context/language/LanguageProvider";
+import { useNavigate } from "react-router-dom";
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
+import CustomDialog from "../../../../../components/ui/dialog/CustomDialog";
 import "dayjs/locale/en-gb";
 import "dayjs/locale/es";
 
 export default function ProjectDetailsContainer({ project }) {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const { language } = useLanguage();
   const { openDialog } = useDialog();
   const [editedField, setEditedField] = useState(null);
   const [editedProject, setEditedProject] = useState(project);
   const [validField, setValidField] = useState(true);
   const [isDateAlertOpen, setIsDateAlertOpen] = useState(false);
+  const [isDeleteProjectDialogOpen, setIsDeleteProjectDialogOpen] =
+    useState(false);
   const { setIsLoading } = useLoading();
-  const { putProject } = useProjects();
+  const { putProject, deleteProject } = useProjects();
 
   function handleCancel() {
     setEditedField(null);
@@ -120,6 +128,41 @@ export default function ProjectDetailsContainer({ project }) {
     }
   }
 
+  const deleteProjectDialog = (
+    <CustomDialog
+      open={isDeleteProjectDialogOpen}
+      handleClose={() => setIsDeleteProjectDialogOpen(false)}
+      title={t("project.delete-project-title")}
+      description={t("project.delete-project-message")}
+      acceptText={t("button.delete")}
+      cancelText={t("button.cancel")}
+      acceptAction={deleteProjectAction}
+    />
+  );
+
+  async function deleteProjectAction() {
+    setIsLoading(true);
+    try {
+      await deleteProject(project.id);
+      setIsLoading(false);
+      navigate("/user-panel/projects/all");
+      openDialog({
+        title: t("project.success"),
+        description: t("project.project-deleted"),
+        severity: "success",
+      });
+    } catch (error) {
+      console.error("Error deleting project:", error);
+      openDialog({
+        title: t("project.error"),
+        description: t("project.could-not-delete-project"),
+        severity: "error",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
   return (
     <div className={styles["project-details-container"]}>
       {!validField && (
@@ -134,6 +177,8 @@ export default function ProjectDetailsContainer({ project }) {
         </Alert>
       )}
 
+      {isDeleteProjectDialogOpen && deleteProjectDialog}
+
       {editedField === "name" ? (
         <TextField
           value={editedProject.name}
@@ -144,12 +189,23 @@ export default function ProjectDetailsContainer({ project }) {
           }
         />
       ) : (
-        <h2
-          onClick={() => setEditedField("name")}
-          className={styles["project-details-name"]}
-        >
-          {project.name}
-        </h2>
+        <div className={styles["title-and-delete-icon-container"]}>
+          <h2
+            onClick={() => setEditedField("name")}
+            className={styles["project-details-name"]}
+          >
+            {project.name}
+          </h2>
+          <Tooltip
+            title={t("button.delete-project")}
+            className={styles["delete-icon"]}
+            onClick={() => setIsDeleteProjectDialogOpen(true)}
+          >
+            <IconButton>
+              <DeleteIcon />
+            </IconButton>
+          </Tooltip>
+        </div>
       )}
 
       {editedField === "description" ? (
