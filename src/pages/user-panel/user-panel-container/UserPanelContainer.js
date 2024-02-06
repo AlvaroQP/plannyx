@@ -12,8 +12,8 @@ import { useTranslation } from "react-i18next";
 import { Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Flags from "../../../components/ui/flags/sidebar/Flags";
-import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
-import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import Tooltip from "@mui/material/Tooltip";
 import { NavLink } from "react-router-dom";
 import styles from "./UserPanelContainer.module.css";
@@ -83,13 +83,13 @@ export default function UserPanelContainer() {
             className={styles["toggle-icon-container"]}
           >
             {collapsed ? (
-              <ArrowCircleRightIcon
-                className={`${styles["toggle-icon"]} ${styles["toggle-icon-right"]}`}
+              <ChevronRightIcon
+                className={`${styles["toggle-icon-right"]}`}
                 sx={{ fontSize: "2rem" }}
               />
             ) : (
               <Tooltip title={t("user-panel-sidebar.collapse")}>
-                <ArrowCircleLeftIcon
+                <ChevronLeftIcon
                   className={styles["toggle-icon"]}
                   sx={{ fontSize: "2rem" }}
                 />

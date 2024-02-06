@@ -55,7 +55,7 @@
 .project-details-status:hover {
   cursor: pointer;
   border: 1px dashed #d3d3d3;
-  color: rgb(87, 139, 78);
+  color: grey;
 }
 
 .project-details-dates > *,

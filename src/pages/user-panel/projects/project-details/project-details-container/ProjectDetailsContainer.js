@@ -187,6 +187,7 @@ export default function ProjectDetailsContainer({ project }) {
           onChange={(e) =>
             setEditedProject({ ...editedProject, name: e.target.value })
           }
+          sx={{ mt: 2, mb: 2 }}
         />
       ) : (
         <div className={styles["title-and-delete-icon-container"]}>
@@ -322,7 +323,11 @@ export default function ProjectDetailsContainer({ project }) {
                   <MenuItem value="low">
                     <span className={styles["low-priority-text"]}>
                       <SignalCellular1BarIcon
-                        sx={{ ml: ".35rem", fontSize: "1rem" }}
+                        sx={{
+                          ml: ".35rem",
+                          fontSize: "1rem",
+                          color: "#029a02",
+                        }}
                       />
                       {t("new-project.low-priority")}
                     </span>
@@ -330,7 +335,11 @@ export default function ProjectDetailsContainer({ project }) {
                   <MenuItem value="medium">
                     <span className={styles["medium-priority-text"]}>
                       <SignalCellular2BarIcon
-                        sx={{ ml: ".35rem", fontSize: "1rem" }}
+                        sx={{
+                          ml: ".35rem",
+                          fontSize: "1rem",
+                          color: "#ff6b02",
+                        }}
                       />
                       {t("new-project.medium-priority")}
                     </span>
@@ -338,7 +347,11 @@ export default function ProjectDetailsContainer({ project }) {
                   <MenuItem value="high">
                     <span className={styles["high-priority-text"]}>
                       <SignalCellular3BarIcon
-                        sx={{ ml: ".35rem", fontSize: "1rem" }}
+                        sx={{
+                          ml: ".35rem",
+                          fontSize: "1rem",
+                          color: "#cd0303",
+                        }}
                       />
                       {t("new-project.high-priority")}
                     </span>
@@ -346,7 +359,11 @@ export default function ProjectDetailsContainer({ project }) {
                   <MenuItem value="critical">
                     <span className={styles["critical-priority-text"]}>
                       <SignalCellularConnectedNoInternet4BarIcon
-                        sx={{ ml: ".35rem", fontSize: "1rem" }}
+                        sx={{
+                          ml: ".35rem",
+                          fontSize: "1rem",
+                          color: "#ff0000",
+                        }}
                       />
                       {t("new-project.critical-priority")}
                     </span>
@@ -364,7 +381,7 @@ export default function ProjectDetailsContainer({ project }) {
                       {t("project.priority-low")}
                     </span>
                     <SignalCellular1BarIcon
-                      sx={{ ml: ".35rem", fontSize: "1rem" }}
+                      sx={{ ml: ".35rem", fontSize: "1rem", color: "#029a02" }}
                     />
                   </span>
                 )}
@@ -374,7 +391,7 @@ export default function ProjectDetailsContainer({ project }) {
                       {t("project.priority-medium")}
                     </span>
                     <SignalCellular2BarIcon
-                      sx={{ ml: ".35rem", fontSize: "1rem" }}
+                      sx={{ ml: ".35rem", fontSize: "1rem", color: "#ff6b02" }}
                     />
                   </span>
                 )}
@@ -384,7 +401,7 @@ export default function ProjectDetailsContainer({ project }) {
                       {t("project.priority-high")}
                     </span>
                     <SignalCellular3BarIcon
-                      sx={{ ml: ".35rem", fontSize: "1rem" }}
+                      sx={{ ml: ".35rem", fontSize: "1rem", color: "#cd0303" }}
                     />
                   </span>
                 )}
@@ -394,7 +411,7 @@ export default function ProjectDetailsContainer({ project }) {
                       {t("project.priority-critical")}
                     </span>
                     <SignalCellularConnectedNoInternet4BarIcon
-                      sx={{ ml: ".35rem", fontSize: "1rem" }}
+                      sx={{ ml: ".35rem", fontSize: "1rem", color: "#ff0000" }}
                     />
                   </span>
                 )}

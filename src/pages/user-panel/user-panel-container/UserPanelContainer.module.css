@@ -25,10 +25,11 @@
   align-items: center;
   margin-top: 0.5rem;
   margin-left: 1.5rem;
+  width: 60%;
 }
 
 .logo-container img {
-  width: 60%;
+  width: 100%;
 }
 
 .icon {
@@ -46,10 +47,6 @@
   margin-right: 0.35rem;
 }
 
-.toggle-icon-container {
-  margin-bottom: 4rem;
-}
-
 .toggle-icon {
   position: absolute;
   top: 1.5rem;
@@ -60,10 +57,12 @@
 }
 
 .toggle-icon-right {
-  left: 1.5rem;
+  font-size: 2rem;
+  color: #0f418d;
+  cursor: pointer;
 }
 
-.toggle-icon-left:hover,
+.toggle-icon:hover,
 .toggle-icon-right:hover {
   color: #3071d4;
 }
