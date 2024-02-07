@@ -17,11 +17,13 @@ export function TasksProvider({ children }) {
   const { userId } = useAuth();
   const [tasks, setTasks] = useState([]);
   const [projectId, setProjectId] = useState(null);
+  const [taskCount, setTaskCount] = useState(0);
 
   const getAllTasks = useCallback(
     async (projectId) => {
       let tasks = await getAllTasksRequest(userId, projectId);
       setTasks(tasks);
+      setTaskCount(tasks.length);
       return tasks;
     },
     [userId]
@@ -36,6 +38,7 @@ export function TasksProvider({ children }) {
   async function postTask(projectId, task) {
     const newTask = await postTaskRequest(userId, projectId, task);
     setTasks((prevTasks) => [...prevTasks, newTask]);
+    setTaskCount((prevCount) => prevCount + 1);
   }
 
   return (
@@ -47,6 +50,7 @@ export function TasksProvider({ children }) {
         projectId,
         setProjectId,
         getAllTasks,
+        taskCount,
       }}
     >
       {children}

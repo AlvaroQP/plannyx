@@ -1,7 +1,17 @@
 .no-tasks-yet-container {
-  margin-top: 2rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .tasks-and-no-tasks-container {
   width: 100%;
+}
+
+.tasks-tabs-container,
+.no-tasks-tabs-container {
+  width: 100%;
+  background-color: white;
 }

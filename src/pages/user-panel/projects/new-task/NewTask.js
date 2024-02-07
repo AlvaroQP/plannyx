@@ -31,6 +31,7 @@ import { useTasks } from "../../../../context/tasks/TasksProvider";
 
 export default function NewTask({ projectId }) {
   const { t } = useTranslation();
+
   const { postTask } = useTasks();
   const { language } = useLanguage();
   const { openDialog } = useDialog();

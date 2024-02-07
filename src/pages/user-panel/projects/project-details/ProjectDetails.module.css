@@ -9,13 +9,13 @@
 }
 
 .tasks-section {
-  margin: 2rem;
-  background-color: #f4f4f4;
+  margin: 0 2rem;
+  /*   background-color: #fbfbfb;
   border-radius: 0.5rem;
   border: 1px solid #e1e1e1;
-  padding: 2rem 1rem;
+  padding: 1rem;
   font-size: 0.9rem;
-  text-align: center;
+  text-align: center; */
 }
 
 .back-button-container {

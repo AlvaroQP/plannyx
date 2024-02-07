@@ -191,9 +191,17 @@
         "error": "Error",
         "task-added": "La tarea ha sido creada con éxito.",
         "could-not-add-task": "No se ha podido añadir la tarea. Por favor, inténtalo de nuevo más tarde.",
-        "no-tasks-yet": "Todavía no tienes ninguna tarea. Crea una nueva haciendo clic en el botón de Nueva Tarea.",
+        "no-tasks-yet": "Todavía no tienes ninguna tarea. Crea una nueva debajo.",
         "task": "Tarea",
         "tasks": "Tareas",
-        "selected": "seleccionada"
+        "selected": "seleccionada",
+        "no-tasks-with-this-status": "No hay tareas con este estado."
+    },
+    "tasks-tabs-titles": {
+        "all-tasks": "Todas las Tareas",
+        "not-started": "No iniciadas",
+        "in-progress": "En progreso",
+        "finished": "Finalizadas",
+        "stuck": "Atascadas"
     }
 }

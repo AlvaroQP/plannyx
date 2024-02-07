@@ -7,11 +7,9 @@ import { useNavigate } from "react-router-dom";
 import CustomButton from "../../../../components/ui/button/CustomButton";
 import UserPanelHeader from "../../../../components/ui/header/user-panel-header/UserPanelHeader";
 import ProjectDetailsContainer from "./project-details-container/ProjectDetailsContainer";
-import NewTask from "../new-task/NewTask";
 import ViewTasks from "../view-tasks/ViewTasks";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import styles from "./ProjectDetails.module.css";
-import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 import { useTasks } from "../../../../context/tasks/TasksProvider";
 
 export default function ProjectDetails() {
@@ -23,19 +21,6 @@ export default function ProjectDetails() {
   const { setIsLoading } = useLoading();
   const [project, setProject] = useState(null);
   const [isProjectFetched, setIsProjectFetched] = useState(false);
-  const [selectedButton, setSelectedButton] = useState(null);
-  const [showNewTaskForm, setShowNewTaskForm] = useState(false);
-  const [showViewTasks, setShowViewTasks] = useState(false);
-
-  function handleShowNewTaskForm() {
-    setShowNewTaskForm(true);
-    setShowViewTasks(false);
-  }
-
-  function handleShowViewTasks() {
-    setShowNewTaskForm(false);
-    setShowViewTasks(true);
-  }
 
   useEffect(() => {
     async function fetchProject() {
@@ -75,52 +60,7 @@ export default function ProjectDetails() {
           </section>
 
           <section className={styles["tasks-section"]}>
-            <div className={styles["task-buttons-container"]}>
-              <ToggleButtonGroup
-                exclusive
-                value={selectedButton}
-                onChange={(e, selectedButton) => {
-                  setSelectedButton(selectedButton);
-                  if (selectedButton === "new-task") {
-                    handleShowNewTaskForm();
-                  } else if (selectedButton === "view-tasks") {
-                    handleShowViewTasks();
-                  }
-                }}
-              >
-                <ToggleButton
-                  value="new-task"
-                  sx={{
-                    "&.Mui-selected": {
-                      backgroundColor: "primary.main",
-                      color: "white",
-                      "&:hover": {
-                        backgroundColor: "primary.dark",
-                      },
-                    },
-                  }}
-                >
-                  {t("task.new-task")}
-                </ToggleButton>
-                <ToggleButton
-                  value="view-tasks"
-                  sx={{
-                    "&.Mui-selected": {
-                      backgroundColor: "primary.main",
-                      color: "white",
-                      "&:hover": {
-                        backgroundColor: "primary.dark",
-                      },
-                    },
-                  }}
-                >
-                  {t("task.view-tasks")}
-                </ToggleButton>
-              </ToggleButtonGroup>
-            </div>
-
-            {showNewTaskForm && <NewTask projectId={id} />}
-            {showViewTasks && <ViewTasks projectId={id} />}
+            <ViewTasks projectId={id} />
           </section>
         </>
       )}

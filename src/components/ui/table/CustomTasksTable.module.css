@@ -1,5 +1,4 @@
 .tasks-table-container {
-  margin-top: 2rem;
   overflow-x: auto;
   width: 100%;
   background-color: white;
@@ -30,11 +29,11 @@
 
 .table-cell-header {
   font-weight: 600;
-  background-color: #dfdfdf;
+  background-color: #eaeaea;
 }
 
 .table-cell-header-checkbox {
-  background-color: #dfdfdf;
+  background-color: #eaeaea;
 }
 
 .table-row {
@@ -42,7 +41,7 @@
 }
 
 .table-row:nth-child(even) {
-  background-color: #f7f7f7;
+  background-color: #f9f9f9;
 }
 
 .cell-max-width {

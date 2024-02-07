@@ -191,9 +191,17 @@
         "error": "Error",
         "task-added": "The task has been created successfully.",
         "could-not-add-task": "Could not add the task. Please try again later.",
-        "no-tasks-yet": "You have no tasks yet. Create one by clicking the New Task button.",
+        "no-tasks-yet": "You have no tasks yet. Create one now below.",
         "task": "Task",
         "tasks": "Tasks",
-        "selected": "selected"
+        "selected": "selected",
+        "no-tasks-with-this-status": "No tasks with this status."
+    },
+    "tasks-tabs-titles": {
+        "all-tasks": "All Tasks",
+        "not-started": "Not started",
+        "in-progress": "In progress",
+        "finished": "Finished",
+        "stuck": "Stuck"
     }
 }
