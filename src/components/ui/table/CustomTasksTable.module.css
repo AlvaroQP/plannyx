@@ -1,12 +1,15 @@
 .tasks-table-container {
   margin-top: 2rem;
-  overflow-x: scroll;
+  overflow-x: auto;
+  width: 100%;
+  background-color: white;
 }
 
 .table-title {
+  font-size: 1.1rem;
   padding: 1rem;
   text-align: left;
-  background-color: #0f418d;
+  background-color: #1565c0;
   color: white;
 }
 
@@ -20,8 +23,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 0;
-  background-color: #0f418d;
+  padding: 0.57rem 0;
+  background-color: #1565c0;
   color: white;
 }
 
@@ -40,4 +43,9 @@
 
 .table-row:nth-child(even) {
   background-color: #f7f7f7;
+}
+
+.cell-max-width {
+  min-width: 100px;
+  max-width: 150px;
 }

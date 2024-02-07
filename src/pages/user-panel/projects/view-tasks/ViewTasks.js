@@ -20,8 +20,8 @@ export default function ViewTasks({ projectId }) {
         let tasks = await getAllTasks(projectId);
         let formattedTasks = tasks.map((task) => ({
           name: task.name,
-          startDate: task.startDate.toDate().toLocaleDateString(),
-          endDate: task.endDate.toDate().toLocaleDateString(),
+          startDate: task.startDate.toDate(),
+          endDate: task.endDate ? task.endDate.toDate() : "not-specified",
           status: task.status,
           priority: task.priority,
         }));
@@ -31,7 +31,7 @@ export default function ViewTasks({ projectId }) {
       setFinishedLoading(true);
     }
     fetchProject();
-  }, [projectId, getAllTasks, setIsLoading]);
+  }, [projectId, getAllTasks, setIsLoading, t]);
 
   const tasks = (
     <CustomTasksTable title={t("task.tasks")} rows={projectTasks} />
