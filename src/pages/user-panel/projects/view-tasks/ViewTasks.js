@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useTasks } from "../../../../context/tasks/TasksProvider";
 import { useLoading } from "../../../../context/loading/LoadingProvider";
+import { useTranslation } from "react-i18next";
+import CustomTasksTable from "../../../../components/ui/table/CustomTasksTable";
+import styles from "./ViewTasks.module.css";
 
 export default function ViewTasks({ projectId }) {
   const { setIsLoading } = useLoading();
   const { getAllTasks } = useTasks();
   const [projectTasks, setProjectTasks] = useState([]);
   const [finishedLoading, setFinishedLoading] = useState(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
     async function fetchProject() {
@@ -14,7 +18,14 @@ export default function ViewTasks({ projectId }) {
       setFinishedLoading(false);
       if (projectId) {
         let tasks = await getAllTasks(projectId);
-        setProjectTasks(tasks);
+        let formattedTasks = tasks.map((task) => ({
+          name: task.name,
+          startDate: task.startDate.toDate().toLocaleDateString(),
+          endDate: task.endDate.toDate().toLocaleDateString(),
+          status: task.status,
+          priority: task.priority,
+        }));
+        setProjectTasks(formattedTasks);
       }
       setIsLoading(false);
       setFinishedLoading(true);
@@ -23,23 +34,17 @@ export default function ViewTasks({ projectId }) {
   }, [projectId, getAllTasks, setIsLoading]);
 
   const tasks = (
-    <div>
-      {projectTasks.map((task) => (
-        <div key={task.id}>
-          <p>{task.name}</p>
-        </div>
-      ))}
-    </div>
+    <CustomTasksTable title={t("task.tasks")} rows={projectTasks} />
   );
 
   const noTasks = (
-    <div>
-      <p>No tasks yet</p>
+    <div className={styles["no-tasks-yet-container"]}>
+      <p>{t("task.no-tasks-yet")}</p>
     </div>
   );
 
   return (
-    <div>
+    <div className={styles["tasks-and-no-tasks-container"]}>
       {finishedLoading ? (projectTasks.length > 0 ? tasks : noTasks) : null}
     </div>
   );

@@ -11,6 +11,7 @@ import NewTask from "../new-task/NewTask";
 import ViewTasks from "../view-tasks/ViewTasks";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import styles from "./ProjectDetails.module.css";
+import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 import { useTasks } from "../../../../context/tasks/TasksProvider";
 
 export default function ProjectDetails() {
@@ -22,6 +23,7 @@ export default function ProjectDetails() {
   const { setIsLoading } = useLoading();
   const [project, setProject] = useState(null);
   const [isProjectFetched, setIsProjectFetched] = useState(false);
+  const [selectedButton, setSelectedButton] = useState(null);
   const [showNewTaskForm, setShowNewTaskForm] = useState(false);
   const [showViewTasks, setShowViewTasks] = useState(false);
 
@@ -74,16 +76,47 @@ export default function ProjectDetails() {
 
           <section className={styles["tasks-section"]}>
             <div className={styles["task-buttons-container"]}>
-              <CustomButton
-                variant="outlined"
-                text={t("task.new-task")}
-                onClick={() => handleShowNewTaskForm()}
-              />
-              <CustomButton
-                variant="outlined"
-                text={t("task.view-tasks")}
-                onClick={() => handleShowViewTasks()}
-              />
+              <ToggleButtonGroup
+                exclusive
+                value={selectedButton}
+                onChange={(e, selectedButton) => {
+                  setSelectedButton(selectedButton);
+                  if (selectedButton === "new-task") {
+                    handleShowNewTaskForm();
+                  } else if (selectedButton === "view-tasks") {
+                    handleShowViewTasks();
+                  }
+                }}
+              >
+                <ToggleButton
+                  value="new-task"
+                  sx={{
+                    "&.Mui-selected": {
+                      backgroundColor: "primary.main",
+                      color: "white",
+                      "&:hover": {
+                        backgroundColor: "primary.dark",
+                      },
+                    },
+                  }}
+                >
+                  {t("task.new-task")}
+                </ToggleButton>
+                <ToggleButton
+                  value="view-tasks"
+                  sx={{
+                    "&.Mui-selected": {
+                      backgroundColor: "primary.main",
+                      color: "white",
+                      "&:hover": {
+                        backgroundColor: "primary.dark",
+                      },
+                    },
+                  }}
+                >
+                  {t("task.view-tasks")}
+                </ToggleButton>
+              </ToggleButtonGroup>
             </div>
 
             {showNewTaskForm && <NewTask projectId={id} />}

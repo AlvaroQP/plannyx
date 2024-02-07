@@ -1,0 +1,43 @@
+.tasks-table-container {
+  margin-top: 2rem;
+  overflow-x: scroll;
+}
+
+.table-title {
+  padding: 1rem;
+  text-align: left;
+  background-color: #0f418d;
+  color: white;
+}
+
+.selected-rows-title {
+  margin-left: 1rem;
+  font-size: 1rem;
+}
+
+.selected-rows-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  background-color: #0f418d;
+  color: white;
+}
+
+.table-cell-header {
+  font-weight: 600;
+  background-color: #dfdfdf;
+}
+
+.table-cell-header-checkbox {
+  background-color: #dfdfdf;
+}
+
+.table-row {
+  cursor: pointer;
+}
+
+.table-row:nth-child(even) {
+  background-color: #f7f7f7;
+}

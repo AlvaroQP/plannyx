@@ -181,6 +181,10 @@
         "success": "Success",
         "error": "Error",
         "task-added": "The task has been created successfully.",
-        "could-not-add-task": "Could not add the task. Please try again later."
+        "could-not-add-task": "Could not add the task. Please try again later.",
+        "no-tasks-yet": "You have no tasks yet. Create one by clicking the New Task button.",
+        "task": "Task",
+        "tasks": "Tasks",
+        "selected": "selected"
     }
 }

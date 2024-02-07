@@ -181,6 +181,10 @@
         "success": "Éxito",
         "error": "Error",
         "task-added": "La tarea ha sido creada con éxito.",
-        "could-not-add-task": "No se ha podido añadir la tarea. Por favor, inténtalo de nuevo más tarde."
+        "could-not-add-task": "No se ha podido añadir la tarea. Por favor, inténtalo de nuevo más tarde.",
+        "no-tasks-yet": "Todavía no tienes ninguna tarea. Crea una nueva haciendo clic en el botón de Nueva Tarea.",
+        "task": "Tarea",
+        "tasks": "Tareas",
+        "selected": "seleccionada"
     }
 }

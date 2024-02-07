@@ -4,19 +4,20 @@ import bannerEs from "../../assets/images/banner-es.png";
 import homeBanner1 from "../../assets/images/home-banner-1.png";
 import homeBanner2 from "../../assets/images/home-banner-2.png";
 import { useTranslation } from "react-i18next";
-import i18n from "../../i18n";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import Footer from "../../components/ui/footer/Footer";
+import { useLanguage } from "../../context/language/LanguageProvider";
 import styles from "./Home.module.css";
 
 export default function Home() {
   const { t } = useTranslation();
+  const { language } = useLanguage();
 
   return (
     <>
       <div className={styles["banner-container"]}>
         <img
-          src={i18n.language === "en-gb" ? bannerEn : bannerEs}
+          src={language === "en-gb" ? bannerEn : bannerEs}
           alt="banner"
           className={styles.banner}
         />
