@@ -44,3 +44,11 @@
   min-width: 100px;
   max-width: 150px;
 }
+
+.table-cell:hover,
+.cell-max-width:hover {
+  cursor: pointer;
+  background-color: #1976d2;
+  color: white;
+  font-weight: 600;
+}

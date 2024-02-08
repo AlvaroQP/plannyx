@@ -12,6 +12,7 @@ import {
   IconButton,
   TableContainer,
   TableSortLabel,
+  Tooltip,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useTranslation } from "react-i18next";
@@ -105,6 +106,10 @@ export default function CustomTasksTable({ title, rows }) {
     }
 
     setIsLoading(false);
+  }
+
+  function handleEditTask(task, field, value) {
+    console.log("Editing task:", task, "Field:", field.key, "Value:", value);
   }
 
   function handleSort(key) {
@@ -206,6 +211,7 @@ export default function CustomTasksTable({ title, rows }) {
             acceptAction={handleDeleteSelected}
           />
         )}
+
         <Box className={styles["tasks-table-container"]}>
           <Typography
             className={styles["title-header"]}
@@ -220,14 +226,23 @@ export default function CustomTasksTable({ title, rows }) {
                     selectedRows.length > 1 && language === "es" ? "s" : ""
                   }`}
                 </div>
-                <IconButton onClick={handleOpenDeleteDialog}>
-                  <DeleteIcon sx={{ color: "#fff" }} />
-                </IconButton>
+                <Tooltip
+                  title={
+                    selectedRows.length > 1
+                      ? t("task.delete-tasks")
+                      : t("task.delete-task")
+                  }
+                >
+                  <IconButton onClick={handleOpenDeleteDialog}>
+                    <DeleteIcon sx={{ color: "#fff" }} />
+                  </IconButton>
+                </Tooltip>
               </div>
             ) : (
               <div className={styles["table-title"]}>{title}</div>
             )}
           </Typography>
+
           <TableContainer>
             <Table className={styles["tasks-table"]}>
               <TableHead>
@@ -253,6 +268,7 @@ export default function CustomTasksTable({ title, rows }) {
                       }}
                     />
                   </TableCell>
+
                   {headers.map((header) => (
                     <TableCell
                       key={header.key}
@@ -273,14 +289,13 @@ export default function CustomTasksTable({ title, rows }) {
                   ))}
                 </TableRow>
               </TableHead>
+
               <TableBody>
                 {sortedRows
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row, index) => (
                     <TableRow
                       key={index}
-                      /*                       hover
-                      onClick={() => handleRowSelect(row)} */
                       selected={isRowSelected(row)}
                       className={styles["table-row"]}
                     >
@@ -299,7 +314,10 @@ export default function CustomTasksTable({ title, rows }) {
                           className={
                             header.key === "name"
                               ? styles["cell-max-width"]
-                              : ""
+                              : styles["table-cell"]
+                          }
+                          onClick={() =>
+                            handleEditTask(row, header, row[header.key])
                           }
                         >
                           {header.key === "status" &&

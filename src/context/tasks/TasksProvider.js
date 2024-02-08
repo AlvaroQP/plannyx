@@ -9,6 +9,7 @@ import {
   getAllTasksRequest,
   postTaskRequest,
   deleteTaskRequest,
+  putTaskRequest,
 } from "../../api/tasks/TaskRequests";
 import { useAuth } from "../../auth/auth-context/AuthProvider";
 
@@ -42,6 +43,13 @@ export function TasksProvider({ children }) {
     setTaskCount((prevCount) => prevCount + 1);
   }
 
+  async function putTask(taskId, task) {
+    const updatedTask = await putTaskRequest(userId, projectId, taskId, task);
+    setTasks((prevTasks) =>
+      prevTasks.map((t) => (t.id === taskId ? updatedTask : t))
+    );
+  }
+
   async function deleteTask(taskId) {
     await deleteTaskRequest(userId, projectId, taskId);
     setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
@@ -59,6 +67,7 @@ export function TasksProvider({ children }) {
         getAllTasks,
         taskCount,
         deleteTask,
+        putTask,
       }}
     >
       {children}
