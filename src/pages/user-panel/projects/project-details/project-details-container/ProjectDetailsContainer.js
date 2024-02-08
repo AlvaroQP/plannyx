@@ -65,8 +65,9 @@ export default function ProjectDetailsContainer({ project }) {
     }
 
     if (
+      editedProject.endDate !== null &&
       dayjs(editedProject.startDate.toDate()).isAfter(
-        dayjs(editedProject.endDate.toDate())
+        dayjs(editedProject.endDate?.toDate())
       )
     ) {
       setIsLoading(false);

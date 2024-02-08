@@ -9,8 +9,8 @@ import styles from "./CustomScrollableTabs.module.css";
 /*  Receives an array of objects with the following structure: 
   [{ id: number, name: string, content: JSX.Element }] */
 
-export default function CustomScrollableTabs({ tabs }) {
-  const [value, setValue] = useState(String(tabs[0].id));
+export default function CustomScrollableTabs({ tabs, initialTabId }) {
+  const [value, setValue] = useState(String(initialTabId || tabs[0].id));
 
   function handleChange(event, newValue) {
     setValue(newValue);

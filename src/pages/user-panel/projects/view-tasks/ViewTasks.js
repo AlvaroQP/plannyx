@@ -4,7 +4,6 @@ import { useLoading } from "../../../../context/loading/LoadingProvider";
 import { useTranslation } from "react-i18next";
 import CustomScrollableTabs from "../../../../components/ui/tabs/CustomScrollableTabs";
 import CustomTasksTable from "../../../../components/ui/table/CustomTasksTable";
-import CustomButton from "../../../../components/ui/button/CustomButton";
 import NewTask from "../new-task/NewTask";
 import styles from "./ViewTasks.module.css";
 
@@ -40,11 +39,14 @@ export default function ViewTasks({ projectId }) {
     return (
       <div className={styles["tasks-tabs-container"]}>
         <CustomScrollableTabs
+          initialTabId={2}
           tabs={[
             {
               id: 1,
               name: (
-                <CustomButton variant="outlined" text={t("task.new-task")} />
+                <div className={styles["new-task-div"]}>
+                  {t("task.new-task")}
+                </div>
               ),
               content: <NewTask projectId={projectId} />,
             },
@@ -112,6 +114,7 @@ export default function ViewTasks({ projectId }) {
       <p>{t("task.no-tasks-yet")}</p>
       <div className={styles["no-tasks-tabs-container"]}>
         <CustomScrollableTabs
+          initialTabId={1}
           tabs={[
             {
               id: 1,

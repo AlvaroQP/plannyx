@@ -20,6 +20,7 @@ export default function AllProjectsContainer() {
       <div className={styles["all-projects-container"]}>
         {projects.length > 0 ? (
           <CustomScrollableTabs
+            initialTabId={1}
             tabs={[
               {
                 id: 1,
