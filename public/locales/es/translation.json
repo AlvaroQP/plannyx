@@ -195,7 +195,17 @@
         "task": "Tarea",
         "tasks": "Tareas",
         "selected": "seleccionada",
-        "no-tasks-with-this-status": "No hay tareas con este estado."
+        "no-tasks-with-this-status": "No hay tareas con este estado.",
+        "table-rows-per-page": "Filas por página:",
+        "table-of": "de",
+        "delete-task": "Eliminar Tarea",
+        "delete-tasks": "Eliminar Tareas",
+        "delete-task-description": "¿Estás segur@ de que quieres eliminar esta tarea?",
+        "delete-tasks-description": "¿Estás segur@ de que quieres eliminar estas tareas?",
+        "task-not-deleted": "La tarea no ha podido ser eliminada.",
+        "tasks-not-deleted": "Las tareas no han podido ser eliminadas.",
+        "task-deleted": "La tarea ha sido eliminada con éxito.",
+        "tasks-deleted": "Las tareas han sido eliminadas con éxito."
     },
     "tasks-tabs-titles": {
         "all-tasks": "Todas las Tareas",

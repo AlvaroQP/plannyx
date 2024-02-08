@@ -21,6 +21,7 @@ export default function ViewTasks({ projectId }) {
       if (projectId) {
         let allTasks = await getAllTasks(projectId);
         let formattedTasks = allTasks.map((task) => ({
+          id: task.id,
           name: task.name,
           startDate: task.startDate.toDate(),
           endDate: task.endDate ? task.endDate.toDate() : "not-specified",

@@ -8,6 +8,7 @@ import React, {
 import {
   getAllTasksRequest,
   postTaskRequest,
+  deleteTaskRequest,
 } from "../../api/tasks/TaskRequests";
 import { useAuth } from "../../auth/auth-context/AuthProvider";
 
@@ -41,6 +42,12 @@ export function TasksProvider({ children }) {
     setTaskCount((prevCount) => prevCount + 1);
   }
 
+  async function deleteTask(taskId) {
+    await deleteTaskRequest(userId, projectId, taskId);
+    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
+    setTaskCount((prevCount) => prevCount - 1);
+  }
+
   return (
     <TasksContext.Provider
       value={{
@@ -51,6 +58,7 @@ export function TasksProvider({ children }) {
         setProjectId,
         getAllTasks,
         taskCount,
+        deleteTask,
       }}
     >
       {children}

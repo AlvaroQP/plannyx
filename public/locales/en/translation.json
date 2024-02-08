@@ -195,7 +195,17 @@
         "task": "Task",
         "tasks": "Tasks",
         "selected": "selected",
-        "no-tasks-with-this-status": "No tasks with this status."
+        "no-tasks-with-this-status": "No tasks with this status.",
+        "table-rows-per-page": "Rows per page:",
+        "table-of": "of",
+        "delete-task": "Delete Task",
+        "delete-tasks": "Delete Tasks",
+        "delete-task-description": "Are you sure you want to delete the selected task?",
+        "delete-tasks-description": "Are you sure you want to delete the selected tasks?",
+        "task-not-deleted": "The task could not be deleted.",
+        "tasks-not-deleted": "The tasks could not be deleted.",
+        "task-deleted": "The task has been deleted successfully.",
+        "tasks-deleted": "The tasks have been deleted successfully."
     },
     "tasks-tabs-titles": {
         "all-tasks": "All Tasks",

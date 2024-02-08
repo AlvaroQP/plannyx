@@ -17,6 +17,10 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { useTranslation } from "react-i18next";
 import { useLanguage } from "../../../context/language/LanguageProvider";
 import TablePagination from "@mui/material/TablePagination";
+import { useTasks } from "../../../context/tasks/TasksProvider";
+import { useLoading } from "../../../context/loading/LoadingProvider";
+import { useDialog } from "../../../context/dialog/DialogProvider";
+import CustomDialog from "../../../components/ui/dialog/CustomDialog";
 import styles from "./CustomTasksTable.module.css";
 
 export default function CustomTasksTable({ title, rows }) {
@@ -28,6 +32,10 @@ export default function CustomTasksTable({ title, rows }) {
   const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
   const statusOrder = ["not started", "in progress", "finished", "stuck"];
   const priorityOrder = ["low", "medium", "high", "critical"];
+  const { deleteTask } = useTasks();
+  const { setIsLoading } = useLoading();
+  const { openDialog } = useDialog();
+  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
 
   function handleChangePage(event, newPage) {
     setPage(newPage);
@@ -55,9 +63,48 @@ export default function CustomTasksTable({ title, rows }) {
     return selectedRows.indexOf(row) !== -1;
   }
 
-  function handleDeleteSelected() {
-    // Implement your delete logic here, using the selectedRows array
-    console.log("Deleting selected rows:", selectedRows);
+  function handleOpenDeleteDialog() {
+    setOpenDeleteDialog(true);
+  }
+
+  function handleCloseDeleteDialog() {
+    setOpenDeleteDialog(false);
+  }
+
+  async function handleDeleteSelected() {
+    setIsLoading(true);
+    let deletionFailed = false;
+
+    for (const row of selectedRows) {
+      try {
+        await deleteTask(row.id);
+      } catch (error) {
+        console.error("Error deleting task:", error);
+        deletionFailed = true;
+      }
+    }
+
+    if (deletionFailed) {
+      openDialog({
+        title: t("task.error"),
+        description:
+          selectedRows.length > 1
+            ? t("task.tasks-not-deleted")
+            : t("task.task-not-deleted"),
+        severity: "error",
+      });
+    } else {
+      openDialog({
+        title: t("task.success"),
+        description:
+          selectedRows.length > 1
+            ? t("task.tasks-deleted")
+            : t("task.task-deleted"),
+        severity: "success",
+      });
+    }
+
+    setIsLoading(false);
   }
 
   function handleSort(key) {
@@ -92,10 +139,13 @@ export default function CustomTasksTable({ title, rows }) {
           : new Date(b[sortConfig.key]);
       return sortConfig.direction === "asc" ? dateA - dateB : dateB - dateA;
     } else {
-      if (a[sortConfig.key] < b[sortConfig.key]) {
+      let aValue = String(a[sortConfig.key]).toLowerCase();
+      let bValue = String(b[sortConfig.key]).toLowerCase();
+
+      if (aValue < bValue) {
         return sortConfig.direction === "asc" ? -1 : 1;
       }
-      if (a[sortConfig.key] > b[sortConfig.key]) {
+      if (aValue > bValue) {
         return sortConfig.direction === "asc" ? 1 : -1;
       }
       return 0;
@@ -126,137 +176,172 @@ export default function CustomTasksTable({ title, rows }) {
 
   const headers =
     rows.length > 0
-      ? Object.keys(rows[0]).map((key) => ({
-          key,
-          displayTitle: headerMapping[key] || key,
-        }))
+      ? Object.keys(rows[0])
+          .filter((key) => key !== "id")
+          .map((key) => ({
+            key,
+            displayTitle: headerMapping[key] || key,
+          }))
       : [];
 
   const content =
     rows.length > 0 ? (
-      <Box className={styles["tasks-table-container"]}>
-        <Typography
-          className={styles["title-header"]}
-          sx={{ flex: "1 1 100%" }}
-          component="div"
-        >
-          {selectedRows.length > 0 ? (
-            <div className={styles["selected-rows-container"]}>
-              <div className={styles["selected-rows-title"]}>
-                {selectedRows.length}{" "}
-                {`${t("task.selected")}${
-                  selectedRows.length > 1 && language === "es" ? "s" : ""
-                }`}
+      <>
+        {openDeleteDialog && (
+          <CustomDialog
+            open={openDeleteDialog}
+            handleClose={handleCloseDeleteDialog}
+            title={
+              selectedRows.length > 1
+                ? t("task.delete-tasks")
+                : t("task.delete-task")
+            }
+            description={
+              selectedRows.length > 1
+                ? t("task.delete-tasks-description")
+                : t("task.delete-task-description")
+            }
+            acceptText={t("button.delete")}
+            cancelText={t("button.cancel")}
+            acceptAction={handleDeleteSelected}
+          />
+        )}
+        <Box className={styles["tasks-table-container"]}>
+          <Typography
+            className={styles["title-header"]}
+            sx={{ flex: "1 1 100%" }}
+            component="div"
+          >
+            {selectedRows.length > 0 ? (
+              <div className={styles["selected-rows-container"]}>
+                <div className={styles["selected-rows-title"]}>
+                  {selectedRows.length}{" "}
+                  {`${t("task.selected")}${
+                    selectedRows.length > 1 && language === "es" ? "s" : ""
+                  }`}
+                </div>
+                <IconButton onClick={handleOpenDeleteDialog}>
+                  <DeleteIcon sx={{ color: "#fff" }} />
+                </IconButton>
               </div>
-              <IconButton onClick={handleDeleteSelected}>
-                <DeleteIcon sx={{ color: "#fff" }} />
-              </IconButton>
-            </div>
-          ) : (
-            <div className={styles["table-title"]}>{title}</div>
-          )}
-        </Typography>
-        <TableContainer>
-          <Table className={styles["tasks-table"]}>
-            <TableHead>
-              <TableRow>
-                <TableCell
-                  padding="checkbox"
-                  className={styles["table-cell-header-checkbox"]}
-                >
-                  <Checkbox
-                    indeterminate={
-                      selectedRows.length > 0 &&
-                      selectedRows.length < rows.length
-                    }
-                    checked={
-                      rows.length > 0 && selectedRows.length === rows.length
-                    }
-                    onChange={() => {
-                      if (selectedRows.length === rows.length) {
-                        setSelectedRows([]);
-                      } else {
-                        setSelectedRows([...rows]);
-                      }
-                    }}
-                  />
-                </TableCell>
-                {headers.map((header) => (
+            ) : (
+              <div className={styles["table-title"]}>{title}</div>
+            )}
+          </Typography>
+          <TableContainer>
+            <Table className={styles["tasks-table"]}>
+              <TableHead>
+                <TableRow>
                   <TableCell
-                    key={header.key}
-                    className={styles["table-cell-header"]}
+                    padding="checkbox"
+                    className={styles["table-cell-header-checkbox"]}
                   >
-                    <TableSortLabel
-                      active={sortConfig.key === header.key}
-                      direction={
-                        sortConfig.key === header.key
-                          ? sortConfig.direction
-                          : "asc"
+                    <Checkbox
+                      indeterminate={
+                        selectedRows.length > 0 &&
+                        selectedRows.length < rows.length
                       }
-                      onClick={() => handleSort(header.key)}
-                    >
-                      {header.displayTitle}
-                    </TableSortLabel>
-                  </TableCell>
-                ))}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {sortedRows
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => (
-                  <TableRow
-                    key={index}
-                    hover
-                    onClick={() => handleRowSelect(row)}
-                    selected={isRowSelected(row)}
-                    className={styles["table-row"]}
-                  >
-                    <TableCell padding="checkbox">
-                      <Checkbox checked={isRowSelected(row)} />
-                    </TableCell>
-                    {headers.map((header) => (
-                      <TableCell
-                        key={header.key}
-                        className={
-                          header.key === "name" ? styles["cell-max-width"] : ""
+                      checked={
+                        rows.length > 0 && selectedRows.length === rows.length
+                      }
+                      onChange={() => {
+                        if (selectedRows.length === rows.length) {
+                          setSelectedRows([]);
+                        } else {
+                          setSelectedRows([...rows]);
                         }
+                      }}
+                    />
+                  </TableCell>
+                  {headers.map((header) => (
+                    <TableCell
+                      key={header.key}
+                      className={styles["table-cell-header"]}
+                    >
+                      <TableSortLabel
+                        active={sortConfig.key === header.key}
+                        direction={
+                          sortConfig.key === header.key
+                            ? sortConfig.direction
+                            : "asc"
+                        }
+                        onClick={() => handleSort(header.key)}
                       >
-                        {header.key === "status" &&
-                          statusMapping[row[header.key]]}
-                        {header.key === "priority" &&
-                          priorityMapping[row[header.key]]}
-                        {header.key === "startDate" &&
-                          row.startDate.toLocaleDateString()}
-                        {header.key === "endDate" &&
-                          row.endDate instanceof Date &&
-                          row.endDate.toLocaleDateString()}
-                        {header.key === "endDate" &&
-                          row.endDate === "not-specified" &&
-                          t("task.end-date-not-specified")}
-                        {header.key !== "status" &&
-                          header.key !== "priority" &&
-                          header.key !== "startDate" &&
-                          header.key !== "endDate" &&
-                          row[header.key]}
+                        {header.displayTitle}
+                      </TableSortLabel>
+                    </TableCell>
+                  ))}
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {sortedRows
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row, index) => (
+                    <TableRow
+                      key={index}
+                      /*                       hover
+                      onClick={() => handleRowSelect(row)} */
+                      selected={isRowSelected(row)}
+                      className={styles["table-row"]}
+                    >
+                      <TableCell padding="checkbox">
+                        <Checkbox
+                          checked={isRowSelected(row)}
+                          onClick={(event) => {
+                            event.stopPropagation();
+                            handleRowSelect(row);
+                          }}
+                        />
                       </TableCell>
-                    ))}
-                  </TableRow>
-                ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 20]}
-          component="div"
-          count={rows.length}
-          page={page}
-          onPageChange={handleChangePage}
-          rowsPerPage={rowsPerPage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-          sx={{ backgroundColor: "#EAEAEA" }}
-        />
-      </Box>
+                      {headers.map((header) => (
+                        <TableCell
+                          key={header.key}
+                          className={
+                            header.key === "name"
+                              ? styles["cell-max-width"]
+                              : ""
+                          }
+                        >
+                          {header.key === "status" &&
+                            statusMapping[row[header.key]]}
+                          {header.key === "priority" &&
+                            priorityMapping[row[header.key]]}
+                          {header.key === "startDate" &&
+                            row.startDate.toLocaleDateString()}
+                          {header.key === "endDate" &&
+                            row.endDate instanceof Date &&
+                            row.endDate.toLocaleDateString()}
+                          {header.key === "endDate" &&
+                            row.endDate === "not-specified" &&
+                            t("task.end-date-not-specified")}
+                          {header.key !== "status" &&
+                            header.key !== "priority" &&
+                            header.key !== "startDate" &&
+                            header.key !== "endDate" &&
+                            row[header.key]}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TablePagination
+            rowsPerPageOptions={[5, 10, 20]}
+            component="div"
+            count={rows.length}
+            page={page}
+            onPageChange={handleChangePage}
+            rowsPerPage={rowsPerPage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+            labelRowsPerPage={t("task.table-rows-per-page")}
+            labelDisplayedRows={({ from, to, count }) =>
+              `${from}-${to} ${t("task.table-of")} ${count}`
+            }
+            sx={{ backgroundColor: "#EAEAEA" }}
+          />
+        </Box>
+      </>
     ) : (
       <Typography className={styles["no-tasks-message"]}>
         {t("task.no-tasks-with-this-status")}

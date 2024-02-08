@@ -26,7 +26,6 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import { useLanguage } from "../../../../../context/language/LanguageProvider";
 import { useNavigate } from "react-router-dom";
-import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import CustomDialog from "../../../../../components/ui/dialog/CustomDialog";
 import "dayjs/locale/en-gb";
@@ -204,9 +203,7 @@ export default function ProjectDetailsContainer({ project }) {
             className={styles["delete-icon"]}
             onClick={() => setIsDeleteProjectDialogOpen(true)}
           >
-            <IconButton>
-              <DeleteIcon />
-            </IconButton>
+            <DeleteIcon />
           </Tooltip>
         </div>
       )}
