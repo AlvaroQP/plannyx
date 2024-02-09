@@ -48,7 +48,7 @@
 .table-cell:hover,
 .cell-max-width:hover {
   cursor: pointer;
-  background-color: #1976d2;
-  color: white;
+  /*   background-color: #1976d2;
+  color: white; */
   font-weight: 600;
 }

@@ -9,7 +9,7 @@ import styles from "./ViewTasks.module.css";
 
 export default function ViewTasks({ projectId }) {
   const { setIsLoading } = useLoading();
-  const { getAllTasks, taskCount } = useTasks();
+  const { getAllTasks, taskCount, modifiedTaskCount } = useTasks();
   const [projectTasks, setProjectTasks] = useState([]);
   const [finishedLoading, setFinishedLoading] = useState(false);
   const { t } = useTranslation();
@@ -34,7 +34,7 @@ export default function ViewTasks({ projectId }) {
       setFinishedLoading(true);
     }
     fetchProject();
-  }, [projectId, getAllTasks, setIsLoading, t, taskCount]);
+  }, [projectId, getAllTasks, setIsLoading, t, taskCount, modifiedTaskCount]);
 
   function showTasks() {
     return (

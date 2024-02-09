@@ -205,7 +205,9 @@
         "task-not-deleted": "La tarea no ha podido ser eliminada.",
         "tasks-not-deleted": "Las tareas no han podido ser eliminadas.",
         "task-deleted": "La tarea ha sido eliminada con éxito.",
-        "tasks-deleted": "Las tareas han sido eliminadas con éxito."
+        "tasks-deleted": "Las tareas han sido eliminadas con éxito.",
+        "task-updated": "La tarea ha sido actualizada con éxito.",
+        "could-not-update-task": "No se ha podido actualizar la tarea. Por favor, inténtalo de nuevo más tarde."
     },
     "tasks-tabs-titles": {
         "all-tasks": "Todas las Tareas",

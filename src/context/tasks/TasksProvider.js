@@ -20,6 +20,7 @@ export function TasksProvider({ children }) {
   const [tasks, setTasks] = useState([]);
   const [projectId, setProjectId] = useState(null);
   const [taskCount, setTaskCount] = useState(0);
+  const [modifiedTaskCount, setModifiedTaskCount] = useState(0);
 
   const getAllTasks = useCallback(
     async (projectId) => {
@@ -48,6 +49,7 @@ export function TasksProvider({ children }) {
     setTasks((prevTasks) =>
       prevTasks.map((t) => (t.id === taskId ? updatedTask : t))
     );
+    setModifiedTaskCount((prevCount) => prevCount + 1);
   }
 
   async function deleteTask(taskId) {
@@ -66,6 +68,7 @@ export function TasksProvider({ children }) {
         setProjectId,
         getAllTasks,
         taskCount,
+        modifiedTaskCount,
         deleteTask,
         putTask,
       }}

@@ -13,6 +13,10 @@ import {
   TableContainer,
   TableSortLabel,
   Tooltip,
+  TextField,
+  MenuItem,
+  Select,
+  Button,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useTranslation } from "react-i18next";
@@ -22,7 +26,11 @@ import { useTasks } from "../../../context/tasks/TasksProvider";
 import { useLoading } from "../../../context/loading/LoadingProvider";
 import { useDialog } from "../../../context/dialog/DialogProvider";
 import CustomDialog from "../../../components/ui/dialog/CustomDialog";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import dayjs from "dayjs";
 import styles from "./CustomTasksTable.module.css";
+import { Timestamp } from "firebase/firestore";
 
 export default function CustomTasksTable({ title, rows }) {
   const [selectedRows, setSelectedRows] = useState([]);
@@ -33,10 +41,16 @@ export default function CustomTasksTable({ title, rows }) {
   const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
   const statusOrder = ["not started", "in progress", "finished", "stuck"];
   const priorityOrder = ["low", "medium", "high", "critical"];
-  const { deleteTask } = useTasks();
+  const { deleteTask, putTask } = useTasks();
   const { setIsLoading } = useLoading();
   const { openDialog } = useDialog();
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+  const [editingRow, setEditingRow] = useState(null);
+  const [editedName, setEditedName] = useState("");
+  const [editedStartDate, setEditedStartDate] = useState(null);
+  const [editedEndDate, setEditedEndDate] = useState(null);
+  const [editedStatus, setEditedStatus] = useState("");
+  const [editedPriority, setEditedPriority] = useState("");
 
   function handleChangePage(event, newPage) {
     setPage(newPage);
@@ -108,8 +122,185 @@ export default function CustomTasksTable({ title, rows }) {
     setIsLoading(false);
   }
 
+  function resetValues() {
+    setEditedName("");
+    setEditedStartDate(null);
+    setEditedEndDate(null);
+    setEditedStatus("");
+    setEditedPriority("");
+  }
+
   function handleEditTask(task, field, value) {
-    console.log("Editing task:", task, "Field:", field.key, "Value:", value);
+    if (
+      editingRow &&
+      (editingRow.task !== task || editingRow.field.key !== field.key)
+    ) {
+      handleCancelEdit();
+    }
+    setEditingRow({ task, field });
+  }
+
+  function handleCancelEdit() {
+    setEditingRow(null);
+    resetValues();
+  }
+
+  async function handleSaveEdit() {
+    setIsLoading(true);
+    const updatedFields = {};
+
+    if (!editingRow || !editingRow.task) {
+      console.error("Editing row or task is undefined");
+      setIsLoading(false);
+      return;
+    }
+
+    if (
+      editedEndDate !== null &&
+      dayjs(editingRow.task.startDate).isAfter(editedEndDate)
+    ) {
+      console.log("Start Date cannot be after End Date");
+      setIsLoading(false);
+      return;
+    }
+
+    if (editedName !== "") {
+      updatedFields.name = editedName;
+    }
+    if (editedStartDate !== null) {
+      updatedFields.startDate = Timestamp.fromDate(editedStartDate.toDate());
+    }
+    if (editedEndDate !== null) {
+      updatedFields.endDate = Timestamp.fromDate(editedEndDate.toDate());
+    }
+    if (editedEndDate === "not-specified") {
+      updatedFields.endDate = null;
+    }
+    if (editedStatus !== "") {
+      updatedFields.status = editedStatus;
+    }
+    if (editedPriority !== "") {
+      updatedFields.priority = editedPriority;
+    }
+    if (editingRow.task.endDate === "not-specified") {
+      updatedFields.endDate = null;
+    }
+
+    // Construct the updated task object
+    const { id, ...fieldsWithoutId } = editingRow.task;
+    const updatedTask = { ...fieldsWithoutId, ...updatedFields };
+
+    try {
+      await putTask(editingRow.task.id, updatedTask);
+      setEditingRow(null);
+      resetValues();
+
+      openDialog({
+        title: t("task.success"),
+        description: t("task.task-updated"),
+        severity: "success",
+      });
+    } catch (error) {
+      console.error("Error updating task:", error);
+      openDialog({
+        title: t("task.error"),
+        description: t("task.could-not-update-task"),
+        severity: "error",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  function renderEditField(
+    key,
+    value,
+    handleValueChange,
+    statusMapping,
+    priorityMapping
+  ) {
+    switch (key) {
+      case "name":
+        return (
+          <TextField
+            defaultValue={value}
+            onChange={(e) => setEditedName(e.target.value)}
+          />
+        );
+      case "startDate":
+        return (
+          <LocalizationProvider
+            dateAdapter={AdapterDayjs}
+            adapterLocale={dayjs.locale(language)}
+          >
+            <DatePicker
+              value={editedStartDate}
+              onChange={(newValue) => setEditedStartDate(newValue)}
+            />
+          </LocalizationProvider>
+        );
+      case "endDate":
+        return (
+          <LocalizationProvider
+            dateAdapter={AdapterDayjs}
+            adapterLocale={dayjs.locale(language)}
+          >
+            <DatePicker
+              value={editedEndDate}
+              onChange={(newValue) => setEditedEndDate(newValue)}
+            />
+          </LocalizationProvider>
+        );
+      case "status":
+        return (
+          <Select
+            value={editedStatus || value}
+            onChange={(e) => {
+              setEditedStatus(e.target.value);
+            }}
+          >
+            {Object.keys(statusMapping).map((status) => (
+              <MenuItem key={status} value={status}>
+                {statusMapping[status]}
+              </MenuItem>
+            ))}
+          </Select>
+        );
+      case "priority":
+        return (
+          <Select
+            value={editedPriority || value}
+            onChange={(e) => setEditedPriority(e.target.value)}
+          >
+            {Object.keys(priorityMapping).map((priority) => (
+              <MenuItem key={priority} value={priority}>
+                {priorityMapping[priority]}
+              </MenuItem>
+            ))}
+          </Select>
+        );
+      default:
+        return <TextField defaultValue={value} />;
+    }
+  }
+
+  function renderDisplayField(key, value) {
+    switch (key) {
+      case "status":
+        return statusMapping[value];
+      case "priority":
+        return priorityMapping[value];
+      case "startDate":
+        return value.toLocaleDateString();
+      case "endDate":
+        return value instanceof Date
+          ? value.toLocaleDateString()
+          : value === "not-specified"
+          ? t("task.end-date-not-specified")
+          : value;
+      default:
+        return value;
+    }
   }
 
   function handleSort(key) {
@@ -320,23 +511,39 @@ export default function CustomTasksTable({ title, rows }) {
                             handleEditTask(row, header, row[header.key])
                           }
                         >
-                          {header.key === "status" &&
-                            statusMapping[row[header.key]]}
-                          {header.key === "priority" &&
-                            priorityMapping[row[header.key]]}
-                          {header.key === "startDate" &&
-                            row.startDate.toLocaleDateString()}
-                          {header.key === "endDate" &&
-                            row.endDate instanceof Date &&
-                            row.endDate.toLocaleDateString()}
-                          {header.key === "endDate" &&
-                            row.endDate === "not-specified" &&
-                            t("task.end-date-not-specified")}
-                          {header.key !== "status" &&
-                            header.key !== "priority" &&
-                            header.key !== "startDate" &&
-                            header.key !== "endDate" &&
-                            row[header.key]}
+                          {editingRow &&
+                          editingRow.task === row &&
+                          editingRow.field.key === header.key ? (
+                            <div className={styles["edit-field-container"]}>
+                              {renderEditField(
+                                header.key,
+                                row[header.key],
+                                (newValue) =>
+                                  handleEditTask(row, header, newValue),
+                                statusMapping,
+                                priorityMapping
+                              )}
+                              <br />
+                              <Button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleCancelEdit();
+                                }}
+                              >
+                                {t("button.cancel")}
+                              </Button>
+                              <Button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleSaveEdit();
+                                }}
+                              >
+                                {t("button.save")}
+                              </Button>
+                            </div>
+                          ) : (
+                            renderDisplayField(header.key, row[header.key])
+                          )}
                         </TableCell>
                       ))}
                     </TableRow>

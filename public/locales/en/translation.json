@@ -205,7 +205,9 @@
         "task-not-deleted": "The task could not be deleted.",
         "tasks-not-deleted": "The tasks could not be deleted.",
         "task-deleted": "The task has been deleted successfully.",
-        "tasks-deleted": "The tasks have been deleted successfully."
+        "tasks-deleted": "The tasks have been deleted successfully.",
+        "task-updated": "The task has been updated successfully.",
+        "could-not-update-task": "Could not update the task. Please try again later."
     },
     "tasks-tabs-titles": {
         "all-tasks": "All Tasks",
