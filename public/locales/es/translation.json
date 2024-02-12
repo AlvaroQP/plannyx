@@ -219,5 +219,13 @@
     "task-table": {
         "start-date": "Inicio",
         "end-date": "Finalización"
+    },
+    "dashboard": {
+        "projects-by-status": "Proyectos por Estado",
+        "projects-by-priority": "Proyectos por Prioridad",
+        "projects-by-date-creation": "Proyectos por Fecha de Creación",
+        "projects-by-start-date": "Proyectos por Fecha de Inicio",
+        "projects-by-end-date": "Proyectos por Fecha de Finalización",
+        "project-count": "proyecto/s"
     }
 }

@@ -48,14 +48,12 @@ export default function UserPanelContainer() {
   );
 
   const dashboardMenu = (
-    <SubMenu
-      label={t("user-panel-sidebar.dashboard")}
+    <MenuItem
       icon={<BarChartIcon className={styles.icon} />}
+      onClick={() => navigate("/user-panel/dashboard")}
     >
-      <MenuItem>1</MenuItem>
-      <MenuItem>2</MenuItem>
-      <MenuItem>3</MenuItem>
-    </SubMenu>
+      {t("user-panel-sidebar.dashboard")}
+    </MenuItem>
   );
 
   const profileMenu = (
