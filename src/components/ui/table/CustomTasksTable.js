@@ -17,6 +17,8 @@ import {
   MenuItem,
   Select,
   Button,
+  Alert,
+  Snackbar,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useTranslation } from "react-i18next";
@@ -36,6 +38,7 @@ import SignalCellular3BarIcon from "@mui/icons-material/SignalCellular3Bar";
 import SignalCellularConnectedNoInternet4BarIcon from "@mui/icons-material/SignalCellularConnectedNoInternet4Bar";
 import CancelIcon from "@mui/icons-material/Cancel";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import { useEditAlert } from "../../../context/alerts/EditAlertProvider";
 import styles from "./CustomTasksTable.module.css";
 
 export default function CustomTasksTable({ title, rows }) {
@@ -50,6 +53,14 @@ export default function CustomTasksTable({ title, rows }) {
   const { deleteTask, putTask } = useTasks();
   const { setIsLoading } = useLoading();
   const { openDialog } = useDialog();
+  const {
+    isEditAlertOpen,
+    isErrorEditAlertOpen,
+    handleOpenEditAlert,
+    handleCloseEditAlert,
+    handleOpenErrorEditAlert,
+    handleCloseErrorEditAlert,
+  } = useEditAlert();
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [editingRow, setEditingRow] = useState(null);
   const [editedName, setEditedName] = useState("");
@@ -207,19 +218,10 @@ export default function CustomTasksTable({ title, rows }) {
       await putTask(editingRow.task.id, updatedTask);
       setEditingRow(null);
       resetValues();
-
-      openDialog({
-        title: t("task.success"),
-        description: t("task.task-updated"),
-        severity: "success",
-      });
+      handleOpenEditAlert();
     } catch (error) {
       console.error("Error updating task:", error);
-      openDialog({
-        title: t("task.error"),
-        description: t("task.could-not-update-task"),
-        severity: "error",
-      });
+      handleOpenErrorEditAlert();
     } finally {
       setIsLoading(false);
     }
@@ -434,8 +436,8 @@ export default function CustomTasksTable({ title, rows }) {
 
   const headerMapping = {
     name: t("task.task"),
-    startDate: t("task.start-date"),
-    endDate: t("task.end-date"),
+    startDate: t("task-table.start-date"),
+    endDate: t("task-table.end-date"),
     status: t("task.status"),
     priority: t("task.priority"),
   };
@@ -519,6 +521,32 @@ export default function CustomTasksTable({ title, rows }) {
           </Typography>
 
           <TableContainer>
+            {isEditAlertOpen && (
+              <Snackbar
+                open={isEditAlertOpen}
+                onClose={handleCloseEditAlert}
+                autoHideDuration={3000}
+                anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+              >
+                <Alert severity="success" variant="filled">
+                  {t("task.task-updated")}
+                </Alert>
+              </Snackbar>
+            )}
+
+            {isErrorEditAlertOpen && (
+              <Snackbar
+                open={isErrorEditAlertOpen}
+                onClose={handleCloseErrorEditAlert}
+                autoHideDuration={3000}
+                anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+              >
+                <Alert severity="error" variant="filled">
+                  {t("task.could-not-update-task")}
+                </Alert>
+              </Snackbar>
+            )}
+
             <Table className={styles["tasks-table"]}>
               <TableHead>
                 <TableRow>
@@ -589,6 +617,8 @@ export default function CustomTasksTable({ title, rows }) {
                           className={
                             header.key === "name"
                               ? styles["cell-max-width"]
+                              : header.key === "status"
+                              ? styles["status-cell"]
                               : styles["table-cell"]
                           }
                           onClick={() =>

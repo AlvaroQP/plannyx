@@ -215,5 +215,9 @@
         "in-progress": "En progreso",
         "finished": "Finalizadas",
         "stuck": "Atascadas"
+    },
+    "task-table": {
+        "start-date": "Inicio",
+        "end-date": "Finalización"
     }
 }

@@ -45,8 +45,13 @@
   max-width: 150px;
 }
 
+.status-cell {
+  min-width: 100px;
+}
+
 .table-cell:hover,
-.cell-max-width:hover {
+.cell-max-width:hover,
+.status-cell:hover {
   cursor: pointer;
   font-weight: 600;
 }
