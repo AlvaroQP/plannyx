@@ -25,8 +25,8 @@ export default function ViewTasks({ projectId }) {
           name: task.name,
           startDate: task.startDate.toDate(),
           endDate: task.endDate ? task.endDate.toDate() : "not-specified",
-          status: task.status,
           priority: task.priority,
+          status: task.status,
         }));
         setProjectTasks(formattedTasks);
       }

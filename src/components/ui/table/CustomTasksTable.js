@@ -29,8 +29,14 @@ import CustomDialog from "../../../components/ui/dialog/CustomDialog";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
-import styles from "./CustomTasksTable.module.css";
 import { Timestamp } from "firebase/firestore";
+import SignalCellular1BarIcon from "@mui/icons-material/SignalCellular1Bar";
+import SignalCellular2BarIcon from "@mui/icons-material/SignalCellular2Bar";
+import SignalCellular3BarIcon from "@mui/icons-material/SignalCellular3Bar";
+import SignalCellularConnectedNoInternet4BarIcon from "@mui/icons-material/SignalCellularConnectedNoInternet4Bar";
+import CancelIcon from "@mui/icons-material/Cancel";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import styles from "./CustomTasksTable.module.css";
 
 export default function CustomTasksTable({ title, rows }) {
   const [selectedRows, setSelectedRows] = useState([]);
@@ -159,7 +165,11 @@ export default function CustomTasksTable({ title, rows }) {
       editedEndDate !== null &&
       dayjs(editingRow.task.startDate).isAfter(editedEndDate)
     ) {
-      console.log("Start Date cannot be after End Date");
+      openDialog({
+        title: t("task.error"),
+        description: t("task.end-date-after-start-date"),
+        severity: "error",
+      });
       setIsLoading(false);
       return;
     }
@@ -184,6 +194,9 @@ export default function CustomTasksTable({ title, rows }) {
     }
     if (editingRow.task.endDate === "not-specified") {
       updatedFields.endDate = null;
+    }
+    if (editingRow.task.endDate === "not-specified" && editedEndDate !== null) {
+      updatedFields.endDate = Timestamp.fromDate(editedEndDate.toDate());
     }
 
     // Construct the updated task object
@@ -285,11 +298,82 @@ export default function CustomTasksTable({ title, rows }) {
   }
 
   function renderDisplayField(key, value) {
+    let statusClassName;
+    if (
+      statusMapping[value] === "Not started" ||
+      statusMapping[value] === "No iniciada"
+    ) {
+      statusClassName = "not-started-status";
+    } else if (
+      statusMapping[value] === "In progress" ||
+      statusMapping[value] === "En progreso"
+    ) {
+      statusClassName = "in-progress-status";
+    } else if (
+      statusMapping[value] === "Finished" ||
+      statusMapping[value] === "Finalizada"
+    ) {
+      statusClassName = "finished-status";
+    } else if (
+      statusMapping[value] === "Stuck" ||
+      statusMapping[value] === "Atascada"
+    ) {
+      statusClassName = "stuck-status";
+    }
+
     switch (key) {
       case "status":
-        return statusMapping[value];
+        return (
+          <div className={styles[`${statusClassName}`]}>
+            {statusMapping[value]}
+          </div>
+        );
       case "priority":
-        return priorityMapping[value];
+        let priorityIcon;
+        if (
+          priorityMapping[value] === "Low" ||
+          priorityMapping[value] === "Baja"
+        ) {
+          priorityIcon = (
+            <SignalCellular1BarIcon
+              sx={{ fontSize: ".9rem", color: "#029a02" }}
+            />
+          );
+        } else if (
+          priorityMapping[value] === "Medium" ||
+          priorityMapping[value] === "Media"
+        ) {
+          priorityIcon = (
+            <SignalCellular2BarIcon
+              sx={{ fontSize: ".9rem", color: "#ff6b02" }}
+            />
+          );
+        } else if (
+          priorityMapping[value] === "High" ||
+          priorityMapping[value] === "Alta"
+        ) {
+          priorityIcon = (
+            <SignalCellular3BarIcon
+              sx={{ fontSize: ".9rem", color: "#cd0303" }}
+            />
+          );
+        } else if (
+          priorityMapping[value] === "Critical" ||
+          priorityMapping[value] === "Crítica"
+        ) {
+          priorityIcon = (
+            <SignalCellularConnectedNoInternet4BarIcon
+              sx={{ fontSize: ".9rem", color: "#ff0000" }}
+            />
+          );
+        }
+
+        return (
+          <div className={styles["priority-div-container"]}>
+            {priorityIcon} {priorityMapping[value]}
+          </div>
+        );
+
       case "startDate":
         return value.toLocaleDateString();
       case "endDate":
@@ -524,22 +608,37 @@ export default function CustomTasksTable({ title, rows }) {
                                 priorityMapping
                               )}
                               <br />
-                              <Button
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  handleCancelEdit();
-                                }}
+                              <div
+                                className={
+                                  styles["cancel-save-button-container"]
+                                }
                               >
-                                {t("button.cancel")}
-                              </Button>
-                              <Button
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  handleSaveEdit();
-                                }}
-                              >
-                                {t("button.save")}
-                              </Button>
+                                <Button
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleCancelEdit();
+                                  }}
+                                  sx={{ color: "red" }}
+                                >
+                                  {t("button.cancel")}{" "}
+                                  <CancelIcon
+                                    sx={{ ml: ".25rem", fontSize: "1rem" }}
+                                  />
+                                </Button>
+
+                                <Button
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleSaveEdit();
+                                  }}
+                                  sx={{ color: "green" }}
+                                >
+                                  {t("button.save")}{" "}
+                                  <CheckCircleIcon
+                                    sx={{ ml: ".25rem", fontSize: "1rem" }}
+                                  />
+                                </Button>
+                              </div>
                             </div>
                           ) : (
                             renderDisplayField(header.key, row[header.key])
