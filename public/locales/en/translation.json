@@ -226,6 +226,8 @@
         "projects-by-date-creation": "Projects by Date of Creation",
         "projects-by-start-date": "Projects by Start Date",
         "projects-by-end-date": "Projects by End Date",
-        "project-count": "project(s)"
+        "project-count": "project(s)",
+        "no-projects-message": "The dashboard data will be displayed here once you have created some projects.",
+        "more": "more projects"
     }
 }

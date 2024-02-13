@@ -226,6 +226,8 @@
         "projects-by-date-creation": "Proyectos por Fecha de Creación",
         "projects-by-start-date": "Proyectos por Fecha de Inicio",
         "projects-by-end-date": "Proyectos por Fecha de Finalización",
-        "project-count": "proyecto/s"
+        "project-count": "proyecto/s",
+        "no-projects-message": "La información de los gráficos se mostrará aquí una vez hayas creado algún proyecto.",
+        "more": "proyectos más"
     }
 }

@@ -1,8 +1,11 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import styles from "./Dashboard.module.css";
 import UserPanelHeader from "../../../components/ui/header/user-panel-header/UserPanelHeader";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import CustomButton from "../../../components/ui/button/CustomButton";
 import { useProjects } from "../../../context/projects/ProjectsProvider";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import {
   PieChart,
   Pie,
@@ -23,9 +26,11 @@ const PRIORITY_ORDER = ["low", "medium", "high", "critical"];
 export default function Dashboard() {
   const { t } = useTranslation();
   const { projects } = useProjects();
+  const navigate = useNavigate();
+  const [projectsToDisplay, setProjectsToDisplay] = useState([]);
 
   const STATUS_COLORS = ["#676767", "#008000", "#3071D4", "#DC3545"];
-  const PRIORITY_COLORS = ["#029a02", "#ff6b02", "#cd0303", "#FF0000"];
+  const PRIORITY_COLORS = ["#EED202", "#FFA500", "#FF4500", "#FF0000"];
 
   const statusData = useMemo(() => {
     const statusCounts = projects.reduce((counts, project) => {
@@ -137,11 +142,71 @@ export default function Dashboard() {
     return endDateArray;
   }, [projects]);
 
-  useEffect(() => {
-    console.log(projects);
-  }, [projects]);
+  const totalStatusCount = useMemo(() => {
+    return statusData.reduce((total, status) => total + status.value, 0);
+  }, [statusData]);
 
-  return (
+  const totalPriorityCount = useMemo(() => {
+    return priorityData.reduce((total, priority) => total + priority.value, 0);
+  }, [priorityData]);
+
+  function handleStatusPieHover(data) {
+    const status = data.name;
+    const filteredProjects = projects.filter(
+      (project) => project.status === status
+    );
+    const projectNames = filteredProjects.map((project) => project.name);
+    setProjectsToDisplay(projectNames);
+  }
+
+  function handlePriorityPieHover(data) {
+    const priority = data.name;
+    const filteredProjects = projects.filter(
+      (project) => project.priority === priority
+    );
+    const projectNames = filteredProjects.map((project) => project.name);
+    setProjectsToDisplay(projectNames);
+  }
+
+  const CustomTooltip = ({ active, payload }) => {
+    if (active && payload && payload.length) {
+      const displayItems = projectsToDisplay.slice(0, 10);
+      const remainingItems = projectsToDisplay.length - 10;
+
+      return (
+        <div className={styles["projects-tooltip-content"]}>
+          {displayItems.map((project, index) => (
+            <p key={index}>{project}</p>
+          ))}
+          {remainingItems > 0 && (
+            <p>
+              +{remainingItems} {t("dashboard.more")}
+            </p>
+          )}
+        </div>
+      );
+    }
+
+    return null;
+  };
+
+  const noProjectsContent = (
+    <>
+      <UserPanelHeader title={t("user-panel-sidebar.dashboard")} />
+      <div className={styles["dashboard-no-projects-container"]}>
+        <p>{t("dashboard.no-projects-message")}</p>
+        <CustomButton
+          text={t("button.new-project")}
+          onClick={() => navigate("/user-panel/projects/new")}
+          variant="contained"
+          color="primary"
+          icon={<AddCircleOutlineIcon />}
+        />
+      </div>
+    </>
+  );
+
+  const dashboardContent = (
     <div className={styles["dashboard-container"]}>
       <UserPanelHeader title={t("user-panel-sidebar.dashboard")} />
 
@@ -151,8 +216,8 @@ export default function Dashboard() {
             {t("dashboard.projects-by-status")}
           </p>
           <PieChart
-            width={220}
-            height={320}
+            width={240}
+            height={330}
             margin={"1rem"}
             className={styles["pie-chart"]}
           >
@@ -160,11 +225,12 @@ export default function Dashboard() {
               dataKey="value"
               isAnimationActive={false}
               data={statusData}
-              cx={110}
-              cy={100}
+              /*               cx={110}
+              cy={120} */
               outerRadius={80}
               fill="#8884d8"
               label
+              onMouseOver={handleStatusPieHover}
             >
               {statusData.map((entry, index) => (
                 <Cell
@@ -173,17 +239,19 @@ export default function Dashboard() {
                 />
               ))}
             </Pie>
-            <Tooltip
-              formatter={(value, name) => [
-                value,
-                t(`project.status-${name.replace(" ", "-")}`),
-              ]}
-            />
+
+            <Tooltip content={<CustomTooltip />} />
             <Legend
               layout="vertical"
-              formatter={(value) =>
-                t(`project.status-${value.replace(" ", "-")}`)
-              }
+              formatter={(value, entry) => {
+                const percentage = (
+                  (entry.payload.value / totalStatusCount) *
+                  100
+                ).toFixed(2);
+                return `${t(
+                  `project.status-${value.replace(" ", "-")}`
+                )} (${percentage}%)`;
+              }}
             />
           </PieChart>
         </div>
@@ -192,8 +260,8 @@ export default function Dashboard() {
             {t("dashboard.projects-by-priority")}
           </p>
           <PieChart
-            width={220}
-            height={320}
+            width={240}
+            height={330}
             margin={"1rem"}
             className={styles["pie-chart"]}
           >
@@ -201,11 +269,12 @@ export default function Dashboard() {
               dataKey="value"
               isAnimationActive={false}
               data={priorityData}
-              cx={110}
-              cy={100}
+              /*               cx={110}
+              cy={120} */
               outerRadius={80}
               fill="#8884d8"
               label
+              onMouseOver={handlePriorityPieHover}
             >
               {priorityData.map((entry, index) => (
                 <Cell
@@ -214,15 +283,18 @@ export default function Dashboard() {
                 />
               ))}
             </Pie>
-            <Tooltip
-              formatter={(value, name) => [
-                value,
-                t(`project.priority-${name}`),
-              ]}
-            />
+            <Tooltip content={<CustomTooltip />} />
             <Legend
               layout="vertical"
-              formatter={(value) => t(`project.priority-${value}`)}
+              formatter={(value, entry) => {
+                const percentage = (
+                  (entry.payload.value / totalPriorityCount) *
+                  100
+                ).toFixed(2);
+                return `${t(
+                  `project.priority-${value.replace(" ", "-")}`
+                )} (${percentage}%)`;
+              }}
             />
           </PieChart>
         </div>
@@ -253,8 +325,8 @@ export default function Dashboard() {
             <Area
               type="monotone"
               dataKey="count"
-              stroke="#8884d8"
-              fill="#8884d8"
+              stroke="#3071D4"
+              fill="#3071D4"
             />
           </AreaChart>
         </ResponsiveContainer>
@@ -285,8 +357,8 @@ export default function Dashboard() {
             <Area
               type="monotone"
               dataKey="count"
-              stroke="#8884d8"
-              fill="#8884d8"
+              stroke="#3071D4"
+              fill="#3071D4"
             />
           </AreaChart>
         </ResponsiveContainer>
@@ -317,12 +389,14 @@ export default function Dashboard() {
             <Area
               type="monotone"
               dataKey="count"
-              stroke="#8884d8"
-              fill="#8884d8"
+              stroke="#3071D4"
+              fill="#3071D4"
             />
           </AreaChart>
         </ResponsiveContainer>
       </div>
     </div>
   );
+
+  return projects.length === 0 ? noProjectsContent : dashboardContent;
 }

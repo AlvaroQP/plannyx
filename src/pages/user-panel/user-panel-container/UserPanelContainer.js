@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import logo from "../../../assets/images/logo-blue.png";
-import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
+import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
+import LibraryAddIcon from "@mui/icons-material/LibraryAdd";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import BarChartIcon from "@mui/icons-material/BarChart";
@@ -27,18 +28,22 @@ export default function UserPanelContainer() {
     setCollapsed(!collapsed);
   }
 
-  const projectsMenu = (
-    <SubMenu
-      label={t("user-panel-sidebar.projects")}
-      icon={<ListAltIcon className={styles.icon} />}
+  const newProjectMenu = (
+    <MenuItem
+      icon={<LibraryAddIcon className={styles.icon} />}
+      onClick={() => navigate("/user-panel/projects/new")}
     >
-      <MenuItem onClick={() => navigate("/user-panel/projects/new")}>
-        {t("user-panel-sidebar.new-project")}
-      </MenuItem>
-      <MenuItem onClick={() => navigate("/user-panel/projects/all")}>
-        {t("user-panel-sidebar.my-projects")}
-      </MenuItem>
-    </SubMenu>
+      {t("user-panel-sidebar.new-project")}
+    </MenuItem>
+  );
+
+  const myProjectsMenu = (
+    <MenuItem
+      icon={<ListAltIcon className={styles.icon} />}
+      onClick={() => navigate("/user-panel/projects/all")}
+    >
+      {t("user-panel-sidebar.my-projects")}
+    </MenuItem>
   );
 
   const calendarMenu = (
@@ -106,11 +111,25 @@ export default function UserPanelContainer() {
           )}
 
           {collapsed ? (
-            <Tooltip title={t("user-panel-sidebar.projects")} placement="right">
-              <div>{projectsMenu}</div>
+            <Tooltip
+              title={t("user-panel-sidebar.new-project")}
+              placement="right"
+            >
+              <div>{newProjectMenu}</div>
             </Tooltip>
           ) : (
-            projectsMenu
+            newProjectMenu
+          )}
+
+          {collapsed ? (
+            <Tooltip
+              title={t("user-panel-sidebar.my-projects")}
+              placement="right"
+            >
+              <div>{myProjectsMenu}</div>
+            </Tooltip>
+          ) : (
+            myProjectsMenu
           )}
 
           {collapsed ? (
