@@ -28,6 +28,7 @@ export default function Dashboard() {
   const { projects } = useProjects();
   const navigate = useNavigate();
   const [projectsToDisplay, setProjectsToDisplay] = useState([]);
+  const [currentLabel, setCurrentLabel] = useState("");
 
   const STATUS_COLORS = ["#676767", "#008000", "#3071D4", "#DC3545"];
   const PRIORITY_COLORS = ["#EED202", "#FFA500", "#FF4500", "#FF0000"];
@@ -73,17 +74,23 @@ export default function Dashboard() {
       const dateObject = project.createdAt.toDate();
       const dateString = dateObject.toLocaleDateString();
 
-      counts[dateString] = counts[dateString] || { count: 0, date: dateObject };
+      counts[dateString] = counts[dateString] || {
+        count: 0,
+        date: dateObject,
+        projects: [],
+      };
       counts[dateString].count += 1;
+      counts[dateString].projects.push(project.name);
 
       return counts;
     }, {});
 
     const createdAtArray = Object.entries(dateCounts).map(
-      ([dateString, { count, date }]) => ({
+      ([dateString, { count, date, projects }]) => ({
         date: dateString,
         timestamp: date,
         count,
+        projects,
       })
     );
 
@@ -96,17 +103,23 @@ export default function Dashboard() {
       const dateObject = project.startDate.toDate();
       const dateString = dateObject.toLocaleDateString();
 
-      counts[dateString] = counts[dateString] || { count: 0, date: dateObject };
+      counts[dateString] = counts[dateString] || {
+        count: 0,
+        date: dateObject,
+        projects: [],
+      };
       counts[dateString].count += 1;
+      counts[dateString].projects.push(project.name);
 
       return counts;
     }, {});
 
     const startDateArray = Object.entries(dateCounts).map(
-      ([dateString, { count, date }]) => ({
+      ([dateString, { count, date, projects }]) => ({
         date: dateString,
         timestamp: date,
         count,
+        projects,
       })
     );
 
@@ -123,18 +136,21 @@ export default function Dashboard() {
         counts[dateString] = counts[dateString] || {
           count: 0,
           date: dateObject,
+          projects: [],
         };
         counts[dateString].count += 1;
+        counts[dateString].projects.push(project.name);
       }
 
       return counts;
     }, {});
 
     const endDateArray = Object.entries(dateCounts).map(
-      ([dateString, { count, date }]) => ({
+      ([dateString, { count, date, projects }]) => ({
         date: dateString,
         timestamp: date,
         count,
+        projects,
       })
     );
 
@@ -157,6 +173,7 @@ export default function Dashboard() {
     );
     const projectNames = filteredProjects.map((project) => project.name);
     setProjectsToDisplay(projectNames);
+    setCurrentLabel(t(`project.status-${status.replace(" ", "-")}`));
   }
 
   function handlePriorityPieHover(data) {
@@ -166,6 +183,7 @@ export default function Dashboard() {
     );
     const projectNames = filteredProjects.map((project) => project.name);
     setProjectsToDisplay(projectNames);
+    setCurrentLabel(t(`project.priority-${priority.replace(" ", "-")}`));
   }
 
   const CustomTooltip = ({ active, payload }) => {
@@ -175,6 +193,37 @@ export default function Dashboard() {
 
       return (
         <div className={styles["projects-tooltip-content"]}>
+          <p>
+            <strong>{currentLabel}</strong>
+          </p>
+          <hr />
+          {displayItems.map((project, index) => (
+            <p key={index}>{project}</p>
+          ))}
+          {remainingItems > 0 && (
+            <p>
+              +{remainingItems} {t("dashboard.more")}
+            </p>
+          )}
+        </div>
+      );
+    }
+
+    return null;
+  };
+
+  const CustomAreaTooltip = ({ active, payload }) => {
+    if (active && payload && payload.length) {
+      const { date, projects } = payload[0].payload;
+      const displayItems = projects.slice(0, 10);
+      const remainingItems = projects.length - 10;
+
+      return (
+        <div className={styles["projects-tooltip-content"]}>
+          <p>
+            <strong>{date}</strong>
+          </p>
+          <hr />
           {displayItems.map((project, index) => (
             <p key={index}>{project}</p>
           ))}
@@ -225,8 +274,6 @@ export default function Dashboard() {
               dataKey="value"
               isAnimationActive={false}
               data={statusData}
-              /*               cx={110}
-              cy={120} */
               outerRadius={80}
               fill="#8884d8"
               label
@@ -255,6 +302,7 @@ export default function Dashboard() {
             />
           </PieChart>
         </div>
+
         <div className={styles["dashboard-pie-chart"]}>
           <p className={styles["dashboard-chart-title"]}>
             {t("dashboard.projects-by-priority")}
@@ -269,8 +317,6 @@ export default function Dashboard() {
               dataKey="value"
               isAnimationActive={false}
               data={priorityData}
-              /*               cx={110}
-              cy={120} */
               outerRadius={80}
               fill="#8884d8"
               label
@@ -317,11 +363,7 @@ export default function Dashboard() {
               domain={[0, 10]}
               tickFormatter={(value) => (value >= 10 ? "10+" : value)}
             />
-            <Tooltip
-              formatter={(value) => [
-                `${value} ${t("dashboard.project-count")}`,
-              ]}
-            />
+            <Tooltip content={<CustomAreaTooltip />} />
             <Area
               type="monotone"
               dataKey="count"
@@ -349,11 +391,7 @@ export default function Dashboard() {
               domain={[0, 10]}
               tickFormatter={(value) => (value >= 10 ? "10+" : value)}
             />
-            <Tooltip
-              formatter={(value) => [
-                `${value} ${t("dashboard.project-count")}`,
-              ]}
-            />
+            <Tooltip content={<CustomAreaTooltip />} />
             <Area
               type="monotone"
               dataKey="count"
@@ -381,11 +419,7 @@ export default function Dashboard() {
               domain={[0, 10]}
               tickFormatter={(value) => (value >= 10 ? "10+" : value)}
             />
-            <Tooltip
-              formatter={(value) => [
-                `${value} ${t("dashboard.project-count")}`,
-              ]}
-            />
+            <Tooltip content={<CustomAreaTooltip />} />
             <Area
               type="monotone"
               dataKey="count"
