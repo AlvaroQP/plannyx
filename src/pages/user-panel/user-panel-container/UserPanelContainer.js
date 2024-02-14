@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import logo from "../../../assets/images/logo-blue.png";
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import LibraryAddIcon from "@mui/icons-material/LibraryAdd";
@@ -17,16 +17,13 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import Tooltip from "@mui/material/Tooltip";
 import { NavLink } from "react-router-dom";
+import { useSidebar } from "../../../context/sidebar/SidebarProvider";
 import styles from "./UserPanelContainer.module.css";
 
 export default function UserPanelContainer() {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const [collapsed, setCollapsed] = useState(false);
-
-  function handleCollapseClick() {
-    setCollapsed(!collapsed);
-  }
+  const { collapsed, handleCollapseClick } = useSidebar();
 
   const newProjectMenu = (
     <MenuItem

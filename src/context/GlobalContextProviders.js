@@ -7,6 +7,7 @@ import { DialogProvider } from "./dialog/DialogProvider";
 import { LanguageProvider } from "./language/LanguageProvider";
 import { ProjectsProvider } from "./projects/ProjectsProvider";
 import { TasksProvider } from "./tasks/TasksProvider";
+import { SidebarProvider } from "./sidebar/SidebarProvider";
 import ThemeWrapper from "./theme/ThemeProvider";
 
 export default function GlobalContextProviders({ children }) {
@@ -19,7 +20,9 @@ export default function GlobalContextProviders({ children }) {
               <LanguageProvider>
                 <ThemeWrapper>
                   <ProjectsProvider>
-                    <TasksProvider>{children}</TasksProvider>
+                    <TasksProvider>
+                      <SidebarProvider>{children}</SidebarProvider>
+                    </TasksProvider>
                   </ProjectsProvider>
                 </ThemeWrapper>
               </LanguageProvider>

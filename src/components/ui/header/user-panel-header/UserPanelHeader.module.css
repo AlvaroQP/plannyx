@@ -1,16 +1,39 @@
 .user-panel-header {
   position: fixed;
   top: 0;
-  width: 100%;
+  /*   width: 100%; */
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
+  justify-content: space-between;
   background-color: #0f418d;
   height: 73px;
-  font-weight: 500;
   color: white;
   z-index: 1;
+  transition: width 0.3s ease-out;
 }
 
 .user-panel-header-title {
+  font-weight: 500;
   margin-left: 2rem;
+}
+
+.user-panel-date-and-time {
+  /*   background-color: #2661b9;
+  border: 0.5px solid #6aa0f0;
+  border-radius: 5px;
+  padding: 0.5rem; */
+  margin-left: 2rem;
+  margin-right: 5rem;
+  color: #ffffff;
+}
+
+.date {
+  margin-right: 20px;
+  font-size: 0.8rem;
+}
+
+.time {
+  font-weight: 600;
+  font-size: 0.8rem;
 }
