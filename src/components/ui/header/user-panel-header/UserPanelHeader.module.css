@@ -26,6 +26,8 @@
   margin-left: 2rem;
   margin-right: 5rem;
   color: #ffffff;
+  display: flex;
+  align-items: center;
 }
 
 .date {

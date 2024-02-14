@@ -38,6 +38,7 @@
         "reset": "Borrar",
         "submit": "Enviar",
         "new-project": "Nuevo Proyecto",
+        "my-projects": "Mis Proyectos",
         "edit": "Editar",
         "delete": "Eliminar",
         "save": "Guardar",
@@ -229,5 +230,13 @@
         "project-count": "proyecto/s",
         "no-projects-message": "La información de los gráficos se mostrará aquí una vez hayas creado algún proyecto.",
         "more": "proyectos más"
+    },
+    "projects-notifications": {
+        "starting-today": "Proyectos que empiezan hoy",
+        "ending-today": "Proyectos que terminan hoy",
+        "starting-soon": "Proyectos que empiezan pronto",
+        "ending-soon": "Proyectos que terminan pronto",
+        "no-projects":"Todavía no tienes ningún proyecto. Crea uno nuevo haciendo clic en el botón de abajo.",
+        "no-projects-starting-ending-soon": "No hay proyectos que empiecen o terminen pronto."
     }
 }

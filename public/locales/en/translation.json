@@ -37,7 +37,8 @@
         "close": "Close",
         "reset": "Reset",
         "submit": "Submit",
-        "new-project": "New Project", 
+        "new-project": "New Project",
+        "my-projects": "My Projects",
         "edit": "Edit",
         "delete": "Delete",
         "save": "Save",
@@ -229,5 +230,13 @@
         "project-count": "project(s)",
         "no-projects-message": "The dashboard data will be displayed here once you have created some projects.",
         "more": "more projects"
+    },
+    "projects-notifications": {
+        "starting-today": "Projects starting today",
+        "ending-today": "Projects ending today",
+        "starting-soon": "Projects starting soon",
+        "ending-soon": "Projects ending soon",
+        "no-projects":"You have no projects yet. Create one by clicking on the button below.",
+        "no-projects-starting-ending-soon": "There are no projects starting or ending soon."
     }
 }

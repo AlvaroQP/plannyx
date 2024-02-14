@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
+import styles from "./UserPanelHeader.module.css";
 import { useSidebar } from "../../../../context/sidebar/SidebarProvider";
 import { useLanguage } from "../../../../context/language/LanguageProvider";
-import styles from "./UserPanelHeader.module.css";
 
 export default function UserPanelHeader({ title }) {
   const { collapsed } = useSidebar();

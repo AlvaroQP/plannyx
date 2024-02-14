@@ -18,11 +18,14 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import Tooltip from "@mui/material/Tooltip";
 import { NavLink } from "react-router-dom";
 import { useSidebar } from "../../../context/sidebar/SidebarProvider";
+import { useLocation } from "react-router-dom";
+import UserPanelHome from "../user-panel-home/UserPanelHome";
 import styles from "./UserPanelContainer.module.css";
 
 export default function UserPanelContainer() {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const location = useLocation();
   const { collapsed, handleCollapseClick } = useSidebar();
 
   const newProjectMenu = (
@@ -175,7 +178,11 @@ export default function UserPanelContainer() {
       </Sidebar>
 
       <div className={styles["outlet-container"]}>
-        <Outlet />
+        {location.pathname === "/user-panel" || location.pathname === "/" ? (
+          <UserPanelHome />
+        ) : (
+          <Outlet />
+        )}
       </div>
     </div>
   );
