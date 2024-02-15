@@ -45,6 +45,7 @@ import styles from "./CustomTasksTable.module.css";
 import CustomDivider from "../divider/CustomDivider";
 import NotesIcon from "@mui/icons-material/Notes";
 import EditNoteIcon from "@mui/icons-material/EditNote";
+import TextSnippetIcon from "@mui/icons-material/TextSnippet";
 
 export default function CustomTasksTable({ title, rows }) {
   const [selectedRows, setSelectedRows] = useState([]);
@@ -105,8 +106,9 @@ export default function CustomTasksTable({ title, rows }) {
   function handleExpandRow(row) {
     const rowIndex = rows.indexOf(row);
     setExpandedRows((prevExpandedRows) => {
-      const newExpandedRows = [...prevExpandedRows];
-      newExpandedRows[rowIndex] = !newExpandedRows[rowIndex];
+      const newExpandedRows = prevExpandedRows.map((expanded, index) =>
+        index === rowIndex ? !expanded : false
+      );
       return newExpandedRows;
     });
   }
@@ -604,6 +606,15 @@ export default function CustomTasksTable({ title, rows }) {
                       }}
                     />
                   </TableCell>
+                  <TableCell
+                    padding="checkbox"
+                    className={styles["table-cell-header-notes"]}
+                    sx={{ textAlign: "center" }}
+                  >
+                    <Tooltip title={t("task.task-notes")}>
+                      <TextSnippetIcon sx={{ mt: 0.8 }} />
+                    </Tooltip>
+                  </TableCell>
 
                   {headers.map((header) => (
                     <TableCell
@@ -647,6 +658,8 @@ export default function CustomTasksTable({ title, rows }) {
                               handleRowSelect(row);
                             }}
                           />
+                        </TableCell>
+                        <TableCell padding="checkbox">
                           <IconButton
                             aria-label="expand row"
                             size="small"
@@ -735,7 +748,7 @@ export default function CustomTasksTable({ title, rows }) {
                         >
                           <TableCell
                             style={{ paddingBottom: 0, paddingTop: 0 }}
-                            colSpan={6}
+                            colSpan={7}
                           >
                             <Box
                               sx={{
@@ -820,7 +833,9 @@ export default function CustomTasksTable({ title, rows }) {
                                       )
                                     }
                                   >
-                                    {row.notes} <EditNoteIcon />
+                                    <span className={styles["notes-span"]}>
+                                      {row.notes} <EditNoteIcon />
+                                    </span>{" "}
                                   </div>
                                 ) : (
                                   <div
@@ -833,7 +848,9 @@ export default function CustomTasksTable({ title, rows }) {
                                       )
                                     }
                                   >
-                                    {t("task.add-notes")} <EditNoteIcon />
+                                    <span className={styles["notes-span"]}>
+                                      {t("task.add-notes")} <EditNoteIcon />
+                                    </span>{" "}
                                   </div>
                                 )}
                               </div>
