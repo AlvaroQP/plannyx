@@ -13,6 +13,7 @@ import AccessDenied from "./pages/access-denied/AccessDenied";
 import { useAuth } from "./auth/auth-context/AuthProvider";
 import "./i18n";
 import ProjectDetails from "./pages/user-panel/projects/project-details/ProjectDetails";
+import Notifications from "./pages/user-panel/notifications/Notifications";
 
 export default function App() {
   function ComponentOrAccessDenied({ component: Component }) {
@@ -69,6 +70,10 @@ export default function App() {
             {
               path: "dashboard",
               element: <ComponentOrAccessDenied component={Dashboard} />,
+            },
+            {
+              path: "notifications",
+              element: <ComponentOrAccessDenied component={Notifications} />,
             },
           ],
         },

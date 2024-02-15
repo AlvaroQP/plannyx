@@ -1,92 +1,55 @@
 .user-panel-home {
-  margin: 2rem;
-}
-
-.user-panel-background-wrapper {
-  border-radius: 0.2rem;
   background-color: #f3f3f3;
   border: 1px solid #d7d7d7;
-  padding: 0 1rem;
-  margin-bottom: 2rem;
-}
-
-.projects-title {
-  text-align: center;
-  font-size: 1.1rem;
-  font-weight: 600;
-}
-
-.projects-container {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  margin-bottom: 1rem;
-}
-
-.project-name-container {
   border-radius: 0.2rem;
-  padding: 0.5rem 0.75rem;
-  cursor: pointer;
-  font-size: 0.9rem;
-  font-weight: 500;
-}
-
-.project-name-container-starting-today {
-  background-color: #4caf50;
-  color: white;
-}
-
-.project-name-container-starting-today:hover {
-  background-color: #388e3c;
-  color: white;
-}
-
-.project-name-container-ending-today {
-  background-color: #f44336;
-  color: white;
-}
-
-.project-name-container-ending-today:hover {
-  background-color: #d32f2f;
-}
-
-.project-name-container-starting-soon {
-  background-color: #2196f3;
-  color: white;
-}
-
-.project-name-container-starting-soon:hover {
-  background-color: #1976d2;
-}
-
-.project-name-container-ending-soon {
-  background-color: #ff5722;
-  color: white;
-}
-
-.project-name-container-ending-soon:hover {
-  background-color: #e64a19;
-}
-
-.no-projects,
-.no-projects-to-show {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-size: 1rem;
-  margin: 1rem;
+  height: calc(100vh - 10rem);
+  margin: 2rem;
 }
 
-.no-projects h2,
-.no-projects-to-show h2 {
+.new-project-container,
+.my-projects-container {
+  padding: 1rem;
+  margin: 2rem;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  width: 50%;
+  height: 25%;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  box-shadow: 3px 3px 10px 0px #00000040;
+}
+
+.new-project-container:hover,
+.my-projects-container:hover {
+  transform: scale(1.05);
+  transition: transform 0.25s ease-in-out;
+}
+
+.new-project-container {
+  background-image: url("../../../assets/images/new-project.png");
+}
+
+.my-projects-container {
+  background-image: url("../../../assets/images/my-projects.png");
+}
+
+.title-container {
+  display: flex;
+  justify-content: center;
+}
+
+.title {
+  background-color: #041f48e3;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
   font-size: 1rem;
-  margin-bottom: 1.5rem;
   font-weight: 600;
-}
-
-.buttons-container button {
-  margin: 1rem;
+  text-align: center;
+  width: fit-content;
 }

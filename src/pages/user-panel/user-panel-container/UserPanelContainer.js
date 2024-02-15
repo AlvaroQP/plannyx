@@ -20,6 +20,7 @@ import { NavLink } from "react-router-dom";
 import { useSidebar } from "../../../context/sidebar/SidebarProvider";
 import { useLocation } from "react-router-dom";
 import UserPanelHome from "../user-panel-home/UserPanelHome";
+import NotificationsIcon from "@mui/icons-material/Notifications";
 import styles from "./UserPanelContainer.module.css";
 
 export default function UserPanelContainer() {
@@ -58,6 +59,15 @@ export default function UserPanelContainer() {
       onClick={() => navigate("/user-panel/dashboard")}
     >
       {t("user-panel-sidebar.dashboard")}
+    </MenuItem>
+  );
+
+  const notificationsMenu = (
+    <MenuItem
+      icon={<NotificationsIcon className={styles.icon} />}
+      onClick={() => navigate("/user-panel/notifications")}
+    >
+      {t("user-panel-sidebar.notifications")}
     </MenuItem>
   );
 
@@ -149,6 +159,17 @@ export default function UserPanelContainer() {
             </Tooltip>
           ) : (
             dashboardMenu
+          )}
+
+          {collapsed ? (
+            <Tooltip
+              title={t("user-panel-sidebar.notifications")}
+              placement="right"
+            >
+              <div>{notificationsMenu}</div>
+            </Tooltip>
+          ) : (
+            notificationsMenu
           )}
 
           <CustomDivider />
