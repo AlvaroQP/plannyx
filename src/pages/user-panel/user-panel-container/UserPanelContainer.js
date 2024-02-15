@@ -28,10 +28,12 @@ export default function UserPanelContainer() {
   const navigate = useNavigate();
   const location = useLocation();
   const { collapsed, handleCollapseClick } = useSidebar();
+  const isActive = (path) => location.pathname === path;
 
   const newProjectMenu = (
     <MenuItem
       icon={<LibraryAddIcon className={styles.icon} />}
+      className={isActive("/user-panel/projects/new") ? styles.active : ""}
       onClick={() => navigate("/user-panel/projects/new")}
     >
       {t("user-panel-sidebar.new-project")}
@@ -41,6 +43,7 @@ export default function UserPanelContainer() {
   const myProjectsMenu = (
     <MenuItem
       icon={<ListAltIcon className={styles.icon} />}
+      className={isActive("/user-panel/projects/all") ? styles.active : ""}
       onClick={() => navigate("/user-panel/projects/all")}
     >
       {t("user-panel-sidebar.my-projects")}
@@ -56,6 +59,7 @@ export default function UserPanelContainer() {
   const dashboardMenu = (
     <MenuItem
       icon={<BarChartIcon className={styles.icon} />}
+      className={isActive("/user-panel/dashboard") ? styles.active : ""}
       onClick={() => navigate("/user-panel/dashboard")}
     >
       {t("user-panel-sidebar.dashboard")}
@@ -65,6 +69,7 @@ export default function UserPanelContainer() {
   const notificationsMenu = (
     <MenuItem
       icon={<NotificationsIcon className={styles.icon} />}
+      className={isActive("/user-panel/notifications") ? styles.active : ""}
       onClick={() => navigate("/user-panel/notifications")}
     >
       {t("user-panel-sidebar.notifications")}

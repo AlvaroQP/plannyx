@@ -70,3 +70,8 @@
 .expand-text {
   font-size: 0.6rem;
 }
+
+.active {
+  background-color: #f4f4f4;
+  font-weight: 600;
+}
