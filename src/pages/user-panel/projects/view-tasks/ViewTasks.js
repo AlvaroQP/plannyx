@@ -25,6 +25,7 @@ export default function ViewTasks({ projectId }) {
           name: task.name,
           startDate: task.startDate.toDate(),
           endDate: task.endDate ? task.endDate.toDate() : "not-specified",
+          notes: task.notes ? task.notes : "",
           priority: task.priority,
           status: task.status,
         }));

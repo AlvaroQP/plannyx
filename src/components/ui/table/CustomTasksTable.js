@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import {
   Table,
@@ -39,7 +39,12 @@ import SignalCellularConnectedNoInternet4BarIcon from "@mui/icons-material/Signa
 import CancelIcon from "@mui/icons-material/Cancel";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { useEditAlert } from "../../../context/alerts/EditAlertProvider";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import styles from "./CustomTasksTable.module.css";
+import CustomDivider from "../divider/CustomDivider";
+import NotesIcon from "@mui/icons-material/Notes";
+import EditNoteIcon from "@mui/icons-material/EditNote";
 
 export default function CustomTasksTable({ title, rows }) {
   const [selectedRows, setSelectedRows] = useState([]);
@@ -48,6 +53,7 @@ export default function CustomTasksTable({ title, rows }) {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
+  const [expandedRows, setExpandedRows] = useState([]);
   const statusOrder = ["not started", "in progress", "finished", "stuck"];
   const priorityOrder = ["low", "medium", "high", "critical"];
   const { deleteTask, putTask } = useTasks();
@@ -64,10 +70,15 @@ export default function CustomTasksTable({ title, rows }) {
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [editingRow, setEditingRow] = useState(null);
   const [editedName, setEditedName] = useState("");
+  const [editedNotes, setEditedNotes] = useState("");
   const [editedStartDate, setEditedStartDate] = useState(null);
   const [editedEndDate, setEditedEndDate] = useState(null);
   const [editedStatus, setEditedStatus] = useState("");
   const [editedPriority, setEditedPriority] = useState("");
+
+  useEffect(() => {
+    setExpandedRows(new Array(rows.length).fill(false));
+  }, [rows.length]);
 
   function handleChangePage(event, newPage) {
     setPage(newPage);
@@ -89,6 +100,15 @@ export default function CustomTasksTable({ title, rows }) {
     }
 
     setSelectedRows(newSelected);
+  }
+
+  function handleExpandRow(row) {
+    const rowIndex = rows.indexOf(row);
+    setExpandedRows((prevExpandedRows) => {
+      const newExpandedRows = [...prevExpandedRows];
+      newExpandedRows[rowIndex] = !newExpandedRows[rowIndex];
+      return newExpandedRows;
+    });
   }
 
   function isRowSelected(row) {
@@ -141,6 +161,7 @@ export default function CustomTasksTable({ title, rows }) {
 
   function resetValues() {
     setEditedName("");
+    setEditedNotes("");
     setEditedStartDate(null);
     setEditedEndDate(null);
     setEditedStatus("");
@@ -187,6 +208,9 @@ export default function CustomTasksTable({ title, rows }) {
 
     if (editedName !== "") {
       updatedFields.name = editedName;
+    }
+    if (editedNotes !== "") {
+      updatedFields.notes = editedNotes;
     }
     if (editedStartDate !== null) {
       updatedFields.startDate = Timestamp.fromDate(editedStartDate.toDate());
@@ -238,8 +262,17 @@ export default function CustomTasksTable({ title, rows }) {
       case "name":
         return (
           <TextField
+            multiline
             defaultValue={value}
             onChange={(e) => setEditedName(e.target.value)}
+          />
+        );
+      case "notes":
+        return (
+          <TextField
+            multiline
+            defaultValue={value}
+            onChange={(e) => setEditedNotes(e.target.value)}
           />
         );
       case "startDate":
@@ -459,7 +492,7 @@ export default function CustomTasksTable({ title, rows }) {
   const headers =
     rows.length > 0
       ? Object.keys(rows[0])
-          .filter((key) => key !== "id")
+          .filter((key) => key !== "id" && key !== "notes")
           .map((key) => ({
             key,
             displayTitle: headerMapping[key] || key,
@@ -597,85 +630,218 @@ export default function CustomTasksTable({ title, rows }) {
                 {sortedRows
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row, index) => (
-                    <TableRow
-                      key={index}
-                      selected={isRowSelected(row)}
-                      className={styles["table-row"]}
-                    >
-                      <TableCell padding="checkbox">
-                        <Checkbox
-                          checked={isRowSelected(row)}
-                          onClick={(event) => {
-                            event.stopPropagation();
-                            handleRowSelect(row);
-                          }}
-                        />
-                      </TableCell>
-                      {headers.map((header) => (
+                    <React.Fragment key={row.id}>
+                      <TableRow
+                        selected={isRowSelected(row)}
+                        className={styles["table-row"]}
+                        key={row.id + "-not-expanded"}
+                      >
                         <TableCell
-                          key={header.key}
-                          className={
-                            header.key === "name"
-                              ? styles["cell-max-width"]
-                              : header.key === "status"
-                              ? styles["status-cell"]
-                              : styles["table-cell"]
-                          }
-                          onClick={() =>
-                            handleEditTask(row, header, row[header.key])
-                          }
+                          padding="checkbox"
+                          className={styles["checkbox-and-expand-container"]}
                         >
-                          {editingRow &&
-                          editingRow.task === row &&
-                          editingRow.field.key === header.key ? (
-                            <div className={styles["edit-field-container"]}>
-                              {renderEditField(
-                                header.key,
-                                row[header.key],
-                                (newValue) =>
-                                  handleEditTask(row, header, newValue),
-                                statusMapping,
-                                priorityMapping
-                              )}
-                              <br />
-                              <div
-                                className={
-                                  styles["cancel-save-button-container"]
-                                }
-                              >
-                                <Button
-                                  onClick={(e) => {
-                                    e.stopPropagation();
-                                    handleCancelEdit();
-                                  }}
-                                  sx={{ color: "red" }}
-                                >
-                                  {t("button.cancel")}{" "}
-                                  <CancelIcon
-                                    sx={{ ml: ".25rem", fontSize: "1rem" }}
-                                  />
-                                </Button>
-
-                                <Button
-                                  onClick={(e) => {
-                                    e.stopPropagation();
-                                    handleSaveEdit();
-                                  }}
-                                  sx={{ color: "green" }}
-                                >
-                                  {t("button.save")}{" "}
-                                  <CheckCircleIcon
-                                    sx={{ ml: ".25rem", fontSize: "1rem" }}
-                                  />
-                                </Button>
-                              </div>
-                            </div>
-                          ) : (
-                            renderDisplayField(header.key, row[header.key])
-                          )}
+                          <Checkbox
+                            checked={isRowSelected(row)}
+                            onClick={(event) => {
+                              event.stopPropagation();
+                              handleRowSelect(row);
+                            }}
+                          />
+                          <IconButton
+                            aria-label="expand row"
+                            size="small"
+                            onClick={() => handleExpandRow(row)}
+                            key={index}
+                            sx={{ ml: 0.5 }}
+                          >
+                            {expandedRows[index] ? (
+                              <KeyboardArrowUpIcon />
+                            ) : (
+                              <KeyboardArrowDownIcon />
+                            )}
+                          </IconButton>
                         </TableCell>
-                      ))}
-                    </TableRow>
+
+                        {headers.map((header) => (
+                          <TableCell
+                            key={header.key}
+                            className={
+                              header.key === "name"
+                                ? styles["cell-max-width"]
+                                : header.key === "status"
+                                ? styles["status-cell"]
+                                : styles["table-cell"]
+                            }
+                            onClick={() =>
+                              handleEditTask(row, header, row[header.key])
+                            }
+                          >
+                            {editingRow &&
+                            editingRow.task === row &&
+                            editingRow.field.key === header.key ? (
+                              <div className={styles["edit-field-container"]}>
+                                {renderEditField(
+                                  header.key,
+                                  row[header.key],
+                                  (newValue) =>
+                                    handleEditTask(row, header, newValue),
+                                  statusMapping,
+                                  priorityMapping
+                                )}
+                                <br />
+                                <div
+                                  className={
+                                    styles["cancel-save-button-container"]
+                                  }
+                                >
+                                  <Button
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      handleCancelEdit();
+                                    }}
+                                    sx={{ color: "red" }}
+                                  >
+                                    {t("button.cancel")}{" "}
+                                    <CancelIcon
+                                      sx={{ ml: ".25rem", fontSize: "1rem" }}
+                                    />
+                                  </Button>
+
+                                  <Button
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      handleSaveEdit();
+                                    }}
+                                    sx={{ color: "green" }}
+                                  >
+                                    {t("button.save")}{" "}
+                                    <CheckCircleIcon
+                                      sx={{ ml: ".25rem", fontSize: "1rem" }}
+                                    />
+                                  </Button>
+                                </div>
+                              </div>
+                            ) : (
+                              renderDisplayField(header.key, row[header.key])
+                            )}
+                          </TableCell>
+                        ))}
+                      </TableRow>
+
+                      {expandedRows[index] && (
+                        <TableRow
+                          key={row.id + "-expanded"}
+                          className={styles["notes-row"]}
+                        >
+                          <TableCell
+                            style={{ paddingBottom: 0, paddingTop: 0 }}
+                            colSpan={6}
+                          >
+                            <Box
+                              sx={{
+                                display: "flex",
+                                flexDirection: "column",
+                                alignItems: "center",
+                                justifyContent: "center",
+                              }}
+                            >
+                              <div className={styles["notes-title"]}>
+                                {row.notes !== ""
+                                  ? t("task.task-notes")
+                                  : t("task.no-notes")}
+                                <NotesIcon />
+                              </div>
+                              <CustomDivider />
+                              <div className={styles["notes-text"]}>
+                                {editingRow &&
+                                editingRow.task === row &&
+                                editingRow.field === "notes" ? (
+                                  <div
+                                    className={styles["edit-notes-container"]}
+                                  >
+                                    <TextField
+                                      multiline
+                                      fullWidth
+                                      rows={4}
+                                      width="100%"
+                                      label={t("task.add-notes")}
+                                      defaultValue={row.notes}
+                                      onChange={(e) =>
+                                        setEditedNotes(e.target.value)
+                                      }
+                                    />
+                                    <br />
+                                    <div
+                                      className={
+                                        styles["cancel-save-button-container"]
+                                      }
+                                    >
+                                      <Button
+                                        onClick={(e) => {
+                                          e.stopPropagation();
+                                          handleCancelEdit();
+                                        }}
+                                        sx={{ color: "red" }}
+                                      >
+                                        {t("button.cancel")}{" "}
+                                        <CancelIcon
+                                          sx={{
+                                            ml: ".25rem",
+                                            fontSize: "1rem",
+                                          }}
+                                        />
+                                      </Button>
+
+                                      <Button
+                                        onClick={(e) => {
+                                          e.stopPropagation();
+                                          handleSaveEdit();
+                                        }}
+                                        sx={{ color: "green" }}
+                                      >
+                                        {t("button.save")}{" "}
+                                        <CheckCircleIcon
+                                          sx={{
+                                            ml: ".25rem",
+                                            fontSize: "1rem",
+                                          }}
+                                        />
+                                      </Button>
+                                    </div>
+                                  </div>
+                                ) : row.notes !== "" ? (
+                                  <div
+                                    className={styles["notes-div-clickable"]}
+                                    onClick={() =>
+                                      handleEditTask(
+                                        row,
+                                        "notes",
+                                        row["notes".key]
+                                      )
+                                    }
+                                  >
+                                    {row.notes} <EditNoteIcon />
+                                  </div>
+                                ) : (
+                                  <div
+                                    className={styles["notes-div-clickable"]}
+                                    onClick={() =>
+                                      handleEditTask(
+                                        row,
+                                        "notes",
+                                        row["notes".key]
+                                      )
+                                    }
+                                  >
+                                    {t("task.add-notes")} <EditNoteIcon />
+                                  </div>
+                                )}
+                              </div>
+                            </Box>
+                          </TableCell>
+                        </TableRow>
+                      )}
+                    </React.Fragment>
                   ))}
               </TableBody>
             </Table>

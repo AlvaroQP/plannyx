@@ -37,6 +37,7 @@ export default function NewTask({ projectId }) {
   const { openDialog } = useDialog();
   const { setIsLoading } = useLoading();
   const [taskName, setTaskName] = useState("");
+  const [taskNotes, setTaskNotes] = useState("");
   const [taskStartDate, setTaskStartDate] = useState(null);
   const [taskEndDate, setTaskEndDate] = useState(null);
   const [taskPriority, setTaskPriority] = useState("");
@@ -46,6 +47,7 @@ export default function NewTask({ projectId }) {
 
   function handleReset() {
     setTaskName("");
+    setTaskNotes("");
     setTaskStartDate(null);
     setTaskEndDate(null);
     setTaskPriority("");
@@ -73,6 +75,7 @@ export default function NewTask({ projectId }) {
     } else {
       const task = {
         name: taskName,
+        notes: taskNotes.trim() === "" ? null : taskNotes,
         startDate: Timestamp.fromDate(taskStartDate.toDate()),
         endDate: isEndDateKnown
           ? Timestamp.fromDate(taskEndDate.toDate())
@@ -126,6 +129,15 @@ export default function NewTask({ projectId }) {
           label={t("task.task-name")}
           sx={{ mb: 4, background: "#fff" }}
           onChange={(e) => setTaskName(e.target.value)}
+        />
+
+        <TextField
+          multiline
+          rows={4}
+          label={t("task.task-notes")}
+          sx={{ mb: 4, background: "#fff" }}
+          value={taskNotes}
+          onChange={(e) => setTaskNotes(e.target.value)}
         />
 
         <div className={styles["switch-container"]}>

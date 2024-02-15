@@ -23,3 +23,10 @@
   padding: 0.5rem;
   border-radius: 0.2rem;
 }
+
+.checkbox-and-expand-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}

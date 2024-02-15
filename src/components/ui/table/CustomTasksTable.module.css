@@ -110,3 +110,41 @@
   flex-wrap: wrap;
   gap: 0 0.5rem;
 }
+
+.notes-row {
+  background-color: #eaeaea;
+}
+
+.notes-title {
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.notes-text {
+  font-size: 0.9rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  /* border: 1px dashed #b7b7b7; */
+}
+
+.notes-div-clickable {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  border: 1px dashed #b7b7b7;
+}
+
+.notes-div-clickable:hover {
+  font-weight: 600;
+}
+
+/* .edit-notes-container {
+  width: 100%;
+}
+ */
