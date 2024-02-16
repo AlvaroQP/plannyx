@@ -42,7 +42,6 @@ import { useEditAlert } from "../../../context/alerts/EditAlertProvider";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import styles from "./CustomTasksTable.module.css";
-import CustomDivider from "../divider/CustomDivider";
 import NotesIcon from "@mui/icons-material/Notes";
 import EditNoteIcon from "@mui/icons-material/EditNote";
 import TextSnippetIcon from "@mui/icons-material/TextSnippet";
@@ -69,6 +68,7 @@ export default function CustomTasksTable({ title, rows }) {
     handleCloseErrorEditAlert,
   } = useEditAlert();
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+  const [openDeleteNoteDialog, setOpenDeleteNoteDialog] = useState(false);
   const [editingRow, setEditingRow] = useState(null);
   const [editedName, setEditedName] = useState("");
   const [editedNotes, setEditedNotes] = useState("");
@@ -76,6 +76,7 @@ export default function CustomTasksTable({ title, rows }) {
   const [editedEndDate, setEditedEndDate] = useState(null);
   const [editedStatus, setEditedStatus] = useState("");
   const [editedPriority, setEditedPriority] = useState("");
+  const [isDeletingNote, setIsDeletingNote] = useState(false);
 
   useEffect(() => {
     setExpandedRows(new Array(rows.length).fill(false));
@@ -103,12 +104,20 @@ export default function CustomTasksTable({ title, rows }) {
     setSelectedRows(newSelected);
   }
 
-  function handleExpandRow(row) {
+  /*   function handleExpandRow(row) {
     const rowIndex = rows.indexOf(row);
     setExpandedRows((prevExpandedRows) => {
       const newExpandedRows = prevExpandedRows.map((expanded, index) =>
         index === rowIndex ? !expanded : false
       );
+      return newExpandedRows;
+    });
+  } */
+
+  function handleExpandRow(row) {
+    setExpandedRows((prevExpandedRows) => {
+      const newExpandedRows = { ...prevExpandedRows };
+      newExpandedRows[row.id] = !newExpandedRows[row.id];
       return newExpandedRows;
     });
   }
@@ -123,6 +132,14 @@ export default function CustomTasksTable({ title, rows }) {
 
   function handleCloseDeleteDialog() {
     setOpenDeleteDialog(false);
+  }
+
+  function handleOpenDeleteNoteDialog() {
+    setOpenDeleteNoteDialog(true);
+  }
+
+  function handleCloseDeleteNoteDialog() {
+    setOpenDeleteNoteDialog(false);
   }
 
   async function handleDeleteSelected() {
@@ -211,8 +228,11 @@ export default function CustomTasksTable({ title, rows }) {
     if (editedName !== "") {
       updatedFields.name = editedName;
     }
-    if (editedNotes !== "") {
+    if (editedNotes !== "" && !isDeletingNote) {
       updatedFields.notes = editedNotes;
+    }
+    if (editedNotes === "") {
+      updatedFields.notes = "";
     }
     if (editedStartDate !== null) {
       updatedFields.startDate = Timestamp.fromDate(editedStartDate.toDate());
@@ -250,6 +270,7 @@ export default function CustomTasksTable({ title, rows }) {
       handleOpenErrorEditAlert();
     } finally {
       setIsLoading(false);
+      isDeletingNote && setIsDeletingNote(false);
     }
   }
 
@@ -524,6 +545,23 @@ export default function CustomTasksTable({ title, rows }) {
           />
         )}
 
+        {openDeleteNoteDialog && (
+          <CustomDialog
+            open={openDeleteNoteDialog}
+            handleClose={handleCloseDeleteNoteDialog}
+            title={t("task.delete-notes")}
+            description={t("task.delete-notes-description")}
+            acceptText={t("button.delete")}
+            cancelText={t("button.cancel")}
+            acceptAction={() => {
+              setOpenDeleteNoteDialog(false);
+              setIsDeletingNote(true);
+              setEditedNotes("");
+              handleSaveEdit();
+            }}
+          />
+        )}
+
         <Box className={styles["tasks-table-container"]}>
           <Typography
             className={styles["title-header"]}
@@ -667,7 +705,7 @@ export default function CustomTasksTable({ title, rows }) {
                             key={index}
                             sx={{ ml: 0.5 }}
                           >
-                            {expandedRows[index] ? (
+                            {expandedRows[row.id] ? (
                               <KeyboardArrowUpIcon />
                             ) : (
                               <KeyboardArrowDownIcon />
@@ -741,7 +779,7 @@ export default function CustomTasksTable({ title, rows }) {
                         ))}
                       </TableRow>
 
-                      {expandedRows[index] && (
+                      {expandedRows[row.id] && (
                         <TableRow
                           key={row.id + "-expanded"}
                           className={styles["notes-row"]}
@@ -759,12 +797,15 @@ export default function CustomTasksTable({ title, rows }) {
                               }}
                             >
                               <div className={styles["notes-title"]}>
-                                {row.notes !== ""
-                                  ? t("task.task-notes")
-                                  : t("task.no-notes")}
-                                <NotesIcon />
+                                {row.notes !== "" ? (
+                                  <>
+                                    {t("task.task-notes")} <NotesIcon />{" "}
+                                  </>
+                                ) : (
+                                  ""
+                                )}
                               </div>
-                              <CustomDivider />
+
                               <div className={styles["notes-text"]}>
                                 {editingRow &&
                                 editingRow.task === row &&
@@ -782,6 +823,7 @@ export default function CustomTasksTable({ title, rows }) {
                                       onChange={(e) =>
                                         setEditedNotes(e.target.value)
                                       }
+                                      sx={{ backgroundColor: "#fff" }}
                                     />
                                     <br />
                                     <div
@@ -820,6 +862,24 @@ export default function CustomTasksTable({ title, rows }) {
                                           }}
                                         />
                                       </Button>
+
+                                      <div>
+                                        <Button
+                                          onClick={(e) => {
+                                            e.stopPropagation();
+                                            handleOpenDeleteNoteDialog();
+                                          }}
+                                          sx={{ color: "red", mt: "1rem" }}
+                                        >
+                                          {t("task.delete-notes")}{" "}
+                                          <DeleteIcon
+                                            sx={{
+                                              ml: ".25rem",
+                                              fontSize: "1rem",
+                                            }}
+                                          />
+                                        </Button>
+                                      </div>
                                     </div>
                                   </div>
                                 ) : row.notes !== "" ? (
@@ -848,7 +908,9 @@ export default function CustomTasksTable({ title, rows }) {
                                       )
                                     }
                                   >
-                                    <span className={styles["notes-span"]}>
+                                    <span
+                                      className={styles["notes-span-add-notes"]}
+                                    >
                                       {t("task.add-notes")} <EditNoteIcon />
                                     </span>{" "}
                                   </div>

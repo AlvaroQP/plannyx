@@ -172,6 +172,8 @@
         "task-notes-optional": "Notes (optional)",
         "no-notes": "No notes",
         "add-notes": "Add notes",
+        "delete-notes": "Delete notes",
+        "delete-notes-description": "Are you sure you want to delete the notes?",
         "name": "Name",
         "start-date": "Start Date",
         "end-date": "End Date",

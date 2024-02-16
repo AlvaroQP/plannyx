@@ -172,6 +172,8 @@
         "task-notes-optional": "Notas (opcional)",
         "no-notes": "No hay notas",
         "add-notes": "Añadir notas",
+        "delete-notes": "Eliminar notas",
+        "delete-notes-description": "¿Estás segur@ de que quieres eliminar las notas de esta tarea?",
         "name": "Nombre",
         "start-date": "Fecha de Inicio",
         "end-date": "Fecha de Finalización",

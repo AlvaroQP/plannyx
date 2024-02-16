@@ -110,12 +110,6 @@
   color: white;
 }
 
-.cancel-save-button-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0 0.5rem;
-}
-
 .notes-row {
   background-color: #eaeaea;
 }
@@ -131,7 +125,7 @@
 
 .notes-text {
   font-size: 0.9rem;
-  padding: 1rem;
+  /* padding: 1rem; */
   margin-bottom: 1rem;
   width: 100%;
 }
@@ -147,10 +141,11 @@
 }
 
 .notes-div-clickable:hover {
-  font-weight: 600;
+  color: #3071d4;
 }
 
-.notes-span {
+.notes-span,
+.notes-span-add-notes {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -158,9 +153,7 @@
   gap: 0.75rem;
 }
 
-.add-notes-span {
-  /*   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem; */
+.notes-span-add-notes {
+  color: #3071d4;
+  font-weight: 600;
 }
