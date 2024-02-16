@@ -5,3 +5,12 @@
 .icon {
   color: #3071d4;
 }
+
+.flag-collapsed-text {
+  font-size: 1rem;
+  margin: 0.25rem;
+}
+
+.select:hover {
+  background-color: #f0f0f0;
+}
