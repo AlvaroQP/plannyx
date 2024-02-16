@@ -863,23 +863,25 @@ export default function CustomTasksTable({ title, rows }) {
                                         />
                                       </Button>
 
-                                      <div>
-                                        <Button
-                                          onClick={(e) => {
-                                            e.stopPropagation();
-                                            handleOpenDeleteNoteDialog();
-                                          }}
-                                          sx={{ color: "red", mt: "1rem" }}
-                                        >
-                                          {t("task.delete-notes")}{" "}
-                                          <DeleteIcon
-                                            sx={{
-                                              ml: ".25rem",
-                                              fontSize: "1rem",
+                                      {row.notes !== "" && (
+                                        <div>
+                                          <Button
+                                            onClick={(e) => {
+                                              e.stopPropagation();
+                                              handleOpenDeleteNoteDialog();
                                             }}
-                                          />
-                                        </Button>
-                                      </div>
+                                            sx={{ color: "red", mt: "1rem" }}
+                                          >
+                                            {t("task.delete-notes")}{" "}
+                                            <DeleteIcon
+                                              sx={{
+                                                ml: ".25rem",
+                                                fontSize: "1rem",
+                                              }}
+                                            />
+                                          </Button>
+                                        </div>
+                                      )}
                                     </div>
                                   </div>
                                 ) : row.notes !== "" ? (
