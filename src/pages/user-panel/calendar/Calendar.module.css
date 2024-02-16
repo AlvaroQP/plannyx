@@ -1,0 +1,7 @@
+.calendar-container {
+  margin: 2rem;
+}
+
+.my-event:hover {
+  background-color: #0f418d !important;
+}

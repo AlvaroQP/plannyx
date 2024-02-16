@@ -245,5 +245,14 @@
         "ending-soon": "Projects ending soon",
         "no-projects":"You have no projects yet. Create one by clicking on the button below.",
         "no-projects-starting-ending-soon": "There are no projects starting or ending soon."
+    },
+    "calendar": {
+        "month": "Month",
+        "week": "Week",
+        "day": "Day",
+        "today": "Today",
+        "previous": "Previous",
+        "next": "Next",
+        "more": "more"
     }
 }

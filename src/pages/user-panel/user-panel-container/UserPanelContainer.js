@@ -51,7 +51,11 @@ export default function UserPanelContainer() {
   );
 
   const calendarMenu = (
-    <MenuItem icon={<CalendarMonthIcon className={styles.icon} />}>
+    <MenuItem
+      icon={<CalendarMonthIcon className={styles.icon} />}
+      className={isActive("/user-panel/calendar") ? styles.active : ""}
+      onClick={() => navigate("/user-panel/calendar")}
+    >
       {t("user-panel-sidebar.calendar")}
     </MenuItem>
   );
