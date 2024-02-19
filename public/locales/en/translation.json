@@ -250,6 +250,7 @@
         "today": "Today",
         "month": "Month",
         "week": "Week",
-        "day": "Day"
+        "day": "Day",
+        "no-projects": "The calendar will be displayed here once you have created some projects."
     }
 }

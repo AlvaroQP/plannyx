@@ -9,6 +9,8 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "../../../context/language/LanguageProvider";
 import styles from "./Calendar.module.css";
+import AddCircleOutline from "@mui/icons-material/AddCircleOutline";
+import CustomButton from "../../../components/ui/button/CustomButton";
 
 export default function CalendarView() {
   const { projects } = useProjects();
@@ -57,42 +59,56 @@ export default function CalendarView() {
   }
 
   function handleEventMouseEnter(info) {
-    info.el.style.border = "1.5px solid black";
+    info.el.style.border = ".5px solid black";
+    info.el.style.fontWeight = "600";
   }
 
   function handleEventMouseLeave(info) {
     info.el.style.border = "none";
+    info.el.style.fontWeight = "normal";
   }
 
   return (
     <>
       <UserPanelHeader title={t("user-panel-sidebar.calendar")} />
       <div className={styles["calendar-container"]}>
-        <FullCalendar
-          plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-          headerToolbar={{
-            left: "prev,next today",
-            center: "title",
-            right: "dayGridMonth,dayGridWeek,dayGridDay",
-          }}
-          initialView="dayGridMonth"
-          events={events}
-          height="80vh"
-          aspectRatio={1}
-          eventClick={handleEventClick}
-          locale={language}
-          firstDay={1}
-          slotMinTime={"00:00"}
-          slotMaxTime={"00:00"}
-          buttonText={{
-            today: t("calendar.today"),
-            month: t("calendar.month"),
-            week: t("calendar.week"),
-            day: t("calendar.day"),
-          }}
-          eventMouseEnter={handleEventMouseEnter}
-          eventMouseLeave={handleEventMouseLeave}
-        />
+        {projects.length > 0 ? (
+          <FullCalendar
+            plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+            headerToolbar={{
+              left: "prev,next today",
+              center: "title",
+              right: "dayGridMonth,dayGridWeek,dayGridDay",
+            }}
+            initialView="dayGridMonth"
+            events={events}
+            height="80vh"
+            aspectRatio={1}
+            eventClick={handleEventClick}
+            locale={language}
+            firstDay={1}
+            slotMinTime={"00:00"}
+            slotMaxTime={"00:00"}
+            buttonText={{
+              today: t("calendar.today"),
+              month: t("calendar.month"),
+              week: t("calendar.week"),
+              day: t("calendar.day"),
+            }}
+            eventMouseEnter={handleEventMouseEnter}
+            eventMouseLeave={handleEventMouseLeave}
+          />
+        ) : (
+          <div className={styles["no-projects"]}>
+            <div>{t("calendar.no-projects")}</div>
+            <CustomButton
+              text={t("button.new-project")}
+              variant="contained"
+              icon={<AddCircleOutline />}
+              onClick={() => navigate("/user-panel/projects/new")}
+            />
+          </div>
+        )}
       </div>
     </>
   );

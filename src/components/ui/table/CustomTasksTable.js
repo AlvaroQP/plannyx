@@ -76,7 +76,6 @@ export default function CustomTasksTable({ title, rows }) {
   const [editedEndDate, setEditedEndDate] = useState(null);
   const [editedStatus, setEditedStatus] = useState("");
   const [editedPriority, setEditedPriority] = useState("");
-  /*   const [isDeletingNote, setIsDeletingNote] = useState(false); */
 
   useEffect(() => {
     setExpandedRows(new Array(rows.length).fill(false));
@@ -103,16 +102,6 @@ export default function CustomTasksTable({ title, rows }) {
 
     setSelectedRows(newSelected);
   }
-
-  /*   function handleExpandRow(row) {
-    const rowIndex = rows.indexOf(row);
-    setExpandedRows((prevExpandedRows) => {
-      const newExpandedRows = prevExpandedRows.map((expanded, index) =>
-        index === rowIndex ? !expanded : false
-      );
-      return newExpandedRows;
-    });
-  } */
 
   function handleExpandRow(row) {
     setExpandedRows((prevExpandedRows) => {
@@ -180,7 +169,7 @@ export default function CustomTasksTable({ title, rows }) {
 
   function resetValues() {
     setEditedName("");
-    setEditedNotes("");
+    setEditedNotes(null);
     setEditedStartDate(null);
     setEditedEndDate(null);
     setEditedStatus("");
@@ -548,7 +537,6 @@ export default function CustomTasksTable({ title, rows }) {
             cancelText={t("button.cancel")}
             acceptAction={() => {
               setOpenDeleteNoteDialog(false);
-              /* setIsDeletingNote(true); */
               setEditedNotes(null);
               handleSaveEdit();
             }}

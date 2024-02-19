@@ -73,20 +73,21 @@
 .no-projects,
 .no-projects-to-show {
   display: flex;
+  height: 50vh;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   font-size: 1rem;
-  margin: 1rem;
+  gap: 2rem;
 }
 
 .no-projects h2,
 .no-projects-to-show h2 {
   font-size: 1rem;
-  margin-bottom: 1.5rem;
-  font-weight: 600;
+  font-weight: 300;
 }
 
-.buttons-container button {
+/* .buttons-container button {
   margin: 1rem;
 }
+ */

@@ -250,6 +250,7 @@
         "today": "Hoy",
         "month": "Mes",
         "week": "Semana",
-        "day": "Día"
+        "day": "Día",
+        "no-projects": "El calendario se mostrará aquí una vez hayas creado algún proyecto."
     }
 }
