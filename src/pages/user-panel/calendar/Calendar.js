@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+/* import React, { useState, useMemo } from "react";
 import styles from "./Calendar.module.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import UserPanelHeader from "../../../components/ui/header/user-panel-header/UserPanelHeader";
@@ -67,7 +67,7 @@ export default function CalendarView() {
       <UserPanelHeader title={t("user-panel-sidebar.calendar")} />
       <div className={styles["calendar-container"]}>
         <Calendar
-          culture={language}
+          culture={language === "es" ? "es" : "en"}
           localizer={localizer}
           events={events}
           startAccessor="start"
@@ -100,4 +100,11 @@ export default function CalendarView() {
       </div>
     </>
   );
+}
+ */
+
+import React from "react";
+
+export default function Calendar() {
+  return <div>Calendar</div>;
 }

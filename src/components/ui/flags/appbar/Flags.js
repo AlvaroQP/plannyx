@@ -27,7 +27,7 @@ export default function Flags() {
         color: "#fff",
       }}
     >
-      <MenuItem value="en-gb">
+      <MenuItem value="en">
         <span className={`fi fi-gb ${styles.flag}`} />
         <span className={styles["flag-text"]}>EN</span>
       </MenuItem>
