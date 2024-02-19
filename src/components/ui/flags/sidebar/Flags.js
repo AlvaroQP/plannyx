@@ -34,7 +34,7 @@ export default function Flags({ collapsed }) {
           "& .MuiOutlinedInput-notchedOutline": { border: "none" },
         }}
       >
-        <MenuItem value="gb" sx={{ padding: ".75rem 1rem" }}>
+        <MenuItem value="en-gb" sx={{ padding: ".75rem 1rem" }}>
           <span className={`fi fi-gb ${styles.flag}`} />{" "}
           {t("user-panel-sidebar.english")}
         </MenuItem>
@@ -64,10 +64,14 @@ export default function Flags({ collapsed }) {
             paddingLeft: ".80rem",
           }}
           renderValue={(value) => (
-            <span className={`fi fi-${value.split("-")[0]} ${styles.flag}`} />
+            <span
+              className={`fi fi-${
+                value.split("-")[1] ? value.split("-")[1] : value.split("-")[0]
+              } ${styles.flag}`}
+            />
           )}
         >
-          <MenuItem value="gb">
+          <MenuItem value="en-gb">
             <span
               className={`fi fi-gb ${styles.flag} ${styles["flag-collapsed"]}`}
             />

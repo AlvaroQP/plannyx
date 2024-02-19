@@ -75,7 +75,7 @@ export default function NewTask({ projectId }) {
     } else {
       const task = {
         name: taskName,
-        notes: taskNotes.trim() === "" ? "" : taskNotes,
+        notes: taskNotes.trim() === "" ? null : taskNotes,
         startDate: Timestamp.fromDate(taskStartDate.toDate()),
         endDate: isEndDateKnown
           ? Timestamp.fromDate(taskEndDate.toDate())

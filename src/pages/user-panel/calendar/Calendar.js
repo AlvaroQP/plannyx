@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import styles from "./Calendar.module.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import UserPanelHeader from "../../../components/ui/header/user-panel-header/UserPanelHeader";
@@ -15,6 +15,10 @@ export default function CalendarView() {
   const { t } = useTranslation();
   const { language } = useLanguage();
   const navigate = useNavigate();
+  const [currentView, setCurrentView] = useState("month");
+
+  const calendarStyle =
+    currentView === "month" ? { height: "85vh" } : { height: "auto" };
 
   const lang = {
     en: null,
@@ -52,6 +56,12 @@ export default function CalendarView() {
 
   const messages = lang[language] || {};
 
+  const myDayStart = new Date();
+  myDayStart.setHours(0, 0, 0, 0);
+
+  const myDayEnd = new Date();
+  myDayEnd.setHours(0, 0, 0, 0);
+
   return (
     <>
       <UserPanelHeader title={t("user-panel-sidebar.calendar")} />
@@ -62,10 +72,13 @@ export default function CalendarView() {
           events={events}
           startAccessor="start"
           endAccessor="end"
-          style={{ height: "85vh" }}
+          style={calendarStyle}
           views={["month", "week", "day"]}
+          onView={setCurrentView}
           messages={messages}
           step={60}
+          min={myDayStart}
+          max={myDayEnd}
           eventPropGetter={(event, start, end, isSelected) => {
             let newStyle = {
               backgroundColor: "#4c8dbf",

@@ -35,6 +35,7 @@ export default function ProjectDetailsContainer({ project }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { language } = useLanguage();
+  const locale = language === "en-gb" ? "en" : "es";
   const { openDialog } = useDialog();
   const [editedField, setEditedField] = useState(null);
   const [editedProject, setEditedProject] = useState(project);
@@ -235,7 +236,7 @@ export default function ProjectDetailsContainer({ project }) {
             <div>
               <LocalizationProvider
                 dateAdapter={AdapterDayjs}
-                adapterLocale={dayjs.locale(language)}
+                adapterLocale={dayjs.locale(locale)}
               >
                 <MobileDatePicker
                   label={t("new-project.start-date")}
@@ -271,7 +272,7 @@ export default function ProjectDetailsContainer({ project }) {
             <div>
               <LocalizationProvider
                 dateAdapter={AdapterDayjs}
-                adapterLocale={dayjs.locale(language)}
+                adapterLocale={dayjs.locale(locale)}
               >
                 <MobileDatePicker
                   label={t("new-project.end-date")}
