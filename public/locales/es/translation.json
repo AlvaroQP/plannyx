@@ -245,5 +245,11 @@
         "ending-soon": "Proyectos que terminan pronto",
         "no-projects":"Todavía no tienes ningún proyecto. Crea uno nuevo haciendo clic en el botón de abajo.",
         "no-projects-starting-ending-soon": "No hay proyectos que empiecen o terminen pronto."
+    },
+    "calendar": {
+        "today": "Hoy",
+        "month": "Mes",
+        "week": "Semana",
+        "day": "Día"
     }
 }

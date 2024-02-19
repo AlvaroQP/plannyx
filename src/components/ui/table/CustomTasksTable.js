@@ -71,12 +71,12 @@ export default function CustomTasksTable({ title, rows }) {
   const [openDeleteNoteDialog, setOpenDeleteNoteDialog] = useState(false);
   const [editingRow, setEditingRow] = useState(null);
   const [editedName, setEditedName] = useState("");
-  const [editedNotes, setEditedNotes] = useState("");
+  const [editedNotes, setEditedNotes] = useState(null);
   const [editedStartDate, setEditedStartDate] = useState(null);
   const [editedEndDate, setEditedEndDate] = useState(null);
   const [editedStatus, setEditedStatus] = useState("");
   const [editedPriority, setEditedPriority] = useState("");
-  const [isDeletingNote, setIsDeletingNote] = useState(false);
+  /*   const [isDeletingNote, setIsDeletingNote] = useState(false); */
 
   useEffect(() => {
     setExpandedRows(new Array(rows.length).fill(false));
@@ -228,11 +228,11 @@ export default function CustomTasksTable({ title, rows }) {
     if (editedName !== "") {
       updatedFields.name = editedName;
     }
-    if (editedNotes !== "" && !isDeletingNote) {
+    if (editedNotes !== "") {
       updatedFields.notes = editedNotes;
     }
     if (editedNotes === "") {
-      updatedFields.notes = "";
+      updatedFields.notes = null;
     }
     if (editedStartDate !== null) {
       updatedFields.startDate = Timestamp.fromDate(editedStartDate.toDate());
@@ -270,7 +270,6 @@ export default function CustomTasksTable({ title, rows }) {
       handleOpenErrorEditAlert();
     } finally {
       setIsLoading(false);
-      isDeletingNote && setIsDeletingNote(false);
     }
   }
 
@@ -304,10 +303,7 @@ export default function CustomTasksTable({ title, rows }) {
             dateAdapter={AdapterDayjs}
             adapterLocale={dayjs.locale(language)}
           >
-            <DatePicker
-              value={editedStartDate}
-              onChange={(newValue) => setEditedStartDate(newValue)}
-            />
+            <DatePicker onChange={(newValue) => setEditedStartDate(newValue)} />
           </LocalizationProvider>
         );
       case "endDate":
@@ -316,10 +312,7 @@ export default function CustomTasksTable({ title, rows }) {
             dateAdapter={AdapterDayjs}
             adapterLocale={dayjs.locale(language)}
           >
-            <DatePicker
-              value={editedEndDate}
-              onChange={(newValue) => setEditedEndDate(newValue)}
-            />
+            <DatePicker onChange={(newValue) => setEditedEndDate(newValue)} />
           </LocalizationProvider>
         );
       case "status":
@@ -555,8 +548,8 @@ export default function CustomTasksTable({ title, rows }) {
             cancelText={t("button.cancel")}
             acceptAction={() => {
               setOpenDeleteNoteDialog(false);
-              setIsDeletingNote(true);
-              setEditedNotes("");
+              /* setIsDeletingNote(true); */
+              setEditedNotes(null);
               handleSaveEdit();
             }}
           />
