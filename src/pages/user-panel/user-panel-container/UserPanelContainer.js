@@ -3,6 +3,7 @@ import logo from "../../../assets/images/logo-blue.png";
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import LibraryAddIcon from "@mui/icons-material/LibraryAdd";
 import ListAltIcon from "@mui/icons-material/ListAlt";
+import ChecklistIcon from "@mui/icons-material/Checklist";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import CustomDivider from "../../../components/ui/divider/CustomDivider";
@@ -47,6 +48,16 @@ export default function UserPanelContainer() {
       onClick={() => navigate("/user-panel/projects/all")}
     >
       {t("user-panel-sidebar.my-projects")}
+    </MenuItem>
+  );
+
+  const toDoListMenu = (
+    <MenuItem
+      icon={<ChecklistIcon className={styles.icon} />}
+      className={isActive("/user-panel/reminders") ? styles.active : ""}
+      onClick={() => navigate("/user-panel/reminders")}
+    >
+      {t("user-panel-sidebar.to-do-list")}
     </MenuItem>
   );
 
@@ -149,6 +160,17 @@ export default function UserPanelContainer() {
             </Tooltip>
           ) : (
             myProjectsMenu
+          )}
+
+          {collapsed ? (
+            <Tooltip
+              title={t("user-panel-sidebar.to-do-list")}
+              placement="right"
+            >
+              <div>{toDoListMenu}</div>
+            </Tooltip>
+          ) : (
+            toDoListMenu
           )}
 
           {collapsed ? (

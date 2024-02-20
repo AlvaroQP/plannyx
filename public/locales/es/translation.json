@@ -97,6 +97,7 @@
         "new-project": "Nuevo Proyecto",
         "my-projects": "Mis Proyectos",
         "calendar": "Calendario",
+        "to-do-list": "Recordatorios",
         "dashboard": "Panel de control",
         "notifications": "Notificaciones",
         "settings": "Ajustes",
@@ -252,5 +253,17 @@
         "week": "Semana",
         "day": "Día",
         "no-projects": "El calendario se mostrará aquí una vez hayas creado algún proyecto."
+    },
+    "reminders": {
+        "no-reminders": "Todavía no tienes ningún recordatorio.",
+        "reminder-title": "Recordatorio",
+        "reminder-description": "Descripción",
+        "reminder-priority": "Prioridad",
+        "reminder-date": "Fecha",
+        "reminder-time": "Hora",
+        "priority-low": "Prioridad Baja",
+        "priority-medium": "Prioridad Media",
+        "priority-high": "Prioridad Alta",
+        "priority-critical": "Prioridad Crítica"
     }
 }

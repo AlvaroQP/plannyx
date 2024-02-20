@@ -6,6 +6,7 @@ import { EditAlertProvider } from "./alerts/EditAlertProvider";
 import { DialogProvider } from "./dialog/DialogProvider";
 import { LanguageProvider } from "./language/LanguageProvider";
 import { ProjectsProvider } from "./projects/ProjectsProvider";
+import { RemindersProvider } from "./reminders/RemindersProvider";
 import { TasksProvider } from "./tasks/TasksProvider";
 import { SidebarProvider } from "./sidebar/SidebarProvider";
 import ThemeWrapper from "./theme/ThemeProvider";
@@ -21,7 +22,9 @@ export default function GlobalContextProviders({ children }) {
                 <ThemeWrapper>
                   <ProjectsProvider>
                     <TasksProvider>
-                      <SidebarProvider>{children}</SidebarProvider>
+                      <RemindersProvider>
+                        <SidebarProvider>{children}</SidebarProvider>
+                      </RemindersProvider>
                     </TasksProvider>
                   </ProjectsProvider>
                 </ThemeWrapper>

@@ -1,0 +1,9 @@
+.new-reminder-form {
+  margin: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.new-reminder-form > * {
+  margin-bottom: 2rem;
+}

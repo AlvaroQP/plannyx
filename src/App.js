@@ -8,6 +8,7 @@ import NewProject from "./pages/user-panel/projects/new-project/NewProject";
 import ProjectsContainer from "./pages/user-panel/projects/projects-container/ProjectsContainer";
 import UserPanelContainer from "./pages/user-panel/user-panel-container/UserPanelContainer";
 import Calendar from "./pages/user-panel/calendar/Calendar";
+import Reminders from "./pages/user-panel/reminders/reminders-container/Reminders";
 import Dashboard from "./pages/user-panel/dashboard/Dashboard";
 import AccessDenied from "./pages/access-denied/AccessDenied";
 import { useAuth } from "./auth/auth-context/AuthProvider";
@@ -66,6 +67,10 @@ export default function App() {
             {
               path: "calendar",
               element: <ComponentOrAccessDenied component={Calendar} />,
+            },
+            {
+              path: "reminders",
+              element: <ComponentOrAccessDenied component={Reminders} />,
             },
             {
               path: "dashboard",

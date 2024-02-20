@@ -97,6 +97,7 @@
         "new-project": "New Project",
         "my-projects": "My Projects",
         "calendar": "Calendar",
+        "to-do-list": "Reminders",
         "dashboard": "Dashboard",
         "notifications": "Notifications",
         "settings": "Settings",
@@ -252,5 +253,18 @@
         "week": "Week",
         "day": "Day",
         "no-projects": "The calendar will be displayed here once you have created some projects."
+    },
+    "reminders": {
+        "no-reminders": "You have no reminders yet.",
+        "reminder-title": "Title",
+        "reminder-description": "Description",
+        "reminder-priority": "Priority",
+        "reminder-date": "Date",
+        "reminder-time": "Time",
+        "priority-low": "Low Priority",
+        "priority-medium": "Medium Priority",
+        "priority-high": "High Priority",
+        "priority-critical": "Critical Priority"
     }
+    
 }
