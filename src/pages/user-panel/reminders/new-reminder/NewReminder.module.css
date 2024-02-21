@@ -7,3 +7,54 @@
 .new-reminder-form > * {
   margin-bottom: 2rem;
 }
+
+.priority-icon-low {
+  color: #029a02;
+}
+
+.priority-icon-medium {
+  color: #ff6b02;
+}
+
+.priority-icon-high {
+  color: #cd0303;
+}
+
+.priority-icon-critical {
+  color: #ff0000;
+}
+
+.low-priority-text,
+.medium-priority-text,
+.high-priority-text,
+.critical-priority-text {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.date-time-container {
+  margin-top: 2rem;
+  display: flex;
+  gap: 2rem;
+}
+
+@media (max-width: 600px) {
+  .date-time-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .date-time-container > * {
+    width: 100%;
+  }
+}
+
+.buttonsContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttonsContainer > button {
+  margin: 0 1rem;
+}

@@ -223,6 +223,7 @@ export default function NewProject() {
               <span className={styles["low-priority-text"]}>
                 <SignalCellular1BarIcon
                   className={styles["priority-icon-low"]}
+                  sx={{ fontSize: "1.2rem" }}
                 />
                 {t("new-project.low-priority")}
               </span>
@@ -231,6 +232,7 @@ export default function NewProject() {
               <span className={styles["medium-priority-text"]}>
                 <SignalCellular2BarIcon
                   className={styles["priority-icon-medium"]}
+                  sx={{ fontSize: "1.2rem" }}
                 />
                 {t("new-project.medium-priority")}
               </span>
@@ -239,6 +241,7 @@ export default function NewProject() {
               <span className={styles["high-priority-text"]}>
                 <SignalCellular3BarIcon
                   className={styles["priority-icon-high"]}
+                  sx={{ fontSize: "1.2rem" }}
                 />
                 {t("new-project.high-priority")}
               </span>
@@ -247,6 +250,7 @@ export default function NewProject() {
               <span className={styles["critical-priority-text"]}>
                 <SignalCellularConnectedNoInternet4BarIcon
                   className={styles["priority-icon-critical"]}
+                  sx={{ fontSize: "1.2rem" }}
                 />
                 {t("new-project.critical-priority")}
               </span>

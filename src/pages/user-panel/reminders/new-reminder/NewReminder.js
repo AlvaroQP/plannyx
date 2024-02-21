@@ -19,6 +19,10 @@ import { useLanguage } from "../../../../context/language/LanguageProvider";
 import CustomButton from "../../../../components/ui/button/CustomButton";
 import RestartAltOutlinedIcon from "@mui/icons-material/RestartAltOutlined";
 import CheckCircleOutlineOutlinedIcon from "@mui/icons-material/CheckCircleOutlineOutlined";
+import SignalCellular1BarIcon from "@mui/icons-material/SignalCellular1Bar";
+import SignalCellular2BarIcon from "@mui/icons-material/SignalCellular2Bar";
+import SignalCellular3BarIcon from "@mui/icons-material/SignalCellular3Bar";
+import SignalCellularConnectedNoInternet4BarIcon from "@mui/icons-material/SignalCellularConnectedNoInternet4Bar";
 import dateFormat from "../../../../utils/dateFormat";
 import dayjs from "dayjs";
 
@@ -28,7 +32,7 @@ export default function NewReminder() {
   const { postReminder } = useReminders();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [priority, setPriority] = useState("low");
+  const [priority, setPriority] = useState("");
   const [reminderDate, setReminderDate] = useState(null);
   const [reminderTime, setReminderTime] = useState(null);
   const [validForm, setValidForm] = useState(true);
@@ -36,7 +40,7 @@ export default function NewReminder() {
   function handleReset() {
     setTitle("");
     setDescription("");
-    setPriority("low");
+    setPriority("");
     setReminderDate(null);
     setReminderTime(null);
   }
@@ -63,68 +67,109 @@ export default function NewReminder() {
   return (
     <form className={styles["new-reminder-form"]} onSubmit={handleSubmit}>
       <TextField
+        required
         id="title"
         label={t("reminders.reminder-title")}
-        variant="standard"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        required
+        variant="filled"
+        sx={{ mb: 4, background: "#fff" }}
       />
+
       <TextField
         id="description"
         label={t("reminders.reminder-description")}
-        variant="standard"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
+        variant="filled"
+        sx={{ mb: 4, background: "#fff" }}
       />
-      <FormControl variant="standard">
-        <InputLabel id="reminder-priority-label">
+
+      <FormControl variant="filled" sx={{ background: "#fff" }} required>
+        <InputLabel id="priority-select-label">
           {t("reminders.reminder-priority")}
         </InputLabel>
         <Select
-          labelId="reminder-priority-label"
-          id="reminder-priority"
+          labelId="priority-select-label"
+          id="priority-label"
+          required
           value={priority}
-          label={t("reminders.reminder-priority")}
+          label={t("new-project.project-priority")}
           onChange={(e) => setPriority(e.target.value)}
         >
-          <MenuItem value="low">{t("reminders.priority-low")}</MenuItem>
-          <MenuItem value="medium">{t("reminders.priority-medium")}</MenuItem>
-          <MenuItem value="high">{t("reminders.priority-high")}</MenuItem>
+          <MenuItem value="low">
+            <span className={styles["low-priority-text"]}>
+              <SignalCellular1BarIcon
+                className={styles["priority-icon-low"]}
+                sx={{ fontSize: "1.2rem" }}
+              />
+              {t("reminders.priority-low")}
+            </span>
+          </MenuItem>
+          <MenuItem value="medium">
+            <span className={styles["medium-priority-text"]}>
+              <SignalCellular2BarIcon
+                className={styles["priority-icon-medium"]}
+                sx={{ fontSize: "1.2rem" }}
+              />
+              {t("reminders.priority-medium")}
+            </span>
+          </MenuItem>
+          <MenuItem value="high">
+            <span className={styles["high-priority-text"]}>
+              <SignalCellular3BarIcon
+                className={styles["priority-icon-high"]}
+                sx={{ fontSize: "1.2rem" }}
+              />
+              {t("reminders.priority-high")}
+            </span>
+          </MenuItem>
           <MenuItem value="critical">
-            {t("reminders.priority-critical")}
+            <span className={styles["critical-priority-text"]}>
+              <SignalCellularConnectedNoInternet4BarIcon
+                className={styles["priority-icon-critical"]}
+                sx={{ fontSize: "1.2rem" }}
+              />
+              {t("reminders.priority-critical")}
+            </span>
           </MenuItem>
         </Select>
       </FormControl>
-      <FormControl variant="standard">
-        <LocalizationProvider
-          dateAdapter={AdapterDayjs}
-          adapterLocale={dayjs.locale(language)}
-        >
-          <DatePicker
-            labelId="reminder-date-label"
-            id="reminder-date"
-            inputFormat={dateFormat()}
-            label={t("reminders.reminder-date")}
-            value={reminderDate}
-            onChange={(date) => setReminderDate(date)}
-            slotProps={{ textField: { variant: "standard" } }}
-          />
-        </LocalizationProvider>
-      </FormControl>
-      <FormControl variant="standard">
-        <LocalizationProvider dateAdapter={AdapterDayjs} locale={language}>
-          <TimePicker
-            labelId="reminder-time-label"
-            id="reminder-time"
-            ampm={false}
-            value={reminderTime}
-            label={t("reminders.reminder-time")}
-            onChange={(time) => setReminderTime(time)}
-            slotProps={{ textField: { variant: "standard" } }}
-          />
-        </LocalizationProvider>
-      </FormControl>
+
+      <div className={styles["date-time-container"]}>
+        <FormControl variant="standard" sx={{ width: "48%" }}>
+          <LocalizationProvider
+            dateAdapter={AdapterDayjs}
+            adapterLocale={dayjs.locale(language)}
+          >
+            <DatePicker
+              labelId="reminder-date-label"
+              id="reminder-date"
+              inputFormat={dateFormat()}
+              label={t("reminders.reminder-date")}
+              value={reminderDate}
+              onChange={(date) => setReminderDate(date)}
+              slotProps={{ textField: { variant: "filled" } }}
+              sx={{ background: "#fff" }}
+            />
+          </LocalizationProvider>
+        </FormControl>
+
+        <FormControl variant="standard" sx={{ width: "48%" }}>
+          <LocalizationProvider dateAdapter={AdapterDayjs} locale={language}>
+            <TimePicker
+              labelId="reminder-time-label"
+              id="reminder-time"
+              ampm={false}
+              value={reminderTime}
+              label={t("reminders.reminder-time")}
+              onChange={(time) => setReminderTime(time)}
+              slotProps={{ textField: { variant: "filled" } }}
+              sx={{ background: "#fff" }}
+            />
+          </LocalizationProvider>
+        </FormControl>
+      </div>
 
       <div className={styles.buttonsContainer}>
         <CustomButton

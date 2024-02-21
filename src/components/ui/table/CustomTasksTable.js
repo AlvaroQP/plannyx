@@ -217,11 +217,8 @@ export default function CustomTasksTable({ title, rows }) {
     if (editedName !== "") {
       updatedFields.name = editedName;
     }
-    if (editedNotes !== "") {
+    if (editedNotes !== null && editedNotes !== "") {
       updatedFields.notes = editedNotes;
-    }
-    if (editedNotes === "") {
-      updatedFields.notes = null;
     }
     if (editedStartDate !== null) {
       updatedFields.startDate = Timestamp.fromDate(editedStartDate.toDate());
