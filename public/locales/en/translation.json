@@ -257,14 +257,28 @@
     "reminders": {
         "no-reminders": "You have no reminders yet.",
         "reminder-title": "Title",
-        "reminder-description": "Description",
+        "reminder-notes": "Notes",
         "reminder-priority": "Priority",
         "reminder-date": "Date",
         "reminder-time": "Time",
         "priority-low": "Low Priority",
         "priority-medium": "Medium Priority",
         "priority-high": "High Priority",
-        "priority-critical": "Critical Priority"
-    }
-    
+        "priority-critical": "Critical Priority",
+        "category": "Category",
+        "category-work": "Work",
+        "category-personal": "Personal",
+        "category-health": "Health",
+        "category-education": "Education",
+        "category-finance": "Finance",
+        "category-shopping": "Shopping",
+        "category-family": "Family",
+        "category-travel": "Travel",
+        "reminder-success": "Success",
+        "reminder-error": "Error",
+        "reminder-added": "The reminder has been created successfully.",
+        "reminder-not-added": "The reminder could not be created. Please try again later.",
+        "new-reminder": "New Reminder"
+    },
+    "fill-field": "Please fill in this field."
 }

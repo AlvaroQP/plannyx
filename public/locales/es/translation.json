@@ -257,13 +257,28 @@
     "reminders": {
         "no-reminders": "Todavía no tienes ningún recordatorio.",
         "reminder-title": "Recordatorio",
-        "reminder-description": "Descripción",
+        "reminder-notes": "Notas",
         "reminder-priority": "Prioridad",
         "reminder-date": "Fecha",
         "reminder-time": "Hora",
         "priority-low": "Prioridad Baja",
         "priority-medium": "Prioridad Media",
         "priority-high": "Prioridad Alta",
-        "priority-critical": "Prioridad Crítica"
-    }
+        "priority-critical": "Prioridad Crítica",
+        "category": "Categoría",
+        "category-work": "Trabajo",
+        "category-personal": "Personal",
+        "category-health": "Salud",
+        "category-education": "Educación",
+        "category-finance": "Finanzas",
+        "category-shopping": "Compras",
+        "category-family": "Familia",
+        "category-travel": "Viajes",
+        "reminder-success": "Éxito",
+        "reminder-error": "Error",
+        "reminder-added": "El recordatorio ha sido creado con éxito.",
+        "reminder-not-added": "No se ha podido añadir el recordatorio. Por favor, inténtalo de nuevo más tarde.",
+        "new-reminder": "Nuevo Recordatorio"
+    },
+    "fill-field": "Por favor, rellena este campo."
 }
