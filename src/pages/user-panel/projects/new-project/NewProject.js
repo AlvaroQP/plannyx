@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styles from "./NewProject.module.css";
 import { useTranslation } from "react-i18next";
-import UserPanelHeader from "../../../../components/ui/header/user-panel-header/UserPanelHeader";
 import {
   TextField,
   Select,
@@ -10,7 +9,6 @@ import {
   FormControl,
   InputLabel,
 } from "@mui/material";
-import projectsBanner from "../../../../assets/images/projects-banner.png";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dateFormat from "../../../../utils/dateFormat";

@@ -31,6 +31,8 @@ import LocalHospitalIcon from "@mui/icons-material/LocalHospital";
 import SchoolIcon from "@mui/icons-material/School";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import SportsSoccerIcon from "@mui/icons-material/SportsSoccer";
+import CasinoIcon from "@mui/icons-material/Casino";
 import FlightIcon from "@mui/icons-material/Flight";
 import FamilyRestroomIcon from "@mui/icons-material/FamilyRestroom";
 import { useLoading } from "../../../../context/loading/LoadingProvider";
@@ -150,49 +152,71 @@ export default function NewReminder() {
             >
               <MenuItem value="work">
                 <span className={styles["category-text"]}>
-                  <WorkIcon sx={{ fontSize: "1.2rem" }} />
+                  <WorkIcon sx={{ fontSize: "1.2rem", color: "#a96730" }} />
                   {t("reminders.category-work")}
                 </span>
               </MenuItem>
               <MenuItem value="personal">
                 <span className={styles["category-text"]}>
-                  <PersonIcon sx={{ fontSize: "1.2rem" }} />
+                  <PersonIcon sx={{ fontSize: "1.2rem", color: "#1970c2" }} />
                   {t("reminders.category-personal")}
                 </span>
               </MenuItem>
               <MenuItem value="health">
                 <span className={styles["category-text"]}>
-                  <LocalHospitalIcon sx={{ fontSize: "1.2rem" }} />
+                  <LocalHospitalIcon
+                    sx={{ fontSize: "1.2rem", color: "#cd2121" }}
+                  />
                   {t("reminders.category-health")}
                 </span>
               </MenuItem>
               <MenuItem value="education">
                 <span className={styles["category-text"]}>
-                  <SchoolIcon sx={{ fontSize: "1.2rem" }} />
+                  <SchoolIcon sx={{ fontSize: "1.2rem", color: "#55853a" }} />
                   {t("reminders.category-education")}
                 </span>
               </MenuItem>
               <MenuItem value="finance">
                 <span className={styles["category-text"]}>
-                  <AccountBalanceIcon sx={{ fontSize: "1.2rem" }} />
+                  <AccountBalanceIcon
+                    sx={{ fontSize: "1.2rem", color: "#b5960a" }}
+                  />
                   {t("reminders.category-finance")}
                 </span>
               </MenuItem>
               <MenuItem value="shopping">
                 <span className={styles["category-text"]}>
-                  <ShoppingCartIcon sx={{ fontSize: "1.2rem" }} />
+                  <ShoppingCartIcon
+                    sx={{ fontSize: "1.2rem", color: "#d4634f" }}
+                  />
                   {t("reminders.category-shopping")}
+                </span>
+              </MenuItem>
+              <MenuItem value="sports">
+                <span className={styles["category-text"]}>
+                  <SportsSoccerIcon
+                    sx={{ fontSize: "1.2rem", color: "#4f6b93" }}
+                  />
+                  {t("reminders.category-sports")}
+                </span>
+              </MenuItem>
+              <MenuItem value="entertainment">
+                <span className={styles["category-text"]}>
+                  <CasinoIcon sx={{ fontSize: "1.2rem", color: "#c42256" }} />
+                  {t("reminders.category-entertainment")}
                 </span>
               </MenuItem>
               <MenuItem value="travel">
                 <span className={styles["category-text"]}>
-                  <FlightIcon sx={{ fontSize: "1.2rem" }} />
+                  <FlightIcon sx={{ fontSize: "1.2rem", color: "#4f4fc4" }} />
                   {t("reminders.category-travel")}
                 </span>
               </MenuItem>
               <MenuItem value="family">
                 <span className={styles["category-text"]}>
-                  <FamilyRestroomIcon sx={{ fontSize: "1.2rem" }} />
+                  <FamilyRestroomIcon
+                    sx={{ fontSize: "1.2rem", color: "#9b6b5b" }}
+                  />
                   {t("reminders.category-family")}
                 </span>
               </MenuItem>

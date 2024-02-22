@@ -1,7 +1,6 @@
 import React from "react";
 import logo from "../../../assets/images/logo-blue.png";
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
-import LibraryAddIcon from "@mui/icons-material/LibraryAdd";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import ChecklistIcon from "@mui/icons-material/Checklist";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
@@ -30,16 +29,6 @@ export default function UserPanelContainer() {
   const location = useLocation();
   const { collapsed, handleCollapseClick } = useSidebar();
   const isActive = (path) => location.pathname === path;
-
-  /*   const newProjectMenu = (
-    <MenuItem
-      icon={<LibraryAddIcon className={styles.icon} />}
-      className={isActive("/user-panel/projects/new") ? styles.active : ""}
-      onClick={() => navigate("/user-panel/projects/new")}
-    >
-      {t("user-panel-sidebar.new-project")}
-    </MenuItem>
-  ); */
 
   const myProjectsMenu = (
     <MenuItem
@@ -139,17 +128,6 @@ export default function UserPanelContainer() {
               {t("user-panel-sidebar.general")}
             </p>
           )}
-
-          {/*           {collapsed ? (
-            <Tooltip
-              title={t("user-panel-sidebar.new-project")}
-              placement="right"
-            >
-              <div>{newProjectMenu}</div>
-            </Tooltip>
-          ) : (
-            newProjectMenu
-          )} */}
 
           {collapsed ? (
             <Tooltip

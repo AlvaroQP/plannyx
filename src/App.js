@@ -4,11 +4,10 @@ import GlobalContextProviders from "./context/GlobalContextProviders";
 import RootLayout from "./pages/root-layout/RootLayout";
 import Error from "./pages/error/Error";
 import Home from "./pages/home/Home";
-import NewProject from "./pages/user-panel/projects/new-project/NewProject";
 import ProjectsContainer from "./pages/user-panel/projects/projects-container/ProjectsContainer";
 import UserPanelContainer from "./pages/user-panel/user-panel-container/UserPanelContainer";
 import Calendar from "./pages/user-panel/calendar/Calendar";
-import Reminders from "./pages/user-panel/reminders/reminders-container/Reminders";
+import RemindersContainer from "./pages/user-panel/reminders/reminders-container/RemindersContainer";
 import Dashboard from "./pages/user-panel/dashboard/Dashboard";
 import AccessDenied from "./pages/access-denied/AccessDenied";
 import { useAuth } from "./auth/auth-context/AuthProvider";
@@ -50,10 +49,6 @@ export default function App() {
           path: "user-panel",
           element: <ComponentOrAccessDenied component={UserPanelContainer} />,
           children: [
-            /*             {
-              path: "projects/new",
-              element: <ComponentOrAccessDenied component={NewProject} />,
-            }, */
             {
               path: "projects/all",
               element: (
@@ -70,7 +65,9 @@ export default function App() {
             },
             {
               path: "reminders",
-              element: <ComponentOrAccessDenied component={Reminders} />,
+              element: (
+                <ComponentOrAccessDenied component={RemindersContainer} />
+              ),
             },
             {
               path: "dashboard",

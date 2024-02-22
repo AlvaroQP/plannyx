@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Reminders.module.css";
+import styles from "./RemindersContainer.module.css";
 import UserPanelHeader from "../../../../components/ui/header/user-panel-header/UserPanelHeader";
 import { useTranslation } from "react-i18next";
 import { useReminders } from "../../../../context/reminders/RemindersProvider";
@@ -13,8 +13,11 @@ import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import FlightIcon from "@mui/icons-material/Flight";
 import FamilyRestroomIcon from "@mui/icons-material/FamilyRestroom";
+import SportsSoccerIcon from "@mui/icons-material/SportsSoccer";
+import CasinoIcon from "@mui/icons-material/Casino";
+import RemindersContent from "../reminders-content/RemindersContent";
 
-export default function Reminders() {
+export default function RemindersContainer() {
   const { t } = useTranslation();
   const { reminders } = useReminders();
   const categoryOrder = [
@@ -24,6 +27,8 @@ export default function Reminders() {
     "finance",
     "education",
     "shopping",
+    "sports",
+    "entertainment",
     "travel",
     "family",
   ];
@@ -48,6 +53,8 @@ export default function Reminders() {
     family: (
       <FamilyRestroomIcon sx={{ fontSize: "1.2rem", color: "#9b6b5b" }} />
     ),
+    sports: <SportsSoccerIcon sx={{ fontSize: "1.2rem", color: "#4f6b93" }} />,
+    entertainment: <CasinoIcon sx={{ fontSize: "1.2rem", color: "#c42256" }} />,
   };
 
   return (
@@ -75,7 +82,13 @@ export default function Reminders() {
                   {t(`reminders.category-${category}`)}
                 </div>
               ),
-              content: <div>{category}</div>,
+              content: (
+                <RemindersContent
+                  reminders={reminders.filter(
+                    (reminder) => reminder.category === category
+                  )}
+                />
+              ),
             })),
           ]}
         />
