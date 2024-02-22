@@ -8,6 +8,7 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import ProjectList from "../project-list/ProjectList";
 import CustomScrollableTabs from "../../../../components/ui/tabs/CustomScrollableTabs";
 import styles from "./ProjectsContainer.module.css";
+import NewProject from "../new-project/NewProject";
 
 export default function AllProjectsContainer() {
   const { t } = useTranslation();
@@ -20,15 +21,24 @@ export default function AllProjectsContainer() {
       <div className={styles["all-projects-container"]}>
         {projects.length > 0 ? (
           <CustomScrollableTabs
-            initialTabId={1}
+            initialTabId={2}
             tabs={[
               {
                 id: 1,
+                name: (
+                  <div className={styles["new-project-div"]}>
+                    {t("project.new-project")}
+                  </div>
+                ),
+                content: <NewProject />,
+              },
+              {
+                id: 2,
                 name: t("project.all-projects"),
                 content: <ProjectList projects={projects} />,
               },
               {
-                id: 2,
+                id: 3,
                 name: t("project.status-not-started"),
                 content: (
                   <ProjectList
@@ -39,7 +49,7 @@ export default function AllProjectsContainer() {
                 ),
               },
               {
-                id: 3,
+                id: 4,
                 name: t("project.status-in-progress"),
                 content: (
                   <ProjectList
@@ -50,7 +60,7 @@ export default function AllProjectsContainer() {
                 ),
               },
               {
-                id: 4,
+                id: 5,
                 name: t("project.status-finished"),
                 content: (
                   <ProjectList
@@ -61,7 +71,7 @@ export default function AllProjectsContainer() {
                 ),
               },
               {
-                id: 5,
+                id: 6,
                 name: t("project.status-stuck"),
                 content: (
                   <ProjectList
@@ -75,14 +85,19 @@ export default function AllProjectsContainer() {
           />
         ) : (
           <div className={styles["no-projects-container"]}>
-            {t("projects-list.no-projects")}
+            <div className={styles["no-projects-text"]}>
+              {t("projects-list.no-projects")}
+            </div>
 
-            <CustomButton
-              variant="contained"
-              color="primary"
-              text={t("button.new-project")}
-              icon={<AddCircleOutlineIcon />}
-              onClick={() => navigate("/user-panel/projects/new")}
+            <CustomScrollableTabs
+              initialTabId={1}
+              tabs={[
+                {
+                  id: 1,
+                  name: t("project.new-project"),
+                  content: <NewProject />,
+                },
+              ]}
             />
           </div>
         )}

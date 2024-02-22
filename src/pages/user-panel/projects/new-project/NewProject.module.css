@@ -1,9 +1,5 @@
-.new-project-container {
-  background-color: #fefefe;
-}
-
 .new-project-form {
-  margin: 2rem;
+  margin: 1rem 0;
   display: flex;
   flex-direction: column;
 }

@@ -50,10 +50,10 @@ export default function App() {
           path: "user-panel",
           element: <ComponentOrAccessDenied component={UserPanelContainer} />,
           children: [
-            {
+            /*             {
               path: "projects/new",
               element: <ComponentOrAccessDenied component={NewProject} />,
-            },
+            }, */
             {
               path: "projects/all",
               element: (

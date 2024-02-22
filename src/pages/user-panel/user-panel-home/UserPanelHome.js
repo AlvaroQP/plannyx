@@ -15,22 +15,23 @@ export default function UserPanelHome() {
       <UserPanelHeader title={`${t("login.welcome")}, ${user.displayName}`} />
       <div className={styles["user-panel-home"]}>
         <div
-          className={styles["new-project-container"]}
-          onClick={() => navigate("/user-panel/projects/new")}
-        >
-          <div className={styles["title-container"]}>
-            <div className={styles["title"]}>
-              {t("user-panel-sidebar.new-project")}
-            </div>
-          </div>
-        </div>
-        <div
           className={styles["my-projects-container"]}
           onClick={() => navigate("/user-panel/projects/all")}
         >
           <div className={styles["title-container"]}>
             <div className={styles["title"]}>
               {t("user-panel-sidebar.my-projects")}
+            </div>
+          </div>
+        </div>
+
+        <div
+          className={styles["to-do-list-container"]}
+          onClick={() => navigate("/user-panel/reminders")}
+        >
+          <div className={styles["title-container"]}>
+            <div className={styles["title"]}>
+              {t("user-panel-sidebar.to-do-list")}
             </div>
           </div>
         </div>

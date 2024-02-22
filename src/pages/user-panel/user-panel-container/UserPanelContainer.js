@@ -31,7 +31,7 @@ export default function UserPanelContainer() {
   const { collapsed, handleCollapseClick } = useSidebar();
   const isActive = (path) => location.pathname === path;
 
-  const newProjectMenu = (
+  /*   const newProjectMenu = (
     <MenuItem
       icon={<LibraryAddIcon className={styles.icon} />}
       className={isActive("/user-panel/projects/new") ? styles.active : ""}
@@ -39,7 +39,7 @@ export default function UserPanelContainer() {
     >
       {t("user-panel-sidebar.new-project")}
     </MenuItem>
-  );
+  ); */
 
   const myProjectsMenu = (
     <MenuItem
@@ -140,7 +140,7 @@ export default function UserPanelContainer() {
             </p>
           )}
 
-          {collapsed ? (
+          {/*           {collapsed ? (
             <Tooltip
               title={t("user-panel-sidebar.new-project")}
               placement="right"
@@ -149,7 +149,7 @@ export default function UserPanelContainer() {
             </Tooltip>
           ) : (
             newProjectMenu
-          )}
+          )} */}
 
           {collapsed ? (
             <Tooltip

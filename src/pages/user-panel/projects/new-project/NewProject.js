@@ -119,15 +119,7 @@ export default function NewProject() {
 
   return (
     <div className={styles["new-project-container"]}>
-      <UserPanelHeader title={t("user-panel-sidebar.new-project")} />
-
       <form onSubmit={handleSubmit} className={styles["new-project-form"]}>
-        <img
-          className={styles["project-banner"]}
-          src={projectsBanner}
-          alt="projects banner"
-        />
-
         {!validForm && (
           <Alert severity="error" sx={{ mb: 4 }}>
             {t("new-project.please-fill-all-fields")}
@@ -144,7 +136,6 @@ export default function NewProject() {
           required
           value={projectName}
           label={t("new-project.project-name")}
-          variant="filled"
           sx={{ mb: 4, background: "#fff" }}
           onChange={(e) => setProjectName(e.target.value)}
         />
@@ -154,7 +145,6 @@ export default function NewProject() {
           value={projectDescription}
           multiline
           label={t("new-project.project-description")}
-          variant="filled"
           sx={{ mb: 3, background: "#fff" }}
           onChange={(e) => setProjectDescription(e.target.value)}
         />
@@ -186,7 +176,7 @@ export default function NewProject() {
               onChange={(value) => {
                 setProjectStartDate(value);
               }}
-              slotProps={{ textField: { variant: "filled" } }}
+              slotProps={{ textField: {} }}
               sx={{ background: "#fff" }}
             />
 
@@ -200,14 +190,14 @@ export default function NewProject() {
                 onChange={(value) => {
                   setProjectEndDate(value);
                 }}
-                slotProps={{ textField: { variant: "filled" } }}
+                slotProps={{ textField: {} }}
                 sx={{ background: "#fff" }}
               />
             )}
           </LocalizationProvider>
         </div>
 
-        <FormControl variant="filled" sx={{ background: "#fff" }} required>
+        <FormControl sx={{ background: "#fff" }} required>
           <InputLabel id="priority-select-label">
             {t("new-project.priority")}
           </InputLabel>

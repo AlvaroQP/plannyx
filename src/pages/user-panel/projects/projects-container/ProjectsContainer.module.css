@@ -1,15 +1,19 @@
-.all-projects-container {
+.all-projects-container,
+.no-projects-container {
   /*   width: 100%; */
   margin: 2rem;
   background-color: #fefefe;
 }
 
-.no-projects-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 50vh;
-  gap: 2rem;
-  text-align: center;
+.new-project-div {
+  color: #1976d2;
+  border: 1px solid #1976d2;
+  background-color: #f8f8f8;
+  padding: 0.5rem;
+  border-radius: 0.2rem;
+}
+
+.no-projects-text {
+  margin-bottom: 1rem;
+  font-weight: 500;
 }

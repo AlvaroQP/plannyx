@@ -95,7 +95,7 @@
         "general": "General",
         "projects": "Proyectos",
         "new-project": "Nuevo Proyecto",
-        "my-projects": "Mis Proyectos",
+        "my-projects": "Proyectos",
         "calendar": "Calendario",
         "to-do-list": "Recordatorios",
         "dashboard": "Panel de control",
@@ -127,9 +127,10 @@
         "could-not-add-project": "No se pudo añadir el proyecto. Por favor, inténtalo de nuevo más tarde."
     },
     "projects-list": {
-        "no-projects": "Todavía no tienes ningún proyecto. Crea uno nuevo haciendo clic en el botón de abajo."
+        "no-projects": "Todavía no tienes ningún proyecto. Puedes crear uno ahora."
     },
     "project": {
+        "new-project": "Nuevo Proyecto",
         "name": "Nombre",
         "description": "Descripción",
         "start-date": "Fecha de Inicio",
