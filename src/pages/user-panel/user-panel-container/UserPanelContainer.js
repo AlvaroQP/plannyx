@@ -2,7 +2,7 @@ import React from "react";
 import logo from "../../../assets/images/logo-blue.png";
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import ListAltIcon from "@mui/icons-material/ListAlt";
-import ChecklistIcon from "@mui/icons-material/Checklist";
+import ViewListIcon from "@mui/icons-material/ViewList";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import CustomDivider from "../../../components/ui/divider/CustomDivider";
@@ -42,7 +42,7 @@ export default function UserPanelContainer() {
 
   const toDoListMenu = (
     <MenuItem
-      icon={<ChecklistIcon className={styles.icon} />}
+      icon={<ViewListIcon className={styles.icon} />}
       className={isActive("/user-panel/reminders") ? styles.active : ""}
       onClick={() => navigate("/user-panel/reminders")}
     >

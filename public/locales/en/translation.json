@@ -286,7 +286,13 @@
         "show-notes": "Show notes",
         "hide-notes": "Hide notes",
         "active": "Active",
-        "archived": "Archived"
+        "archived": "Archived",
+        "delete-reminder": "Delete Reminder",
+        "delete-reminder-message": "Are you sure you want to delete this reminder?",
+        "success": "Success",
+        "reminder-deleted": "The reminder has been deleted successfully.",
+        "error": "Error",
+        "could-not-delete-reminder": "Could not delete reminder. Please try again later."
     },
     "fill-field": "Please fill in this field."
 }

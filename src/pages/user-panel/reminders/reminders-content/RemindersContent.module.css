@@ -3,6 +3,10 @@
 }
 
 .title-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
   font-weight: 600;
   margin-bottom: 1rem;
 }
@@ -59,4 +63,13 @@
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 1rem 0;
+}
+
+.delete-icon {
+  color: grey;
+}
+
+.delete-icon:hover {
+  cursor: pointer;
+  color: #dc3545;
 }

@@ -286,7 +286,13 @@
         "show-notes": "Mostrar notas",
         "hide-notes": "Ocultar notas",
         "active": "Activos",
-        "archived": "Archivados"
+        "archived": "Archivados",
+        "delete-reminder": "Eliminar Recordatorio",
+        "delete-reminder-message": "¿Estás segur@ de que quieres eliminar este recordatorio?",
+        "success": "Éxito",
+        "reminder-deleted": "El recordatorio ha sido eliminado con éxito.",
+        "error": "Error",
+        "could-not-delete-reminder": "No se ha podido eliminar el recordatorio. Por favor, inténtalo de nuevo más tarde."
     },
     "fill-field": "Por favor, rellena este campo."
 }

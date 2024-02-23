@@ -15,15 +15,28 @@ import MenuItem from "@mui/material/MenuItem";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import { ToggleButton, ToggleButtonGroup } from "@mui/material";
+import CircleIcon from "@mui/icons-material/Circle";
+import InventoryIcon from "@mui/icons-material/Inventory";
+import DeleteIcon from "@mui/icons-material/Delete";
+import CustomDialog from "../../../../components/ui/dialog/CustomDialog";
+import Tooltip from "@mui/material/Tooltip";
+import { useReminders } from "../../../../context/reminders/RemindersProvider";
+import { useLoading } from "../../../../context/loading/LoadingProvider";
+import { useDialog } from "../../../../context/dialog/DialogProvider";
 
 export default function RemindersContent({ reminders }) {
   const { t } = useTranslation();
   const [showNotes, setShowNotes] = useState(false);
   const [filter, setFilter] = useState("dateAsc");
-  const [sortedReminders, setSortedReminders] = useState([]);
   const [activeArchived, setActiveArchived] = useState("active");
   const [activeReminders, setActiveReminders] = useState([]);
   const [archivedReminders, setArchivedReminders] = useState([]);
+  const [isDeleteReminderDialogOpen, setIsDeleteReminderDialogOpen] =
+    useState(false);
+  const [reminderId, setReminderId] = useState(null);
+  const { deleteReminder } = useReminders();
+  const { setIsLoading } = useLoading();
+  const { openDialog } = useDialog();
 
   useEffect(() => {
     const today = new Date();
@@ -128,14 +141,28 @@ export default function RemindersContent({ reminders }) {
     >
       <ToggleButton
         value="active"
-        sx={activeArchived === "active" ? { backgroundColor: "#f0f0f0" } : {}}
+        sx={
+          activeArchived === "active"
+            ? { "&.MuiToggleButton-root": { fontWeight: "600" } }
+            : {}
+        }
       >
+        <CircleIcon
+          sx={{ fontSize: ".9rem", mr: ".25rem", color: "#008000" }}
+        />
         {t("reminders.active")}
       </ToggleButton>
       <ToggleButton
         value="archived"
-        sx={activeArchived === "archived" ? { backgroundColor: "#f0f0f0" } : {}}
+        sx={
+          activeArchived === "archived"
+            ? { "&.MuiToggleButton-root": { fontWeight: "600" } }
+            : {}
+        }
       >
+        <InventoryIcon
+          sx={{ fontSize: ".9rem", mr: ".25rem", color: "#464141" }}
+        />
         {t("reminders.archived")}
       </ToggleButton>
     </ToggleButtonGroup>
@@ -174,8 +201,49 @@ export default function RemindersContent({ reminders }) {
     </Select>
   );
 
+  function handleOpenDeleteReminderDialog(id) {
+    setIsDeleteReminderDialogOpen(true);
+    setReminderId(id);
+  }
+
+  const deleteReminderDialog = (
+    <CustomDialog
+      open={isDeleteReminderDialogOpen}
+      handleClose={() => setIsDeleteReminderDialogOpen(false)}
+      title={t("reminders.delete-reminder")}
+      description={t("reminders.delete-reminder-message")}
+      acceptText={t("button.delete")}
+      cancelText={t("button.cancel")}
+      acceptAction={deleteReminderAction}
+    />
+  );
+
+  async function deleteReminderAction() {
+    setIsLoading(true);
+    try {
+      await deleteReminder(reminderId);
+      openDialog({
+        title: t("reminders.success"),
+        description: t("reminders.reminder-deleted"),
+        severity: "success",
+      });
+    } catch (error) {
+      console.error("Error deleting reminder: ", error);
+      openDialog({
+        title: t("reminders.error"),
+        description: t("reminders.could-not-delete-reminder"),
+        severity: "error",
+      });
+    } finally {
+      setIsLoading(false);
+      setIsDeleteReminderDialogOpen(false);
+      setReminderId(null);
+    }
+  }
+
   return (
     <div className={styles["reminders-container"]}>
+      {isDeleteReminderDialogOpen && deleteReminderDialog}
       <div className={styles["filters-and-active-archived-container"]}>
         {filterSelect}
         {activeArchivedButtons}
@@ -184,7 +252,16 @@ export default function RemindersContent({ reminders }) {
         (reminder) => (
           <Card key={reminder.id} className={styles["reminder-card"]}>
             <CardContent>
-              <div className={styles["title-container"]}>{reminder.title}</div>
+              <div className={styles["title-container"]}>
+                {reminder.title}
+                <Tooltip
+                  title={t("reminders.delete-reminder")}
+                  className={styles["delete-icon"]}
+                  onClick={() => handleOpenDeleteReminderDialog(reminder.id)}
+                >
+                  <DeleteIcon sx={{ fontSize: "1.25rem" }} />
+                </Tooltip>
+              </div>
               <div className={styles["date-time-priority-container"]}>
                 <div>
                   <div className={styles["date-container"]}>
