@@ -267,6 +267,7 @@
         "priority-high": "Prioridad Alta",
         "priority-critical": "Prioridad Crítica",
         "category": "Categoría",
+        "category-all": "Todos",
         "category-work": "Trabajo",
         "category-personal": "Personal",
         "category-health": "Salud",
@@ -281,7 +282,11 @@
         "reminder-error": "Error",
         "reminder-added": "El recordatorio ha sido creado con éxito.",
         "reminder-not-added": "No se ha podido añadir el recordatorio. Por favor, inténtalo de nuevo más tarde.",
-        "new-reminder": "Nuevo Recordatorio"
+        "new-reminder": "Nuevo Recordatorio",
+        "show-notes": "Mostrar notas",
+        "hide-notes": "Ocultar notas",
+        "active": "Activos",
+        "archived": "Archivados"
     },
     "fill-field": "Por favor, rellena este campo."
 }

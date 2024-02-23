@@ -267,6 +267,7 @@
         "priority-high": "High Priority",
         "priority-critical": "Critical Priority",
         "category": "Category",
+        "category-all": "All",
         "category-work": "Work",
         "category-personal": "Personal",
         "category-health": "Health",
@@ -281,7 +282,11 @@
         "reminder-error": "Error",
         "reminder-added": "The reminder has been created successfully.",
         "reminder-not-added": "The reminder could not be created. Please try again later.",
-        "new-reminder": "New Reminder"
+        "new-reminder": "New Reminder",
+        "show-notes": "Show notes",
+        "hide-notes": "Hide notes",
+        "active": "Active",
+        "archived": "Archived"
     },
     "fill-field": "Please fill in this field."
 }

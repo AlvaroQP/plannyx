@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { useReminders } from "../../../../context/reminders/RemindersProvider";
 import NewReminder from "../new-reminder/NewReminder";
 import CustomScrollableTabs from "../../../../components/ui/tabs/CustomScrollableTabs";
+import ViewListIcon from "@mui/icons-material/ViewList";
 import WorkIcon from "@mui/icons-material/Work";
 import PersonIcon from "@mui/icons-material/Person";
 import LocalHospitalIcon from "@mui/icons-material/LocalHospital";
@@ -40,7 +41,7 @@ export default function RemindersContainer() {
   );
   const categoryIcons = {
     work: <WorkIcon sx={{ fontSize: "1.2rem", color: "#a96730" }} />,
-    personal: <PersonIcon sx={{ fontSize: "1.2rem", color: "#1970c2" }} />,
+    personal: <PersonIcon sx={{ fontSize: "1.2rem", color: "#0f8ad7" }} />,
     health: <LocalHospitalIcon sx={{ fontSize: "1.2rem", color: "#cd2121" }} />,
     education: <SchoolIcon sx={{ fontSize: "1.2rem", color: "#55853a" }} />,
     finance: (
@@ -62,36 +63,65 @@ export default function RemindersContainer() {
       <UserPanelHeader title={t("user-panel-sidebar.to-do-list")} />
 
       <div className={styles["reminders-container"]}>
-        <CustomScrollableTabs
-          initialTabId={1}
-          tabs={[
-            {
-              id: 1,
-              name: (
-                <div className={styles["new-reminder-div"]}>
-                  {t("reminders.new-reminder")}
-                </div>
-              ),
-              content: <NewReminder />,
-            },
-            ...categories.map((category, index) => ({
-              id: index + 2,
-              name: (
-                <div className={styles["category-tab-name-container"]}>
-                  {categoryIcons[category]}
-                  {t(`reminders.category-${category}`)}
-                </div>
-              ),
-              content: (
-                <RemindersContent
-                  reminders={reminders.filter(
-                    (reminder) => reminder.category === category
-                  )}
-                />
-              ),
-            })),
-          ]}
-        />
+        {reminders.length > 0 ? (
+          <CustomScrollableTabs
+            initialTabId={2}
+            tabs={[
+              {
+                id: 1,
+                name: (
+                  <div className={styles["new-reminder-div"]}>
+                    {t("reminders.new-reminder")}
+                  </div>
+                ),
+                content: <NewReminder />,
+              },
+              {
+                id: 2,
+                name: (
+                  <div className={styles["category-tab-name-container"]}>
+                    <ViewListIcon
+                      sx={{ fontSize: "1.2rem", color: "#1970c2" }}
+                    />
+                    {t("reminders.category-all")}
+                  </div>
+                ),
+                content: <RemindersContent reminders={reminders} />,
+              },
+              ...categories.map((category, index) => ({
+                id: index + 3,
+                name: (
+                  <div className={styles["category-tab-name-container"]}>
+                    {categoryIcons[category]}
+                    {t(`reminders.category-${category}`)}
+                  </div>
+                ),
+                content: (
+                  <RemindersContent
+                    reminders={reminders.filter(
+                      (reminder) => reminder.category === category
+                    )}
+                  />
+                ),
+              })),
+            ]}
+          />
+        ) : (
+          <CustomScrollableTabs
+            initialTabId={1}
+            tabs={[
+              {
+                id: 1,
+                name: (
+                  <div className={styles["new-reminder-div"]}>
+                    {t("reminders.new-reminder")}
+                  </div>
+                ),
+                content: <NewReminder />,
+              },
+            ]}
+          />
+        )}
       </div>
     </>
   );

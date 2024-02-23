@@ -1,0 +1,62 @@
+.reminder-card {
+  margin: 1rem 0;
+}
+
+.title-container {
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.date-time-priority-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.date-container,
+.priority-container,
+.time-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 0.5rem;
+  align-items: center;
+  font-size: 0.85rem;
+}
+
+.date,
+.time {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.priority-container {
+  margin-bottom: 0.5rem;
+}
+
+.notes-container {
+  font-size: 0.85rem;
+}
+
+.notes-divider-container {
+  margin-top: 1rem;
+}
+
+.note {
+  margin-top: 1rem;
+  border: 0.5px solid lightgrey;
+  border-radius: 0.2rem;
+  padding: 0.5rem;
+}
+
+.mr {
+  margin-right: 0.5rem;
+}
+
+.filters-and-active-archived-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem 0;
+}
