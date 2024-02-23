@@ -126,7 +126,9 @@ export default function RemindersContent({ reminders }) {
   }
 
   function handleActiveArchivedChange(event, value) {
-    setActiveArchived(value);
+    if (value !== null) {
+      setActiveArchived(value);
+    }
   }
 
   function handleFilterChange(event) {
