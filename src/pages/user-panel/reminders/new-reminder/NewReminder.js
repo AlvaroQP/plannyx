@@ -73,7 +73,8 @@ export default function NewReminder() {
       category === "" ||
       priority === "" ||
       reminderDate === null ||
-      reminderTime === null
+      reminderTime === null ||
+      !dayjs(reminderTime, "HH:mm").isValid()
     ) {
       setValidForm(false);
       setIsLoading(false);
