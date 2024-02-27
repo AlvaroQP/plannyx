@@ -12,7 +12,7 @@ import {
   InputLabel,
   Select,
   MenuItem,
-  Button,
+  Alert,
 } from "@mui/material";
 import {
   TimePicker,
@@ -38,6 +38,9 @@ import FlightIcon from "@mui/icons-material/Flight";
 import FamilyRestroomIcon from "@mui/icons-material/FamilyRestroom";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import CustomButton from "../../../../components/ui/button/CustomButton";
+import { useLoading } from "../../../../context/loading/LoadingProvider";
+import { Timestamp } from "firebase/firestore";
+import { useDialog } from "../../../../context/dialog/DialogProvider";
 
 export default function EditReminder({
   initialReminder,
@@ -55,19 +58,76 @@ export default function EditReminder({
   );
   const [category, setCategory] = useState(initialReminder?.category);
   const [priority, setPriority] = useState(initialReminder?.priority);
+  const [validForm, setValidForm] = useState(true);
+  const { setIsLoading } = useLoading();
+  const { putReminder, getAllReminders } = useReminders();
+  const { openDialog } = useDialog();
 
   useEffect(() => {
     console.log("initialReminder", initialReminder);
   }, [initialReminder]);
 
-  function handleSaveReminder(e) {
+  async function handleSaveReminder(e) {
     e.preventDefault();
-    console.log("Save reminder");
+    setValidForm(true);
+    setIsLoading(true);
+
+    if (
+      title === "" ||
+      date === null ||
+      time === null ||
+      category === "" ||
+      priority === "" ||
+      !dayjs(date, "YYYY-MM-DD").isValid() ||
+      !dayjs(time, "HH:mm").isValid()
+    ) {
+      setValidForm(false);
+      setIsLoading(false);
+      return;
+    }
+
+    const reminder = {
+      title,
+      notes,
+      category,
+      priority,
+      date: Timestamp.fromDate(date.toDate()),
+      time: time ? time.format("HH:mm") : null,
+    };
+
+    try {
+      await putReminder(initialReminder.id, reminder);
+      await getAllReminders();
+      openDialog({
+        title: t("reminders.reminder-success"),
+        description: t("reminders.reminder-edited"),
+        severity: "success",
+      });
+      handleCloseEditDialog();
+    } catch (error) {
+      console.error("Error updating reminder", error);
+      openDialog({
+        title: t("reminders.reminder-error"),
+        description: t("reminders.reminder-not-edited"),
+        severity: "error",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (
     <Dialog open={initialReminder !== null} onClose={handleCloseEditDialog}>
-      <DialogTitle sx={{ mb: 1 }}>{t("reminders.edit-reminder")}</DialogTitle>
+      <DialogTitle sx={{ mb: 1, textAlign: "center" }}>
+        {t("reminders.edit-reminder")}
+      </DialogTitle>
+
+      {!validForm && (
+        <Alert severity="error" sx={{ m: "0rem 1.5rem" }}>
+          {t("new-project.please-fill-all-fields")}
+        </Alert>
+      )}
+
       <DialogContent>
         <form onSubmit={handleSaveReminder}>
           <TextField
@@ -116,11 +176,7 @@ export default function EditReminder({
                   label={t("reminders.reminder-time")}
                   value={time}
                   onChange={(newTime) => {
-                    // Format time to HH:mm string
-                    const formattedTime = newTime
-                      ? newTime.format("HH:mm")
-                      : null;
-                    setTime(formattedTime);
+                    setTime(newTime);
                   }}
                   fullWidth
                   slotProps={{ textField: { required: true } }}

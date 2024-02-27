@@ -283,6 +283,8 @@
         "reminder-error": "Error",
         "reminder-added": "El recordatorio ha sido creado con éxito.",
         "reminder-not-added": "No se ha podido añadir el recordatorio. Por favor, inténtalo de nuevo más tarde.",
+        "reminder-edited": "El recordatorio ha sido editado con éxito.",
+        "reminder-not-edited": "No se ha podido editar el recordatorio. Por favor, inténtalo de nuevo más tarde.",
         "new-reminder": "Nuevo Recordatorio",
         "show-notes": "Mostrar notas",
         "hide-notes": "Ocultar notas",

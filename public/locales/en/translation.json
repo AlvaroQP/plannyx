@@ -283,6 +283,8 @@
         "reminder-error": "Error",
         "reminder-added": "The reminder has been created successfully.",
         "reminder-not-added": "The reminder could not be created. Please try again later.",
+        "reminder-edited": "The reminder has been edited successfully.",
+        "reminder-not-edited": "The reminder could not be edited. Please try again later.",
         "new-reminder": "New Reminder",
         "show-notes": "Show notes",
         "hide-notes": "Hide notes",
