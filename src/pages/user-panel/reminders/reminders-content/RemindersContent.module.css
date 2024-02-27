@@ -65,11 +65,17 @@
   gap: 1rem 0;
 }
 
-.delete-icon {
+.delete-icon,
+.edit-icon {
   color: grey;
 }
 
 .delete-icon:hover {
   cursor: pointer;
   color: #dc3545;
+}
+
+.edit-icon:hover {
+  cursor: pointer;
+  color: #1970c2;
 }

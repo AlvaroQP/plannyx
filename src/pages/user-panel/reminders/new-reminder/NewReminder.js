@@ -35,6 +35,7 @@ import SportsSoccerIcon from "@mui/icons-material/SportsSoccer";
 import CasinoIcon from "@mui/icons-material/Casino";
 import FlightIcon from "@mui/icons-material/Flight";
 import FamilyRestroomIcon from "@mui/icons-material/FamilyRestroom";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { useLoading } from "../../../../context/loading/LoadingProvider";
 import { Timestamp } from "firebase/firestore";
 import Alert from "@mui/material/Alert";
@@ -219,6 +220,14 @@ export default function NewReminder() {
                     sx={{ fontSize: "1.2rem", color: "#9b6b5b" }}
                   />
                   {t("reminders.category-family")}
+                </span>
+              </MenuItem>
+              <MenuItem value="other">
+                <span className={styles["category-text"]}>
+                  <MoreHorizIcon
+                    sx={{ fontSize: "1.2rem", color: "#4f4fc4" }}
+                  />
+                  {t("reminders.category-other")}
                 </span>
               </MenuItem>
             </Select>

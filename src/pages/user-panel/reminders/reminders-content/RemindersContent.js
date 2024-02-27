@@ -18,11 +18,13 @@ import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 import CircleIcon from "@mui/icons-material/Circle";
 import InventoryIcon from "@mui/icons-material/Inventory";
 import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 import CustomDialog from "../../../../components/ui/dialog/CustomDialog";
 import Tooltip from "@mui/material/Tooltip";
 import { useReminders } from "../../../../context/reminders/RemindersProvider";
 import { useLoading } from "../../../../context/loading/LoadingProvider";
 import { useDialog } from "../../../../context/dialog/DialogProvider";
+import EditReminder from "../edit-reminder/EditReminder";
 
 export default function RemindersContent({ reminders }) {
   const { t } = useTranslation();
@@ -31,12 +33,14 @@ export default function RemindersContent({ reminders }) {
   const [activeArchived, setActiveArchived] = useState("active");
   const [activeReminders, setActiveReminders] = useState([]);
   const [archivedReminders, setArchivedReminders] = useState([]);
+  const [editingReminder, setEditingReminder] = useState(null);
   const [isDeleteReminderDialogOpen, setIsDeleteReminderDialogOpen] =
     useState(false);
   const [reminderId, setReminderId] = useState(null);
   const { deleteReminder } = useReminders();
   const { setIsLoading } = useLoading();
   const { openDialog } = useDialog();
+  const [openEditReminder, setOpenEditReminder] = useState(false);
 
   useEffect(() => {
     const today = new Date();
@@ -203,6 +207,16 @@ export default function RemindersContent({ reminders }) {
     </Select>
   );
 
+  function handleEditReminder(reminder) {
+    console.log("Edit reminder: ", reminder);
+    setEditingReminder(reminder);
+    setOpenEditReminder(true);
+  }
+
+  function handleCloseEditDialog() {
+    setOpenEditReminder(false);
+  }
+
   function handleOpenDeleteReminderDialog(id) {
     setIsDeleteReminderDialogOpen(true);
     setReminderId(id);
@@ -245,6 +259,12 @@ export default function RemindersContent({ reminders }) {
 
   return (
     <div className={styles["reminders-container"]}>
+      {openEditReminder && (
+        <EditReminder
+          initialReminder={editingReminder}
+          handleCloseEditDialog={handleCloseEditDialog}
+        />
+      )}
       {isDeleteReminderDialogOpen && deleteReminderDialog}
       <div className={styles["filters-and-active-archived-container"]}>
         {filterSelect}
@@ -256,13 +276,22 @@ export default function RemindersContent({ reminders }) {
             <CardContent>
               <div className={styles["title-container"]}>
                 {reminder.title}
-                <Tooltip
-                  title={t("reminders.delete-reminder")}
-                  className={styles["delete-icon"]}
-                  onClick={() => handleOpenDeleteReminderDialog(reminder.id)}
-                >
-                  <DeleteIcon sx={{ fontSize: "1.25rem" }} />
-                </Tooltip>
+                <div>
+                  <Tooltip
+                    title={t("reminders.edit-reminder")}
+                    className={styles["edit-icon"]}
+                    onClick={() => handleEditReminder(reminder)}
+                  >
+                    <EditIcon sx={{ fontSize: "1.25rem", mr: ".5rem" }} />
+                  </Tooltip>
+                  <Tooltip
+                    title={t("reminders.delete-reminder")}
+                    className={styles["delete-icon"]}
+                    onClick={() => handleOpenDeleteReminderDialog(reminder.id)}
+                  >
+                    <DeleteIcon sx={{ fontSize: "1.25rem" }} />
+                  </Tooltip>
+                </div>
               </div>
               <div className={styles["date-time-priority-container"]}>
                 <div>

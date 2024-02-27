@@ -1,0 +1,52 @@
+.date-time-container,
+.category-priority-container {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.date-time-container > *,
+.category-priority-container > * {
+  width: 50%;
+}
+
+.low-priority-text,
+.medium-priority-text,
+.high-priority-text,
+.critical-priority-text {
+  display: flex;
+  gap: 0.5rem;
+  /* margin-top: 0.5rem; */
+}
+
+.category-text {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  /* margin-top: 0.5rem; */
+}
+
+.priority-icon-low {
+  color: #029a02;
+}
+
+.priority-icon-medium {
+  color: #ff6b02;
+}
+
+.priority-icon-high {
+  color: #cd0303;
+}
+
+.priority-icon-critical {
+  color: #ff0000;
+}
+
+.buttonsContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+  gap: 2rem;
+  margin-right: 1.25rem;
+}

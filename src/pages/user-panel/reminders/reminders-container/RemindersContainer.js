@@ -16,6 +16,7 @@ import FlightIcon from "@mui/icons-material/Flight";
 import FamilyRestroomIcon from "@mui/icons-material/FamilyRestroom";
 import SportsSoccerIcon from "@mui/icons-material/SportsSoccer";
 import CasinoIcon from "@mui/icons-material/Casino";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import RemindersContent from "../reminders-content/RemindersContent";
 
 export default function RemindersContainer() {
@@ -32,6 +33,7 @@ export default function RemindersContainer() {
     "entertainment",
     "travel",
     "family",
+    "other",
   ];
   const categoriesInReminders = new Set(
     reminders.map((reminder) => reminder.category)
@@ -56,6 +58,7 @@ export default function RemindersContainer() {
     ),
     sports: <SportsSoccerIcon sx={{ fontSize: "1.2rem", color: "#4f6b93" }} />,
     entertainment: <CasinoIcon sx={{ fontSize: "1.2rem", color: "#c42256" }} />,
+    other: <MoreHorizIcon sx={{ fontSize: "1.2rem", color: "#4f4fc4" }} />,
   };
 
   return (
@@ -65,6 +68,7 @@ export default function RemindersContainer() {
       <div className={styles["reminders-container"]}>
         {reminders.length > 0 ? (
           <CustomScrollableTabs
+            key={categories.join(",")}
             initialTabId={2}
             tabs={[
               {
