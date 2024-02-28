@@ -42,7 +42,8 @@
         "edit": "Edit",
         "delete": "Delete",
         "save": "Save",
-        "delete-project": "Delete Project"
+        "delete-project": "Delete Project",
+        "view-reminders": "View Reminders"
     },
     "footer": {
         "all-rights-reserved": "All rights reserved.",
@@ -288,6 +289,7 @@
         "new-reminder": "New Reminder",
         "show-notes": "Show notes",
         "hide-notes": "Hide notes",
+        "no-notes": "No notes",
         "active": "Active",
         "archived": "Archived",
         "delete-reminder": "Delete Reminder",

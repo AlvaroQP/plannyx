@@ -32,7 +32,7 @@ export default function UserPanelContainer() {
 
   const myProjectsMenu = (
     <MenuItem
-      icon={<ListAltIcon className={styles.icon} />}
+      icon={<ListAltIcon sx={{ color: "#138dd8" }} />}
       className={isActive("/user-panel/projects/all") ? styles.active : ""}
       onClick={() => navigate("/user-panel/projects/all")}
     >
@@ -42,7 +42,7 @@ export default function UserPanelContainer() {
 
   const toDoListMenu = (
     <MenuItem
-      icon={<ViewListIcon className={styles.icon} />}
+      icon={<ViewListIcon sx={{ color: "#3b9e06" }} />}
       className={isActive("/user-panel/reminders") ? styles.active : ""}
       onClick={() => navigate("/user-panel/reminders")}
     >
@@ -52,7 +52,7 @@ export default function UserPanelContainer() {
 
   const calendarMenu = (
     <MenuItem
-      icon={<CalendarMonthIcon className={styles.icon} />}
+      icon={<CalendarMonthIcon sx={{ color: "#e51028" }} />}
       className={isActive("/user-panel/calendar") ? styles.active : ""}
       onClick={() => navigate("/user-panel/calendar")}
     >
@@ -62,7 +62,7 @@ export default function UserPanelContainer() {
 
   const dashboardMenu = (
     <MenuItem
-      icon={<BarChartIcon className={styles.icon} />}
+      icon={<BarChartIcon sx={{ color: "#e069cc" }} />}
       className={isActive("/user-panel/dashboard") ? styles.active : ""}
       onClick={() => navigate("/user-panel/dashboard")}
     >
@@ -72,7 +72,7 @@ export default function UserPanelContainer() {
 
   const notificationsMenu = (
     <MenuItem
-      icon={<NotificationsIcon className={styles.icon} />}
+      icon={<NotificationsIcon sx={{ color: "#d69900" }} />}
       className={isActive("/user-panel/notifications") ? styles.active : ""}
       onClick={() => navigate("/user-panel/notifications")}
     >

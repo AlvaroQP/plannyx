@@ -10,3 +10,44 @@
   justify-content: center;
   gap: 2rem;
 }
+
+.date,
+.time,
+.category,
+.priority {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.date-and-time,
+.category-and-priority {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0 2rem;
+}
+
+.category-and-priority {
+  margin-bottom: 0.5rem;
+}
+
+.category,
+.priority {
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+}
+
+.notes {
+  font-size: 0.9rem;
+  text-align: justify;
+}
+
+.buttons-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}

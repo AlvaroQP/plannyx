@@ -8,10 +8,12 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import CustomDivider from "../../../components/ui/divider/CustomDivider";
 import { useNavigate } from "react-router-dom";
+import { Tooltip } from "@mui/material";
 
 export default function Notifications() {
   const { t } = useTranslation();
   const { projects } = useProjects();
+
   const navigate = useNavigate();
   const [projectsStartingToday, setProjectsStartingToday] = useState([]);
   const [projectsEndingToday, setProjectsEndingToday] = useState([]);
@@ -102,7 +104,39 @@ export default function Notifications() {
             <CustomDivider />
             <div className={styles["projects-container"]}>
               {projectsStartingToday.map((project, index) => (
-                <div key={index} className={styles["project"]}>
+                <Tooltip
+                  key={index}
+                  title={
+                    <>
+                      <p>{`${t("project.start-date")}: ${
+                        project.startDate
+                          ? project.startDate.toDate().toLocaleDateString()
+                          : "N/A"
+                      }`}</p>
+                      <p>{`${t("project.end-date")}: ${
+                        project.endDate
+                          ? project.endDate.toDate().toLocaleDateString()
+                          : "N/A"
+                      }`}</p>
+                      <p>{`${t("project.status")}: ${
+                        {
+                          "not started": t("project.status-not-started"),
+                          "in progress": t("project.status-in-progress"),
+                          finished: t("project.status-finished"),
+                          stuck: t("project.status-stuck"),
+                        }[project.status || project.status]
+                      }`}</p>
+                      <p>{`${
+                        {
+                          low: t("project.priority-low"),
+                          medium: t("project.priority-medium"),
+                          high: t("project.priority-high"),
+                          critical: t("project.priority-critical"),
+                        }[project.priority || project.priority]
+                      }`}</p>
+                    </>
+                  }
+                >
                   <div
                     onClick={() =>
                       navigate(`/user-panel/projects/${project.id}`)
@@ -111,7 +145,7 @@ export default function Notifications() {
                   >
                     {project.name}
                   </div>
-                </div>
+                </Tooltip>
               ))}
             </div>
           </div>
@@ -125,7 +159,39 @@ export default function Notifications() {
             <CustomDivider />
             <div className={styles["projects-container"]}>
               {projectsEndingToday.map((project, index) => (
-                <div key={index} className={styles["project"]}>
+                <Tooltip
+                  key={index}
+                  title={
+                    <>
+                      <p>{`${t("project.start-date")}: ${
+                        project.startDate
+                          ? project.startDate.toDate().toLocaleDateString()
+                          : "N/A"
+                      }`}</p>
+                      <p>{`${t("project.end-date")}: ${
+                        project.endDate
+                          ? project.endDate.toDate().toLocaleDateString()
+                          : "N/A"
+                      }`}</p>
+                      <p>{`${t("project.status")}: ${
+                        {
+                          "not started": t("project.status-not-started"),
+                          "in progress": t("project.status-in-progress"),
+                          finished: t("project.status-finished"),
+                          stuck: t("project.status-stuck"),
+                        }[project.status || project.status]
+                      }`}</p>
+                      <p>{`${
+                        {
+                          low: t("project.priority-low"),
+                          medium: t("project.priority-medium"),
+                          high: t("project.priority-high"),
+                          critical: t("project.priority-critical"),
+                        }[project.priority || project.priority]
+                      }`}</p>
+                    </>
+                  }
+                >
                   <div
                     onClick={() =>
                       navigate(`/user-panel/projects/${project.id}`)
@@ -134,7 +200,7 @@ export default function Notifications() {
                   >
                     {project.name}
                   </div>
-                </div>
+                </Tooltip>
               ))}
             </div>
           </div>
@@ -148,7 +214,39 @@ export default function Notifications() {
             <CustomDivider />
             <div className={styles["projects-container"]}>
               {projectsStartingSoon.map((project, index) => (
-                <div key={index} className={styles["project"]}>
+                <Tooltip
+                  key={index}
+                  title={
+                    <>
+                      <p>{`${t("project.start-date")}: ${
+                        project.startDate
+                          ? project.startDate.toDate().toLocaleDateString()
+                          : "N/A"
+                      }`}</p>
+                      <p>{`${t("project.end-date")}: ${
+                        project.endDate
+                          ? project.endDate.toDate().toLocaleDateString()
+                          : "N/A"
+                      }`}</p>
+                      <p>{`${t("project.status")}: ${
+                        {
+                          "not started": t("project.status-not-started"),
+                          "in progress": t("project.status-in-progress"),
+                          finished: t("project.status-finished"),
+                          stuck: t("project.status-stuck"),
+                        }[project.status || project.status]
+                      }`}</p>
+                      <p>{`${
+                        {
+                          low: t("project.priority-low"),
+                          medium: t("project.priority-medium"),
+                          high: t("project.priority-high"),
+                          critical: t("project.priority-critical"),
+                        }[project.priority || project.priority]
+                      }`}</p>
+                    </>
+                  }
+                >
                   <div
                     onClick={() =>
                       navigate(`/user-panel/projects/${project.id}`)
@@ -157,7 +255,7 @@ export default function Notifications() {
                   >
                     {project.name}
                   </div>
-                </div>
+                </Tooltip>
               ))}
             </div>
           </div>
@@ -171,7 +269,39 @@ export default function Notifications() {
             <CustomDivider />
             <div className={styles["projects-container"]}>
               {projectsEndingSoon.map((project, index) => (
-                <div key={index} className={styles["project"]}>
+                <Tooltip
+                  key={index}
+                  title={
+                    <>
+                      <p>{`${t("project.start-date")}: ${
+                        project.startDate
+                          ? project.startDate.toDate().toLocaleDateString()
+                          : "N/A"
+                      }`}</p>
+                      <p>{`${t("project.end-date")}: ${
+                        project.endDate
+                          ? project.endDate.toDate().toLocaleDateString()
+                          : "N/A"
+                      }`}</p>
+                      <p>{`${t("project.status")}: ${
+                        {
+                          "not started": t("project.status-not-started"),
+                          "in progress": t("project.status-in-progress"),
+                          finished: t("project.status-finished"),
+                          stuck: t("project.status-stuck"),
+                        }[project.status || project.status]
+                      }`}</p>
+                      <p>{`${
+                        {
+                          low: t("project.priority-low"),
+                          medium: t("project.priority-medium"),
+                          high: t("project.priority-high"),
+                          critical: t("project.priority-critical"),
+                        }[project.priority || project.priority]
+                      }`}</p>
+                    </>
+                  }
+                >
                   <div
                     onClick={() =>
                       navigate(`/user-panel/projects/${project.id}`)
@@ -180,7 +310,7 @@ export default function Notifications() {
                   >
                     {project.name}
                   </div>
-                </div>
+                </Tooltip>
               ))}
             </div>
           </div>

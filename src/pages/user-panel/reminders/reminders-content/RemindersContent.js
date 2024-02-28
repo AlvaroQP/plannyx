@@ -208,7 +208,6 @@ export default function RemindersContent({ reminders }) {
   );
 
   function handleEditReminder(reminder) {
-    console.log("Edit reminder: ", reminder);
     setEditingReminder(reminder);
     setOpenEditReminder(true);
   }

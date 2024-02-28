@@ -51,7 +51,7 @@ export default function CustomTasksTable({ title, rows }) {
   const { t } = useTranslation();
   const { language } = useLanguage();
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
   const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
   const [expandedRows, setExpandedRows] = useState([]);
   const statusOrder = ["not started", "in progress", "finished", "stuck"];

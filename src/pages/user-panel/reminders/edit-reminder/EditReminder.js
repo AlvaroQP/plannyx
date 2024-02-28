@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styles from "./EditReminder.module.css";
 import { useTranslation } from "react-i18next";
 import { useReminders } from "../../../../context/reminders/RemindersProvider";
@@ -62,10 +62,6 @@ export default function EditReminder({
   const { setIsLoading } = useLoading();
   const { putReminder, getAllReminders } = useReminders();
   const { openDialog } = useDialog();
-
-  useEffect(() => {
-    console.log("initialReminder", initialReminder);
-  }, [initialReminder]);
 
   async function handleSaveReminder(e) {
     e.preventDefault();
