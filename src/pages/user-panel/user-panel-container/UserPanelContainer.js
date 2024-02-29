@@ -21,6 +21,7 @@ import { useSidebar } from "../../../context/sidebar/SidebarProvider";
 import { useLocation } from "react-router-dom";
 import UserPanelHome from "../user-panel-home/UserPanelHome";
 import NotificationsIcon from "@mui/icons-material/Notifications";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
 import styles from "./UserPanelContainer.module.css";
 
 export default function UserPanelContainer() {
@@ -47,6 +48,16 @@ export default function UserPanelContainer() {
       onClick={() => navigate("/user-panel/reminders")}
     >
       {t("user-panel-sidebar.to-do-list")}
+    </MenuItem>
+  );
+
+  const locationsMenu = (
+    <MenuItem
+      icon={<LocationOnIcon sx={{ color: "#19b0d6" }} />}
+      className={isActive("/user-panel/locations") ? styles.active : ""}
+      onClick={() => navigate("/user-panel/locations")}
+    >
+      {t("user-panel-sidebar.locations")}
     </MenuItem>
   );
 
@@ -149,6 +160,17 @@ export default function UserPanelContainer() {
             </Tooltip>
           ) : (
             toDoListMenu
+          )}
+
+          {collapsed ? (
+            <Tooltip
+              title={t("user-panel-sidebar.locations")}
+              placement="right"
+            >
+              <div>{locationsMenu}</div>
+            </Tooltip>
+          ) : (
+            locationsMenu
           )}
 
           {collapsed ? (

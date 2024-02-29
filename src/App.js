@@ -14,6 +14,7 @@ import { useAuth } from "./auth/auth-context/AuthProvider";
 import "./i18n";
 import ProjectDetails from "./pages/user-panel/projects/project-details/ProjectDetails";
 import Notifications from "./pages/user-panel/notifications/Notifications";
+import LocationsContainer from "./pages/user-panel/locations/locations-container/LocationsContainer";
 
 export default function App() {
   function ComponentOrAccessDenied({ component: Component }) {
@@ -67,6 +68,12 @@ export default function App() {
               path: "reminders",
               element: (
                 <ComponentOrAccessDenied component={RemindersContainer} />
+              ),
+            },
+            {
+              path: "locations",
+              element: (
+                <ComponentOrAccessDenied component={LocationsContainer} />
               ),
             },
             {

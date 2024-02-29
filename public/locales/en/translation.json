@@ -5,6 +5,7 @@
         "projects": "Projects",
         "to-do-lists": "To-do lists",
         "calendar": "Calendar",
+        "locations": "Locations",
         "tasks": "Tasks",
         "dashboard": "Dashboard",
         "user-panel": "User Panel",
@@ -99,6 +100,7 @@
         "my-projects": "Projects",
         "calendar": "Calendar",
         "to-do-list": "Reminders",
+        "locations": "Locations",
         "dashboard": "Dashboard",
         "notifications": "Notifications",
         "settings": "Settings",
@@ -300,5 +302,10 @@
         "error": "Error",
         "could-not-delete-reminder": "Could not delete reminder. Please try again later."
     },
-    "fill-field": "Please fill in this field."
+    "fill-field": "Please fill in this field.",
+    "locations": {
+        "map": "Map",
+        "locations": "Locations",
+        "enter-address": "Enter an address"
+    }
 }
