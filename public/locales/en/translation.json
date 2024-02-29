@@ -306,6 +306,10 @@
     "locations": {
         "map": "Map",
         "locations": "Locations",
-        "enter-address": "Enter an address"
+        "enter-address": "Enter an address",
+        "add-location": "Add Location",
+        "location-name": "Location Name",
+        "location-description": "Location Description",
+        "location-name-required": "The location name is required."
     }
 }
