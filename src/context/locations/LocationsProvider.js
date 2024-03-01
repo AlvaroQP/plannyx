@@ -22,6 +22,11 @@ export function LocationsProvider({ children }) {
   const [mapOrLocations, setMapOrLocations] = useState("map");
   const [mapCoords, setMapCoords] = useState([40.4637, -3.7492]);
   const [mapZoomLevel, setMapZoomLevel] = useState(5);
+  const [locationCount, setLocationCount] = useState(0);
+
+  function addLocationCount() {
+    setLocationCount((prevCount) => prevCount + 1);
+  }
 
   const getAllLocations = useCallback(async () => {
     let locations = await getAllLocationsRequest(userId);
@@ -42,6 +47,7 @@ export function LocationsProvider({ children }) {
   async function postLocation(location) {
     const newLocation = await postLocationRequest(userId, location);
     setLocations((prevLocations) => [...prevLocations, newLocation]);
+    await getAllLocations();
   }
 
   async function putLocation(locationId, location) {
@@ -92,6 +98,8 @@ export function LocationsProvider({ children }) {
         handleChangeMapZoomLevel,
         mapOrLocations,
         handleMapOrLocationsChange,
+        locationCount,
+        addLocationCount,
       }}
     >
       {children}

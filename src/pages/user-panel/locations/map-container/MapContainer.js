@@ -15,7 +15,7 @@ export default function Map() {
   const mapRef = useRef(null);
   const [clickedLocation, setClickedLocation] = useState(null);
   const [openAddLocationDialog, setOpenAddLocationDialog] = useState(false);
-  const { locations, mapCoords, mapZoomLevel } = useLocations();
+  const { locations, mapCoords, mapZoomLevel, locationCount } = useLocations();
 
   useEffect(() => {
     const map = L.map(mapRef.current).setView(mapCoords, mapZoomLevel);
@@ -34,7 +34,9 @@ export default function Map() {
         popupContent += "<br /> <br />" + location.description;
       }
 
-      marker.bindPopup(popupContent);
+      marker.bindPopup(popupContent, {
+        offset: [0, -5],
+      });
 
       marker.on("click", function () {
         map.setView([location.lat, location.lng], 16);
@@ -61,7 +63,7 @@ export default function Map() {
       map.remove();
     };
     // eslint-disable-next-line
-  }, [t]);
+  }, [t, locationCount]);
 
   function closeAddLocationDialog() {
     setOpenAddLocationDialog(false);

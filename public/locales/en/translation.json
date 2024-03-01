@@ -318,6 +318,7 @@
         "click-map-add-location": "Enter an address and click on the map to add a location.",
         "show-description": "Show description",
         "hide-description": "Hide description",
-        "show-in-map": "Show in map"
+        "show-in-map": "Show in map",
+        "all": "All"
     }
 }

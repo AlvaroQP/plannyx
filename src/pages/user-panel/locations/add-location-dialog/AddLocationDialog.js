@@ -29,7 +29,13 @@ export default function AddLocationDialog({
   const lng = location.lng;
   const [validForm, setValidForm] = useState(true);
   const { setIsLoading } = useLoading();
-  const { postLocation, getAllLocations } = useLocations();
+  const {
+    postLocation,
+    getAllLocations,
+    handleChangeMapCoords,
+    handleChangeMapZoomLevel,
+    addLocationCount,
+  } = useLocations();
 
   async function handleAddLocation(e) {
     e.preventDefault();
@@ -53,6 +59,9 @@ export default function AddLocationDialog({
     try {
       await postLocation(newLocation);
       await getAllLocations();
+      addLocationCount();
+      handleChangeMapCoords([lat, lng]);
+      handleChangeMapZoomLevel(16);
       openDialog({
         title: t("locations.location-success"),
         description: t("locations.location-added"),
