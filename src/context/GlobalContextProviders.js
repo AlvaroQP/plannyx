@@ -9,6 +9,7 @@ import { ProjectsProvider } from "./projects/ProjectsProvider";
 import { RemindersProvider } from "./reminders/RemindersProvider";
 import { TasksProvider } from "./tasks/TasksProvider";
 import { SidebarProvider } from "./sidebar/SidebarProvider";
+import { LocationsProvider } from "./locations/LocationsProvider";
 import ThemeWrapper from "./theme/ThemeProvider";
 
 export default function GlobalContextProviders({ children }) {
@@ -23,7 +24,9 @@ export default function GlobalContextProviders({ children }) {
                   <ProjectsProvider>
                     <TasksProvider>
                       <RemindersProvider>
-                        <SidebarProvider>{children}</SidebarProvider>
+                        <LocationsProvider>
+                          <SidebarProvider>{children}</SidebarProvider>
+                        </LocationsProvider>
                       </RemindersProvider>
                     </TasksProvider>
                   </ProjectsProvider>

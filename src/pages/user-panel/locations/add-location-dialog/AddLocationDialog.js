@@ -12,28 +12,63 @@ import CustomButton from "../../../../components/ui/button/CustomButton";
 import Alert from "@mui/material/Alert";
 import Markers from "../markers/Markers";
 import CustomDivider from "../../../../components/ui/divider/CustomDivider";
+import { useLoading } from "../../../../context/loading/LoadingProvider";
+import { useLocations } from "../../../../context/locations/LocationsProvider";
+import { useDialog } from "../../../../context/dialog/DialogProvider";
 
 export default function AddLocationDialog({
   location,
   closeAddLocationDialog,
 }) {
   const { t } = useTranslation();
+  const { openDialog } = useDialog();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [marker, setMarker] = useState("location");
   const lat = location.lat;
   const lng = location.lng;
   const [validForm, setValidForm] = useState(true);
+  const { setIsLoading } = useLoading();
+  const { postLocation, getAllLocations } = useLocations();
 
-  function handleAddLocation(e) {
+  async function handleAddLocation(e) {
     e.preventDefault();
     setValidForm(true);
+    setIsLoading(true);
+
     if (name.trim() === "") {
       setValidForm(false);
+      setIsLoading(false);
       return;
     }
 
-    console.log({ name, description, marker, lat, lng });
+    const newLocation = {
+      name,
+      description,
+      marker,
+      lat,
+      lng,
+    };
+
+    try {
+      await postLocation(newLocation);
+      await getAllLocations();
+      openDialog({
+        title: t("locations.location-success"),
+        description: t("locations.location-added"),
+        severity: "success",
+      });
+    } catch (error) {
+      console.error(error);
+      openDialog({
+        title: t("locations.location-error"),
+        description: t("locations.location-not-added"),
+        severity: "error",
+      });
+    } finally {
+      setIsLoading(false);
+      closeAddLocationDialog();
+    }
   }
 
   function handleMarkerChange(e) {

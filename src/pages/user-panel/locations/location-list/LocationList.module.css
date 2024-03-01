@@ -1,0 +1,14 @@
+.locations-container {
+  background-color: #f3f3f3;
+  border: 1px solid #d7d7d7;
+  border-radius: 0.2rem;
+  margin-top: 0.5rem;
+  padding: 0.5rem 1rem;
+}
+
+.list-item {
+  border: 1px solid #ccc;
+  border-radius: 0.2rem;
+  background-color: #fff;
+  margin-bottom: 0.5rem;
+}

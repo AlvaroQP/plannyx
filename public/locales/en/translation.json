@@ -310,6 +310,10 @@
         "add-location": "Add Location",
         "location-name": "Location Name",
         "location-description": "Location Description",
-        "location-name-required": "The location name is required."
+        "location-name-required": "The location name is required.",
+        "location-success": "Success",
+        "location-error": "Error",
+        "location-added": "The location has been added successfully.",
+        "location-not-added": "The location could not be added. Please try again later."
     }
 }

@@ -1,3 +1,7 @@
 .map-container {
   margin: 2rem;
 }
+
+.map-and-locations-container {
+  width: 100%;
+}

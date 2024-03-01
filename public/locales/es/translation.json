@@ -310,6 +310,10 @@
         "add-location": "Añadir Ubicación",
         "location-name": "Nombre de la Ubicación",
         "location-description": "Descripción de la Ubicación",
-        "location-name-required": "El nombre de la ubicación es obligatorio."
+        "location-name-required": "El nombre de la ubicación es obligatorio.",
+        "location-success": "Éxito",
+        "location-error": "Error",
+        "location-added": "La ubicación ha sido añadida con éxito.",
+        "location-not-added": "No se ha podido añadir la ubicación. Por favor, inténtalo de nuevo más tarde."
     }
 }

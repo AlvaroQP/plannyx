@@ -42,10 +42,6 @@ export default function Map() {
     // eslint-disable-next-line
   }, [t]);
 
-  useEffect(() => {
-    console.log(clickedLocation);
-  }, [clickedLocation]);
-
   function closeAddLocationDialog() {
     setOpenAddLocationDialog(false);
   }
