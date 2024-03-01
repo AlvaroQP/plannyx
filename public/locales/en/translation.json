@@ -314,6 +314,10 @@
         "location-success": "Success",
         "location-error": "Error",
         "location-added": "The location has been added successfully.",
-        "location-not-added": "The location could not be added. Please try again later."
+        "location-not-added": "The location could not be added. Please try again later.",
+        "click-map-add-location": "Enter an address and click on the map to add a location.",
+        "show-description": "Show description",
+        "hide-description": "Hide description",
+        "show-in-map": "Show in map"
     }
 }

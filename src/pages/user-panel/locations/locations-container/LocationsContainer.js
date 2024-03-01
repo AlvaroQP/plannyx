@@ -1,21 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import styles from "./LocationsContainer.module.css";
 import UserPanelHeader from "../../../../components/ui/header/user-panel-header/UserPanelHeader";
 import { useTranslation } from "react-i18next";
 import MapContainer from "../map-container/MapContainer";
 import LocationList from "../location-list/LocationList";
 import { ToggleButton, ToggleButtonGroup } from "@mui/material";
+import { useLocations } from "../../../../context/locations/LocationsProvider";
 
 export default function LocationsContainer() {
-  const [mapOrLocations, setMapOrLocations] = useState("map");
+  const {
+    mapOrLocations,
+    handleMapOrLocationsChange,
+    handleChangeMapCoords,
+    handleChangeMapZoomLevel,
+  } = useLocations();
 
   const { t } = useTranslation();
 
-  function handleMapOrLocationsChange(e, value) {
-    if (value !== null) {
-      setMapOrLocations(value);
-    }
-  }
+  useEffect(() => {
+    handleMapOrLocationsChange(null, "map");
+    handleChangeMapCoords([40.4637, -3.7492]);
+    handleChangeMapZoomLevel(5);
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <>

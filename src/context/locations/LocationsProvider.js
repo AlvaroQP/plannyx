@@ -19,6 +19,9 @@ const LocationsContext = createContext();
 export function LocationsProvider({ children }) {
   const { userId } = useAuth();
   const [locations, setLocations] = useState([]);
+  const [mapOrLocations, setMapOrLocations] = useState("map");
+  const [mapCoords, setMapCoords] = useState([40.4637, -3.7492]);
+  const [mapZoomLevel, setMapZoomLevel] = useState(5);
 
   const getAllLocations = useCallback(async () => {
     let locations = await getAllLocationsRequest(userId);
@@ -59,6 +62,20 @@ export function LocationsProvider({ children }) {
     );
   }
 
+  function handleMapOrLocationsChange(e, value) {
+    if (value !== null) {
+      setMapOrLocations(value);
+    }
+  }
+
+  function handleChangeMapCoords(coords) {
+    setMapCoords(coords);
+  }
+
+  function handleChangeMapZoomLevel(zoomLevel) {
+    setMapZoomLevel(zoomLevel);
+  }
+
   return (
     <LocationsContext.Provider
       value={{
@@ -69,6 +86,12 @@ export function LocationsProvider({ children }) {
         postLocation,
         putLocation,
         deleteLocation,
+        mapCoords,
+        mapZoomLevel,
+        handleChangeMapCoords,
+        handleChangeMapZoomLevel,
+        mapOrLocations,
+        handleMapOrLocationsChange,
       }}
     >
       {children}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styles from "./LocationList.module.css";
 import { useLocations } from "../../../../context/locations/LocationsProvider";
 import {
@@ -16,15 +16,19 @@ import MapIcon from "@mui/icons-material/Map";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CustomDivider from "../../../../components/ui/divider/CustomDivider";
+import Tooltip from "@mui/material/Tooltip";
+import { useTranslation } from "react-i18next";
 
 export default function LocationList() {
-  const { locations } = useLocations();
+  const { t } = useTranslation();
+  const {
+    locations,
+    handleMapOrLocationsChange,
+    handleChangeMapCoords,
+    handleChangeMapZoomLevel,
+  } = useLocations();
   const [expandedItem, setExpandedItem] = useState(null);
   const itemsPerPage = 10;
-
-  useEffect(() => {
-    console.log(locations);
-  }, [locations]);
 
   function handleExpandClick(index) {
     if (expandedItem === index) {
@@ -32,6 +36,10 @@ export default function LocationList() {
     } else {
       setExpandedItem(index);
     }
+  }
+
+  function handleMapIconClick(e) {
+    handleMapOrLocationsChange(e, "map");
   }
 
   return (
@@ -74,12 +82,34 @@ export default function LocationList() {
                 <Box>
                   {location.description !== "" && (
                     <IconButton onClick={() => handleExpandClick(index)}>
-                      {expandedItem === index ? <ExpandLess /> : <ExpandMore />}
+                      {expandedItem === index ? (
+                        <Tooltip
+                          title={t("locations.hide-description")}
+                          placement="top"
+                        >
+                          <ExpandLess />
+                        </Tooltip>
+                      ) : (
+                        <Tooltip
+                          title={t("locations.show-description")}
+                          placement="top"
+                        >
+                          <ExpandMore />
+                        </Tooltip>
+                      )}
                     </IconButton>
                   )}
-                  <IconButton>
-                    <MapIcon sx={{ color: "#1976d2" }} />
-                  </IconButton>
+                  <Tooltip title={t("locations.show-in-map")} placement="top">
+                    <IconButton
+                      onClick={() => {
+                        handleMapIconClick();
+                        handleChangeMapCoords([location.lat, location.lng]);
+                        handleChangeMapZoomLevel(16);
+                      }}
+                    >
+                      <MapIcon sx={{ color: "#1976d2" }} />
+                    </IconButton>
+                  </Tooltip>
                   <IconButton>
                     <EditIcon />
                   </IconButton>
