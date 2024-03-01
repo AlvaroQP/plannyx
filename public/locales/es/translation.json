@@ -324,6 +324,9 @@
         "delete-location": "Eliminar Ubicación",
         "delete-location-description": "¿Estás segur@ de que quieres eliminar esta ubicación?",
         "location-deleted": "La ubicación ha sido eliminada con éxito.",
-        "location-not-deleted": "No se ha podido eliminar la ubicación. Por favor, inténtalo de nuevo más tarde."
+        "location-not-deleted": "No se ha podido eliminar la ubicación. Por favor, inténtalo de nuevo más tarde.",
+        "name-is-required": "El nombre es obligatorio.",
+        "location-edited": "La ubicación ha sido editada con éxito.",
+        "location-not-edited": "No se ha podido editar la ubicación. Por favor, inténtalo de nuevo más tarde."
     }  
 }

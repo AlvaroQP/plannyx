@@ -34,13 +34,17 @@ import { useLocations } from "../../../../context/locations/LocationsProvider";
 import { useLoading } from "../../../../context/loading/LoadingProvider";
 import { useDialog } from "../../../../context/dialog/DialogProvider";
 import CustomDialog from "../../../../components/ui/dialog/CustomDialog";
+import EditLocation from "../edit-location/EditLocation";
 
 export default function LocationList() {
   const { t } = useTranslation();
   const { setIsLoading } = useLoading();
   const { openDialog } = useDialog();
+  const [isEditLocationDialogOpen, setIsEditLocationDialogOpen] =
+    useState(false);
   const [isDeleteLocationDialogOpen, setIsDeleteLocationDialogOpen] =
     useState(false);
+  const [locationIdToEdit, setLocationIdToEdit] = useState(null);
   const [locationIdToDelete, setLocationIdToDelete] = useState(null);
   const {
     locations,
@@ -107,6 +111,16 @@ export default function LocationList() {
     setLocationIdToDelete(locationId);
   }
 
+  function handleOpenEditLocationDialog(locationId) {
+    setIsEditLocationDialogOpen(true);
+    setLocationIdToEdit(locationId);
+  }
+
+  function handleCloseEditLocationDialog() {
+    setIsEditLocationDialogOpen(false);
+    setLocationIdToEdit(null);
+  }
+
   async function handleDeleteLocation(locationId) {
     setIsLoading(true);
     try {
@@ -132,6 +146,12 @@ export default function LocationList() {
   return (
     <div className={styles["locations-container"]}>
       {deleteLocationDialog}
+      {isEditLocationDialogOpen && (
+        <EditLocation
+          locationIdToEdit={locationIdToEdit}
+          handleCloseEditLocationDialog={handleCloseEditLocationDialog}
+        />
+      )}
       <ToggleButtonGroup
         value={selectedFilter}
         exclusive
@@ -225,7 +245,10 @@ export default function LocationList() {
                     </IconButton>
                   </Tooltip>
                   <Tooltip title={t("locations.edit-location")} placement="top">
-                    <IconButton className={styles["edit-icon"]}>
+                    <IconButton
+                      onClick={() => handleOpenEditLocationDialog(location.id)}
+                      className={styles["edit-icon"]}
+                    >
                       <EditIcon />
                     </IconButton>
                   </Tooltip>
