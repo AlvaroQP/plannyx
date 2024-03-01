@@ -31,14 +31,23 @@ import LocalHospitalIcon from "@mui/icons-material/LocalHospital";
 import LocalParkingIcon from "@mui/icons-material/LocalParking";
 import LocalGasStationIcon from "@mui/icons-material/LocalGasStation";
 import { useLocations } from "../../../../context/locations/LocationsProvider";
+import { useLoading } from "../../../../context/loading/LoadingProvider";
+import { useDialog } from "../../../../context/dialog/DialogProvider";
+import CustomDialog from "../../../../components/ui/dialog/CustomDialog";
 
 export default function LocationList() {
   const { t } = useTranslation();
+  const { setIsLoading } = useLoading();
+  const { openDialog } = useDialog();
+  const [isDeleteLocationDialogOpen, setIsDeleteLocationDialogOpen] =
+    useState(false);
+  const [locationIdToDelete, setLocationIdToDelete] = useState(null);
   const {
     locations,
     handleMapOrLocationsChange,
     handleChangeMapCoords,
     handleChangeMapZoomLevel,
+    deleteLocation,
   } = useLocations();
   const [expandedItem, setExpandedItem] = useState(null);
   const [page, setPage] = useState(1);
@@ -79,8 +88,50 @@ export default function LocationList() {
     }
   };
 
+  const deleteLocationDialog = (
+    <CustomDialog
+      open={isDeleteLocationDialogOpen}
+      handleClose={() => setIsDeleteLocationDialogOpen(false)}
+      title={t("locations.delete-location")}
+      description={t("locations.delete-location-description")}
+      acceptText={t("button.delete")}
+      cancelText={t("button.cancel")}
+      acceptAction={() => {
+        handleDeleteLocation(locationIdToDelete);
+      }}
+    />
+  );
+
+  function handleOpenDeleteLocationDialog(locationId) {
+    setIsDeleteLocationDialogOpen(true);
+    setLocationIdToDelete(locationId);
+  }
+
+  async function handleDeleteLocation(locationId) {
+    setIsLoading(true);
+    try {
+      await deleteLocation(locationId);
+      openDialog({
+        title: t("locations.location-success"),
+        description: t("locations.location-deleted"),
+        severity: "success",
+      });
+    } catch (error) {
+      console.error(error);
+      openDialog({
+        title: t("locations.location-error"),
+        description: t("locations.location-not-deleted"),
+        severity: "error",
+      });
+    } finally {
+      setIsLoading(false);
+      setPage(1);
+    }
+  }
+
   return (
     <div className={styles["locations-container"]}>
+      {deleteLocationDialog}
       <ToggleButtonGroup
         value={selectedFilter}
         exclusive
@@ -173,12 +224,24 @@ export default function LocationList() {
                       <MapIcon sx={{ color: "#1976d2" }} />
                     </IconButton>
                   </Tooltip>
-                  <IconButton>
-                    <EditIcon />
-                  </IconButton>
-                  <IconButton>
-                    <DeleteIcon />
-                  </IconButton>
+                  <Tooltip title={t("locations.edit-location")} placement="top">
+                    <IconButton className={styles["edit-icon"]}>
+                      <EditIcon />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip
+                    title={t("locations.delete-location")}
+                    placement="top"
+                  >
+                    <IconButton
+                      onClick={() =>
+                        handleOpenDeleteLocationDialog(location.id)
+                      }
+                      className={styles["delete-icon"]}
+                    >
+                      <DeleteIcon />
+                    </IconButton>
+                  </Tooltip>
                 </Box>
               </Box>
             </ListItem>

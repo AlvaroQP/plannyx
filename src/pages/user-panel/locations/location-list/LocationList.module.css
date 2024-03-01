@@ -12,3 +12,11 @@
   background-color: #fff;
   margin-bottom: 0.35rem;
 }
+
+.edit-icon:hover {
+  color: rgb(6, 172, 6);
+}
+
+.delete-icon:hover {
+  color: rgb(203, 1, 1);
+}

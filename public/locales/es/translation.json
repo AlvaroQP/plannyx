@@ -319,6 +319,11 @@
         "show-description": "Mostrar descripción",
         "hide-description": "Ocultar descripción",
         "show-in-map": "Mostrar en el mapa",
-        "all": "Todas"
+        "all": "Todas",
+        "edit-location": "Editar Ubicación",
+        "delete-location": "Eliminar Ubicación",
+        "delete-location-description": "¿Estás segur@ de que quieres eliminar esta ubicación?",
+        "location-deleted": "La ubicación ha sido eliminada con éxito.",
+        "location-not-deleted": "No se ha podido eliminar la ubicación. Por favor, inténtalo de nuevo más tarde."
     }  
 }
