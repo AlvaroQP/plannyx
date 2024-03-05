@@ -6,7 +6,6 @@ import ViewListIcon from "@mui/icons-material/ViewList";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import CustomDivider from "../../../components/ui/divider/CustomDivider";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LogoutButtonSideBar from "../../../auth/logout/LogoutButtonSideBar";
 import "/node_modules/flag-icons/css/flag-icons.min.css";
 import { useTranslation } from "react-i18next";
@@ -88,12 +87,6 @@ export default function UserPanelContainer() {
       onClick={() => navigate("/user-panel/notifications")}
     >
       {t("user-panel-sidebar.notifications")}
-    </MenuItem>
-  );
-
-  const profileMenu = (
-    <MenuItem icon={<AccountCircleIcon className={styles.icon} />}>
-      {t("user-panel-sidebar.profile")}
     </MenuItem>
   );
 
@@ -209,14 +202,6 @@ export default function UserPanelContainer() {
             <p className={styles["title-p"]}>
               {t("user-panel-sidebar.settings")}
             </p>
-          )}
-
-          {collapsed ? (
-            <Tooltip title={t("user-panel-sidebar.profile")} placement="right">
-              <div>{profileMenu}</div>
-            </Tooltip>
-          ) : (
-            profileMenu
           )}
 
           {collapsed ? <Flags collapsed={true} /> : <Flags />}

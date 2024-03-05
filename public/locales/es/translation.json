@@ -21,9 +21,9 @@
         "benefits": {
             "1": "Planifica tus proyectos personales y profesionales.",
             "2": "Gestiona tus tareas eficazmente.",
-            "3": "Mantente organizado con fechas límite y recordatorios útiles.",
-            "4": "Controla tus listas de tareas pendientes.",
-            "5": "Visualiza tus tareas a través de tu calendario personal.",
+            "3": "Mantente organizado con recordatorios útiles.",
+            "4": "Añade tus ubicaciones favoritas y visualízalas en un mapa interactivo.",
+            "5": "Visualiza tus proyectos y recordatorios a través de tu calendario personal.",
             "6": "Analiza tus progresos con un panel de control detallado."
         }
     },
@@ -40,6 +40,7 @@
         "submit": "Enviar",
         "new-project": "Nuevo Proyecto",
         "my-projects": "Mis Proyectos",
+        "new-reminder": "Nuevo Recordatorio",
         "edit": "Editar",
         "delete": "Eliminar",
         "save": "Guardar",
@@ -256,7 +257,7 @@
         "month": "Mes",
         "week": "Semana",
         "day": "Día",
-        "no-projects": "El calendario se mostrará aquí una vez hayas creado algún proyecto."
+        "no-projects": "El calendario se mostrará aquí una vez hayas creado algún proyecto o recordatorio."
     },
     "reminders": {
         "no-reminders": "Todavía no tienes ningún recordatorio.",

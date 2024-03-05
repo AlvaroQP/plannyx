@@ -4,28 +4,36 @@
   border-radius: 0.2rem;
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  height: calc(100vh - 10rem);
+  min-height: calc(100vh - 10rem);
   margin: 2rem;
 }
 
 .to-do-list-container,
-.my-projects-container {
+.my-projects-container,
+.locations-container,
+.calendar-container,
+.dashboard-container {
   padding: 1rem;
-  margin: 2rem;
+  margin: 1.25rem 2rem;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  width: 50%;
-  height: 25%;
+  width: 55%;
+  max-width: 30rem;
+  height: 7rem;
   border-radius: 0.5rem;
   cursor: pointer;
   box-shadow: 3px 3px 10px 0px #00000040;
 }
 
 .to-do-list-container:hover,
-.my-projects-container:hover {
+.my-projects-container:hover,
+.locations-container:hover,
+.calendar-container:hover,
+.dashboard-container:hover {
   transform: scale(1.05);
   transition: transform 0.25s ease-in-out;
 }
@@ -38,6 +46,18 @@
   background-image: url("../../../assets/images/my-projects.png");
 }
 
+.locations-container {
+  background-image: url("../../../assets/images/locations.png");
+}
+
+.calendar-container {
+  background-image: url("../../../assets/images/calendar.png");
+}
+
+.dashboard-container {
+  background-image: url("../../../assets/images/dashboard.png");
+}
+
 .title-container {
   display: flex;
   justify-content: center;
@@ -48,7 +68,7 @@
   color: #fff;
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-weight: 600;
   text-align: center;
   width: fit-content;

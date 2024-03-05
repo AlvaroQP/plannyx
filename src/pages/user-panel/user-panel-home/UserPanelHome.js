@@ -35,6 +35,39 @@ export default function UserPanelHome() {
             </div>
           </div>
         </div>
+
+        <div
+          className={styles["locations-container"]}
+          onClick={() => navigate("/user-panel/locations")}
+        >
+          <div className={styles["title-container"]}>
+            <div className={styles["title"]}>
+              {t("user-panel-sidebar.locations")}
+            </div>
+          </div>
+        </div>
+
+        <div
+          className={styles["calendar-container"]}
+          onClick={() => navigate("/user-panel/calendar")}
+        >
+          <div className={styles["title-container"]}>
+            <div className={styles["title"]}>
+              {t("user-panel-sidebar.calendar")}
+            </div>
+          </div>
+        </div>
+
+        <div
+          className={styles["dashboard-container"]}
+          onClick={() => navigate("/user-panel/dashboard")}
+        >
+          <div className={styles["title-container"]}>
+            <div className={styles["title"]}>
+              {t("user-panel-sidebar.dashboard")}
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );

@@ -21,9 +21,9 @@
         "benefits": {
             "1": "Plan your personal and professional projects.",
             "2": "Manage your tasks efficiently.",
-            "3": "Stay organized with deadlines and helpful reminders.",
-            "4": "Keep track of your to-do lists.",
-            "5": "Visualize your tasks seamlessly through your personal calendar.",
+            "3": "Stay organized with helpful reminders.",
+            "4": "Add your favorite locations to an interactive map.",
+            "5": "Visualize your projects and reminders seamlessly through your personal calendar.",
             "6": "Monitor your progress with a detailed dashboard."
         }
     },
@@ -40,6 +40,7 @@
         "submit": "Submit",
         "new-project": "New Project",
         "my-projects": "My Projects",
+        "new-reminder": "New Reminder",
         "edit": "Edit",
         "delete": "Delete",
         "save": "Save",
@@ -256,7 +257,7 @@
         "month": "Month",
         "week": "Week",
         "day": "Day",
-        "no-projects": "The calendar will be displayed here once you have created some projects."
+        "no-projects": "The calendar will be displayed here once you have created some projects or reminders."
     },
     "reminders": {
         "no-reminders": "You have no reminders yet.",

@@ -246,7 +246,7 @@ export default function Dashboard() {
         <p>{t("dashboard.no-projects-message")}</p>
         <CustomButton
           text={t("button.new-project")}
-          onClick={() => navigate("/user-panel/projects/new")}
+          onClick={() => navigate("/user-panel/projects/all")}
           variant="contained"
           color="primary"
           icon={<AddCircleOutlineIcon />}

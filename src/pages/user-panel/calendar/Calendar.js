@@ -348,7 +348,7 @@ export default function CalendarView() {
       </Dialog>
 
       <div className={styles["calendar-container"]}>
-        {projects.length > 0 ? (
+        {projects.length > 0 || reminders.length > 0 ? (
           <FullCalendar
             plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
             headerToolbar={{
@@ -406,7 +406,14 @@ export default function CalendarView() {
               text={t("button.new-project")}
               variant="contained"
               icon={<AddCircleOutline />}
-              onClick={() => navigate("/user-panel/projects/new")}
+              onClick={() => navigate("/user-panel/projects/all")}
+            />
+
+            <CustomButton
+              text={t("button.new-reminder")}
+              variant="contained"
+              icon={<AddCircleOutline />}
+              onClick={() => navigate("/user-panel/reminders")}
             />
           </div>
         )}

@@ -326,7 +326,7 @@ export default function Notifications() {
               color="primary"
               text={t("button.new-project")}
               icon={<AddCircleOutlineIcon />}
-              onClick={() => navigate("/user-panel/projects/new")}
+              onClick={() => navigate("/user-panel/projects/all")}
             />
           </div>
         )}
@@ -341,14 +341,6 @@ export default function Notifications() {
                 {t("projects-notifications.no-projects-starting-ending-soon")}
               </h2>
               <div className={styles["buttons-container"]}>
-                <CustomButton
-                  variant="contained"
-                  color="primary"
-                  text={t("button.new-project")}
-                  icon={<AddCircleOutlineIcon />}
-                  onClick={() => navigate("/user-panel/projects/new")}
-                />
-
                 <CustomButton
                   variant="contained"
                   color="primary"
